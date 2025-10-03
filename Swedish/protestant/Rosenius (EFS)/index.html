@@ -1,0 +1,460 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daglig Rosenius-andakt</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 56rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .header {
+            text-align: center;
+            padding: 1.5rem 0;
+        }
+        .title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0;
+        }
+        .subtitle {
+            color: #4b5563;
+            margin-top: 0.5rem;
+            margin-bottom: 0;
+        }
+        .card {
+            background-color: #f3f4f6;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2937;
+        }
+        .date-info {
+            color: #374151;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+        .link-list {
+            margin-top: 0.5rem;
+        }
+        .link-item {
+            display: block;
+            color: #2563eb;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+        }
+        .link-item:hover {
+            text-decoration: underline;
+        }
+        .description {
+            color: #374151;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .prompt-container {
+            position: relative;
+        }
+        .prompt-preview {
+            background-color: white;
+            padding: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.625;
+            max-height: 200px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            white-space: pre-wrap;
+        }
+        .prompt-full {
+            background-color: white;
+            padding: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.625;
+            width: 100%;
+            height: 400px;
+            resize: none;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+        .prompt-full:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .fade-gradient {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            height: 3rem;
+            background: linear-gradient(to top, #ffffff, transparent);
+            pointer-events: none;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.15s;
+        }
+        .button-blue {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .button-blue:hover {
+            background-color: #2563eb;
+        }
+        .button-green {
+            background-color: #10b981;
+            color: white;
+        }
+        .button-green:hover {
+            background-color: #059669;
+        }
+        .footer {
+            text-align: center;
+            color: #4b5563;
+            padding: 1rem 0;
+        }
+        .footer-secondary {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Daglig Rosenius-andaktsgenerator</h1>
+            <p class="subtitle">Skapa moderna andakter utifrån Carl-Olof Rosenius dagliga betraktelser</p>
+        </header>
+
+        <div class="card">
+            <h2 class="card-title">📖 Länkar till Rosenius motsvarande andakt för denna dag</h2>
+            <p class="date-info" id="date-info">Laddar...</p>
+            <div class="link-list">
+                <a href="#" class="link-item" id="link1" target="_blank" rel="noopener noreferrer">Laddar...</a>
+                <a href="#" class="link-item" id="link2" target="_blank" rel="noopener noreferrer">Laddar...</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">🤖 AI-prompt för modern Rosenius-inspirerad andakt</h2>
+            <p class="description">Denna omfattande prompt hjälper till att generera en modern andakt baserad på Rosenius ursprungliga svenska text för denna dag.</p>
+            
+            <div class="prompt-container">
+                <div class="prompt-preview" id="prompt-preview">
+                    <div id="preview-text">Laddar prompt...</div>
+                    <div class="fade-gradient"></div>
+                </div>
+                <textarea class="prompt-full hidden" id="prompt-full" readonly></textarea>
+            </div>
+
+            <div class="button-group">
+                <button class="button button-blue" id="toggle-prompt">📄 Visa Fullständig Prompt</button>
+                <button class="button button-green" id="copy-prompt">📋 Kopiera Prompt</button>
+                <button class="button button-blue" id="open-claude">🔗 Öppna i Claude</button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Baserad på "Betraktelser för hwar dag i året" av Carl-Olof Rosenius (1891)</p>
+            <p class="footer-secondary">Originaltexter tillgängliga på Projekt Runeberg</p>
+        </footer>
+    </div>
+
+    <script>
+        console.log("Starting application...");
+
+        // All the date logic functions (preserved exactly)
+        function isLeapYear(year) {
+            console.log(`Checking leap year for: ${year}`);
+            const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+            console.log(`Is Leap Year: ${isLeap}`);
+            return isLeap;
+        }
+
+        function getDayOfYear(date) {
+            console.log(`Calculating day of year for: ${date}`);
+            try {
+                if (!(date instanceof Date) || isNaN(date)) {
+                    throw new Error("Invalid date object");
+                }
+                const start = new Date(date.getFullYear(), 0, 0);
+                const diff = date - start;
+                const oneDay = 1000 * 60 * 60 * 24;
+                const dayOfYear = Math.floor(diff / oneDay);
+                console.log(`Day of Year: ${dayOfYear}`);
+                return dayOfYear;
+            } catch (error) {
+                console.error(`Error in getDayOfYear: ${error.message}`);
+                return 1; // Fallback to day 1
+            }
+        }
+
+        function getDevotionalFiles(date) {
+            console.log(`Processing date: ${date}`);
+            try {
+                const year = date.getFullYear();
+                const isLeap = isLeapYear(year);
+                const dayOfYear = getDayOfYear(date);
+                const baseUrl = "https://runeberg.org/betrakt/";
+
+                console.log(`Day of Year: ${dayOfYear}, Is Leap Year: ${isLeap}`);
+
+                let adjustedDay = dayOfYear;
+                if (!isLeap) {
+                    if (dayOfYear === 60) {
+                        console.log(`Special case: Feb 28 in non-leap year, setting adjustedDay to 61`);
+                        adjustedDay = 61; // Align Feb 28 non-leap year with Feb 28 leap year
+                    } else if (dayOfYear > 60) {
+                        console.log(`Adjusting non-leap year day after Mar 2, setting adjustedDay to ${dayOfYear + 1}`);
+                        adjustedDay = dayOfYear + 1; // Align with leap year sequence starting Mar 3
+                    }
+                }
+
+                console.log(`Adjusted Day: ${adjustedDay}`);
+
+                const fileIndex = (adjustedDay - 1) * 2;
+                const file1Number = fileIndex + 7;
+                const file2Number = fileIndex + 8;
+                const file1 = baseUrl + String(file1Number).padStart(4, "0") + ".html";
+                const file2 = baseUrl + String(file2Number).padStart(4, "0") + ".html";
+                console.log(`General case: File Index: ${fileIndex}, File Numbers: ${file1Number}, ${file2Number}, Files: ${file1}, ${file2}`);
+                return [file1, file2];
+            } catch (error) {
+                console.error(`Error in getDevotionalFiles: ${error.message}`);
+                return [baseUrl + "0007.html", baseUrl + "0008.html"]; // Fallback to Jan 1
+            }
+        }
+
+        function formatDate(date) {
+            return date.toLocaleDateString('sv-SE', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        function formatDateEnglish(date) {
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Initialize the application
+        function initializeApp() {
+            const today = new Date();
+            
+            // Uncomment these for testing specific dates:
+            //const today = new Date(2024, 0, 1)
+            //const today = new Date(2024, 1, 28)
+            //const today = new Date(2024, 1, 29)
+            //const today = new Date(2024, 2, 1)
+            //const today = new Date(2024, 11, 31)
+            //const today = new Date(2025, 0, 1)
+            //const today = new Date(2025, 1, 28)
+            //const today = new Date(2025, 2, 1)
+            //const today = new Date(2025, 2, 2) 
+            //const today = new Date(2025, 11, 31)
+            //const today = new Date(2026, 0, 1)
+            //const today = new Date(2026, 1, 28)
+            //const today = new Date(2026, 2, 1)
+
+            const [file1, file2] = getDevotionalFiles(today);
+            const formattedDateSwedish = formatDate(today);
+            const formattedDateEnglish = formatDateEnglish(today);
+
+            // Update date info
+            document.getElementById('date-info').textContent = `För ${formattedDateSwedish}`;
+
+            // Update links
+            document.getElementById('link1').href = file1;
+            document.getElementById('link1').textContent = `Andakt del 1: ${file1.replace("https://runeberg.org/betrakt/", "")}`;
+            document.getElementById('link2').href = file2;
+            document.getElementById('link2').textContent = `Andakt del 2: ${file2.replace("https://runeberg.org/betrakt/", "")}`;
+
+            // Create the prompt
+            const promptText = `Can you access the content from these two pages for today's devotional by Carl-Olof Rosenius?
+
+${file1}
+${file2}
+
+These contain the ${formattedDateEnglish} devotional from "Betraktelser för hwar dag i året" (Reflections for each day of the year).
+
+After accessing the original Swedish text, please write a contemporary devotional for ${formattedDateEnglish} in the spirit of Rosenius' devotional. The new devotional should:
+
+**Structure and Content:**
+1. Begin with the same Scripture verse(s) if present in the original text
+2. Write 400-600 words that capture the essence and key themes of Rosenius's original reflection
+3. Include a brief prayer or reflection question at the end
+
+**Theological Approach:**
+- Maintain Rosenius's theological depth and pastoral wisdom
+- Honor his evangelical-Lutheran heritage while being ecumenical when corresponding thoughts exist in other Christian traditions
+- Capture Rosenius's characteristic style of pointing away from subjective religious experience toward God's objective promises in Christ
+- Emphasize grace, justification by faith, and the centrality of Christ's work
+
+**Contemporary Application:**
+- Address modern spiritual challenges while staying true to the gospel message
+- Use contemporary language and illustrations that resonate with today's readers
+- Make practical connections to current life situations without compromising theological soundness
+- Maintain the devotional's pastoral and encouraging tone
+
+**Style Guidelines:**
+- Write in a warm, accessible style suitable for personal devotion
+- Use clear, modern language while preserving spiritual depth
+- Include concrete examples or applications where appropriate
+- Ensure the devotional can stand alone as a meaningful spiritual reflection
+
+**IMPORTANT: Please write your response entirely in Swedish (Svenska). The devotional should be written in modern Swedish that is accessible to contemporary Swedish readers.**
+
+Please preserve the spiritual richness and theological soundness of the original while making it genuinely helpful for contemporary Christian life and spiritual growth.`;
+
+            // Update prompt display
+            document.getElementById('preview-text').textContent = promptText.substring(0, 300) + "...";
+            document.getElementById('prompt-full').value = promptText;
+
+            // Set up event handlers
+            let showingFullPrompt = false;
+            
+            document.getElementById('toggle-prompt').addEventListener('click', function() {
+                showingFullPrompt = !showingFullPrompt;
+                const preview = document.getElementById('prompt-preview');
+                const full = document.getElementById('prompt-full');
+                const button = document.getElementById('toggle-prompt');
+                
+                if (showingFullPrompt) {
+                    preview.classList.add('hidden');
+                    full.classList.remove('hidden');
+                    button.textContent = '📄 Visa Förhandsgranskning';
+                } else {
+                    preview.classList.remove('hidden');
+                    full.classList.add('hidden');
+                    button.textContent = '📄 Visa Fullständig Prompt';
+                }
+            });
+
+            document.getElementById('copy-prompt').addEventListener('click', function() {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(promptText).then(() => {
+                        alert("Prompt kopierat till urklipp!");
+                    }).catch((err) => {
+                        fallbackCopy(promptText);
+                    });
+                } else {
+                    fallbackCopy(promptText);
+                }
+            });
+
+            document.getElementById('open-claude').addEventListener('click', function() {
+                const claudeUrl = `https://claude.ai/chat?q=${encodeURIComponent(promptText)}`;
+                window.open(claudeUrl, '_blank');
+            });
+
+            function fallbackCopy(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                textArea.style.top = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert("Prompt kopierad till urklipp!");
+                } catch (err) {
+                    alert("Misslyckades med att kopiera prompt. Vänligen kopiera texten manuellt från den fullständiga promptvyn.");
+                }
+                document.body.removeChild(textArea);
+            }
+
+            console.log("Application initialized successfully");
+        }
+
+        // Start the application when the page loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+    </script>
+</body>
+</html>

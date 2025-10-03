@@ -1,0 +1,31 @@
+{
+  "title": "How to Have a Relationship with God",
+  "author": "Apostle Kathryn Krick",
+  "description": "A foundational teaching series introducing the principles of walking closely with God, designed for seekers and believers alike.",
+  "version": "1.0",
+  "totalEpisodes": 0,
+  "dateRange": {
+    "earliest": null,
+    "latest": null
+  },
+  "episodes": [
+    {
+      "id": "ep1",
+      "title": "Placeholder Episode 1",
+      "description": "Overview of walking with God (placeholder).",
+      "videoUrl": "https://youtube.com/PLACEHOLDER",
+      "duration": "00:00",
+      "publishedDate": "YYYY-MM-DD",
+      "transcriptPath": "transcripts/ep1.txt"
+    },
+    {
+      "id": "ep2",
+      "title": "Placeholder Episode 2",
+      "description": "Learning to hear God’s voice (placeholder).",
+      "videoUrl": "https://youtube.com/PLACEHOLDER",
+      "duration": "00:00",
+      "publishedDate": "YYYY-MM-DD",
+      "transcriptPath": "transcripts/ep2.txt"
+    }
+  ]
+}

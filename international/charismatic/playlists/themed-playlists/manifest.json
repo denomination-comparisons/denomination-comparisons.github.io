@@ -1,0 +1,107 @@
+{
+  "title": "Practical Wisdom Library – Themed Playlists",
+  "author": "Apostle Kathryn Krick",
+  "description": "Curated clips from spiritual Q&A sessions, grouped thematically for personal growth and practical application.",
+  "version": "1.1",
+  "totalPlaylists": 7,
+  "totalClips": 37,
+  "dateRange": {
+    "earliestEpisode": 1,
+    "latestEpisode": 38
+  },
+  "playlists": [
+    {
+      "id": "faith-at-work",
+      "title": "Faith at Work – God’s Wisdom for Jobs & Career",
+      "description": "Walk faithfully in your career with wisdom for transitions, calling, and workplace challenges.",
+      "clipCount": 6,
+      "clips": [
+        { "title": "Business Startup Wisdom", "episode": 1, "start": "04:00", "end": "08:54" },
+        { "title": "Housing Decisions with Wisdom", "episode": 29, "start": "00:01", "end": "07:59" },
+        { "title": "Employment vs. Entrepreneurship", "episode": 29, "start": "52:00", "end": "57:00" },
+        { "title": "Business Timing Strategy", "episode": 10, "start": "35:00", "end": "40:00" },
+        { "title": "Workplace Authority Balance", "episode": 34, "start": "08:26", "end": "09:05" },
+        { "title": "Professional Transitions", "episode": 24, "start": "18:00", "end": "21:00" }
+      ]
+    },
+    {
+      "id": "boundaries-and-balance",
+      "title": "Boundaries & Balance – Protecting Peace and Relationships",
+      "description": "Set healthy relational limits, navigate conflict with grace, and preserve community harmony.",
+      "clipCount": 6,
+      "clips": [
+        { "title": "When to Say No", "episode": 15, "start": "18:58", "end": "24:35" },
+        { "title": "Not Over-Spiritualizing Boundaries", "episode": 20, "start": "10:00", "end": "14:00" },
+        { "title": "Handling False Accusations", "episode": 31, "start": "40:00", "end": "50:00" },
+        { "title": "Handling Family Pushback", "episode": 27, "start": "22:00", "end": "25:00" },
+        { "title": "Marital Boundaries: Obeying God First", "episode": 34, "start": "45:46", "end": "45:56" },
+        { "title": "Equally Yoked Relationships", "episode": 37, "start": "55:20", "end": "56:29" }
+      ]
+    },
+    {
+      "id": "financial-stewardship",
+      "title": "Financial Stewardship – Godly Wisdom for Money",
+      "description": "Biblical principles for managing resources with grace, foresight, and spiritual alignment.",
+      "clipCount": 4,
+      "clips": [
+        { "title": "Counting the Cost", "episode": 29, "start": "16:37", "end": "19:15" },
+        { "title": "Seasonal Sacrifice Wisdom", "episode": 29, "start": "12:06", "end": "16:37" },
+        { "title": "Tithing vs. Debt Strategy", "episode": 29, "start": "40:44", "end": "48:26" },
+        { "title": "Supernatural Provision Principles", "episode": 29, "start": "42:44", "end": "48:00" }
+      ]
+    },
+    {
+      "id": "spiritual-warfare",
+      "title": "Spiritual Warfare – Staying Strong Against the Enemy",
+      "description": "Equip yourself with wisdom to resist temptation, maintain freedom, and stand firm in trials.",
+      "clipCount": 6,
+      "clips": [
+        { "title": "Deliverance in Daily Life", "episode": 12, "start": "10:00", "end": "14:00" },
+        { "title": "Exposing Enemy Distractions", "episode": 23, "start": "27:00", "end": "32:00" },
+        { "title": "When Not to Rebuke", "episode": 27, "start": "10:00", "end": "12:00" },
+        { "title": "Authority over Witchcraft", "episode": 33, "start": "15:00", "end": "19:00" },
+        { "title": "Overcoming Fear", "episode": 21, "start": "05:00", "end": "10:00" },
+        { "title": "Spiritual Warfare with Wisdom", "episode": 30, "start": "48:00", "end": "52:00" }
+      ]
+    },
+    {
+      "id": "evangelism-and-influence",
+      "title": "Evangelism & Influence – Reaching Others with Wisdom",
+      "description": "Practical gospel-sharing tools that empower without striving, trust without manipulation.",
+      "clipCount": 5,
+      "clips": [
+        { "title": "Evangelism without Striving", "episode": 14, "start": "30:00", "end": "34:00" },
+        { "title": "Being a Light in the Workplace", "episode": 24, "start": "40:00", "end": "44:00" },
+        { "title": "Balancing Boldness & Wisdom", "episode": 18, "start": "12:00", "end": "15:00" },
+        { "title": "When Family Rejects the Gospel", "episode": 26, "start": "20:00", "end": "25:00" },
+        { "title": "Effective Social Media Ministry", "episode": 35, "start": "30:00", "end": "34:00" }
+      ]
+    },
+    {
+      "id": "hearing-gods-voice",
+      "title": "Hearing God’s Voice – Discernment & Clarity",
+      "description": "Navigate spiritual direction with clarity—distinguishing the divine from the emotional or deceptive.",
+      "clipCount": 5,
+      "clips": [
+        { "title": "Recognizing God’s Voice", "episode": 19, "start": "05:00", "end": "09:00" },
+        { "title": "When God is Silent", "episode": 22, "start": "15:00", "end": "20:00" },
+        { "title": "Dreams and Interpretation", "episode": 28, "start": "25:00", "end": "30:00" },
+        { "title": "Discerning Prophetic Words", "episode": 32, "start": "10:00", "end": "15:00" },
+        { "title": "Spirit vs. Soul Impressions", "episode": 36, "start": "05:00", "end": "10:00" }
+      ]
+    },
+    {
+      "id": "grace-vs-works",
+      "title": "Grace vs. Works – Resting in God’s Finished Work",
+      "description": "Embrace freedom in Christ through rest-based obedience, not performance-based ministry.",
+      "clipCount": 5,
+      "clips": [
+        { "title": "Serving Without Striving", "episode": 13, "start": "08:00", "end": "12:00" },
+        { "title": "Grace vs. Legalism", "episode": 20, "start": "25:00", "end": "30:00" },
+        { "title": "Breaking Performance Mentality", "episode": 25, "start": "14:00", "end": "18:00" },
+        { "title": "Obedience Through Rest", "episode": 30, "start": "20:00", "end": "24:00" },
+        { "title": "Fruit of Grace, Not Works", "episode": 38, "start": "12:00", "end": "16:00" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Q&A - Episode Index</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        thead {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        tbody tr:hover {
+            background-color: #f8f9ff;
+            transform: scale(1.001);
+            transition: all 0.2s ease;
+        }
+        .date {
+            font-weight: 500;
+            color: #495057;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+        .title {
+            font-weight: 500;
+            color: #2c3e50;
+            max-width: 350px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        .link-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            margin: 2px;
+        }
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .youtube-btn {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+        }
+        .youtube-btn:hover {
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.4);
+        }
+        .episode-num {
+            font-weight: bold;
+            color: #6c757d;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            text-align: center;
+            min-width: 40px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+            th, td {
+                padding: 8px 6px;
+            }
+            .title {
+                max-width: 250px;
+            }
+            .stats {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Spiritual Q&A Episodes</h1>
+        <p>Complete index of all Spiritual Q&A episodes by Apostle Kathryn Krick</p>
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">54 (actually 55, but 1 is hidden in the official playlist)</span>
+                <span>Total Episodes</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2024-2025</span>
+                <span>Date Range</span>
+            </div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Episode</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Transcript</th>
+                <th>YouTube</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="episode-num">#0</span></td>
+                <td class="date">Sep 12, 2025</td>
+                <td class="title">Spiritual Q&A: How To Stay Humble, Wisdom In Marriage & More</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/0-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=FqeMefJjb-I" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#1</span></td>
+                <td class="date">Jul 18, 2025</td>
+                <td class="title">Your Spiritual Questions Answered</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/1-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=MAWclngIY6s" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#2</span></td>
+                <td class="date">Jul 8, 2025</td>
+                <td class="title">Spiritual Q&A: How to Discipline Your Child in a Way that Pleases God & More</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/2-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=Ot_ZvXtazOs" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#3</span></td>
+                <td class="date">Jun 25, 2025</td>
+                <td class="title">Spiritual Q&A: How to Overcome Carnal Areas? How Come You're Not Healed Yet? & More</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/3-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=79TmWND0A_8" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#4</span></td>
+                <td class="date">Jun 18, 2025</td>
+                <td class="title">Spiritual Q&A: How to Overcome Lack of Self Discipline, How to Have a Healthy Lifestyle and More</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/4-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=2HgskUjQmHE" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#5</span></td>
+                <td class="date">Jun 10, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 49 (When It's Okay to Say "God Told Me," Discerning the Angel of Light & More)</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/5-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=Mz6Np6afek8" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#6</span></td>
+                <td class="date">Jun 4, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 48</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/6-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=twJlja68tjo" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#7</span></td>
+                <td class="date">May 27, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 47</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/7-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#8</span></td>
+                <td class="date">May 20, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 46</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/8-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#9</span></td>
+                <td class="date">May 13, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 45</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/9-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#10</span></td>
+                <td class="date">Feb 5, 2025</td>
+                <td class="title">Spiritual Q&A Ep. 44 (How to know if you're called to ministry, how to choose a job/start business)</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/10-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=j8d5l4qs5Zk" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#11</span></td>
+                <td class="date">Apr 29, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 43</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/11-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#12</span></td>
+                <td class="date">Apr 22, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 42</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/12-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#13</span></td>
+                <td class="date">Apr 15, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 41</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/13-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#14</span></td>
+                <td class="date">Apr 8, 2025</td>
+                <td class="title">Spiritual Q&A - Ep. 40</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/14-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#15</span></td>
+                <td class="date">Nov 12, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 39</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/15-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=aA4fM_pqr9A" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#16</span></td>
+                <td class="date">Nov 5, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 38</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/16-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#17</span></td>
+                <td class="date">Oct 29, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 37</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/17-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#18</span></td>
+                <td class="date">Oct 22, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 36</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/18-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#19</span></td>
+                <td class="date">Oct 15, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 35</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/19-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#20</span></td>
+                <td class="date">Aug 28, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 34</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/20-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=JMQQrok3nRU" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#21</span></td>
+                <td class="date">Oct 1, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 33</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/21-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#22</span></td>
+                <td class="date">Sep 24, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 32</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/22-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#23</span></td>
+                <td class="date">Sep 17, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 31</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/23-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#24</span></td>
+                <td class="date">Sep 10, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 30</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/24-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#25</span></td>
+                <td class="date">Jun 28, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 29</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/25-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <a href="https://www.youtube.com/watch?v=N1Tby5fJsmk" class="link-btn youtube-btn" target="_blank">▶️ YouTube</a>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#26</span></td>
+                <td class="date">Jun 21, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 28</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/26-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#27</span></td>
+                <td class="date">Jun 14, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 27</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/27-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#28</span></td>
+                <td class="date">Jun 7, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 26</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/28-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#29</span></td>
+                <td class="date">May 31, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 25</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/29-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#30</span></td>
+                <td class="date">May 24, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 24</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/30-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#31</span></td>
+                <td class="date">May 17, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 23</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/31-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#32</span></td>
+                <td class="date">May 10, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 22</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/32-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="episode-num">#33</span></td>
+                <td class="date">May 3, 2024</td>
+                <td class="title">Spiritual Q&A - Ep. 21</td>
+                <td>
+                    <a href="https://markusisaksson1982.github.io/AKK-CH5/spiritual-qa/33-54.html" class="link-btn" target="_blank">
+                        📄 Transcript
+                    </a>
+                </td>
+                <td>
+                    <span style="color: #6c757d;">TBD</span>
+                </td>
+            </tr>
+            <tr>
+        <td>34</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 20</td>
+                <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/34-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>35</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 19</td>
+                <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/35-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>36</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 18</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/36-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>37</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 17</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/37-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>38</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 16</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/38-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>39</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 15</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/39-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>40</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 14</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/40-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>41</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 13</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/41-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>42</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 12</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/42-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>43</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 11</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/43-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>44</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 10</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/44-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>45</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 9</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/45-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>46</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 8</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/46-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>47</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 7</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/47-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>48</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 6</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/48-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>49</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 5</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/49-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>50</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 4</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/50-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>51</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 3</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/51-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+      <tr>
+        <td>52</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 2</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/52-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+            <tr>
+        <td>53</td>
+        <td class="date">, 202x</td>
+        <td class="title">Spiritual Q&A - Ep. 1</td>
+        <td><a href="https://MarkusIsaksson1982.github.io/AKK-CH5/spiritual-qa/53-54.html">Transcript</a></td>
+        <td>TBD</td>
+      </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p><strong>Spiritual Q&A</strong> - All episodes are part of the ongoing spiritual teaching series by Apostle Kathryn Krick</p>
+        <p>Each episode contains answers to spiritual questions covering topics like healing, deliverance, faith, and Christian living.</p>
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #999;">
+            📝 <strong>Note:</strong> Some YouTube links are marked as "TBD" (To Be Determined) - these episodes may not yet be published on YouTube or the links may need to be updated. All transcript links are active and lead to the full episode content.
+        </p>
+    </div>
+
+    <script>
+        // Add some interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add search functionality
+            const searchDiv = document.createElement('div');
+            searchDiv.style.cssText = `
+                text-align: center;
+                margin: 20px 0;
+                padding: 20px;
+                background: white;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            `;
+            
+            searchDiv.innerHTML = `
+                <input type="text" id="searchInput" placeholder="Search episodes by title or date..." style="
+                    width: 300px;
+                    padding: 10px 15px;
+                    border: 2px solid #e9ecef;
+                    border-radius: 25px;
+                    font-size: 14px;
+                    outline: none;
+                    transition: border-color 0.3s ease;
+                " />
+                <button id="clearSearch" style="
+                    margin-left: 10px;
+                    padding: 10px 20px;
+                    background: #667eea;
+                    color: white;
+                    border: none;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    font-size: 14px;
+                ">Clear</button>
+            `;
+            
+            const table = document.querySelector('table');
+            table.parentNode.insertBefore(searchDiv, table);
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+            const tableRows = document.querySelectorAll('tbody tr');
+            
+            searchInput.addEventListener('focus', function() {
+                this.style.borderColor = '#667eea';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.style.borderColor = '#e9ecef';
+            });
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                tableRows.forEach(row => {
+                    const title = row.querySelector('.title').textContent.toLowerCase();
+                    const date = row.querySelector('.date').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || date.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide clear button
+                clearBtn.style.display = searchTerm ? 'inline-block' : 'none';
+            });
+            
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                tableRows.forEach(row => {
+                    row.style.display = '';
+                });
+                this.style.display = 'none';
+                searchInput.focus();
+            });
+            
+            // Initially hide clear button
+            clearBtn.style.display = 'none';
+            
+            // Add episode counter
+            const totalVisible = document.createElement('div');
+            totalVisible.style.cssText = `
+                text-align: center;
+                margin: 10px 0;
+                color: #6c757d;
+                font-size: 0.9rem;
+            `;
+            totalVisible.innerHTML = `Showing <span id="visibleCount">${tableRows.length}</span> of ${tableRows.length} episodes`;
+            
+            searchDiv.appendChild(totalVisible);
+            
+            // Update counter when searching
+            searchInput.addEventListener('input', function() {
+                const visibleRows = Array.from(tableRows).filter(row => row.style.display !== 'none');
+                document.getElementById('visibleCount').textContent = visibleRows.length;
+            });
+        });
+    </script>
+</body>
+</html>
