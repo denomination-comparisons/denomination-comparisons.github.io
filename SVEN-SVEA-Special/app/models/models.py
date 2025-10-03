@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Float, Boolean
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 db = SQLAlchemy()
@@ -25,7 +27,7 @@ class ReadingText(db.Model):
     word_count = Column(Integer, nullable=False)
     theme = Column(String(100))
     bias_flags = Column(String(255))  # Flaggor för bias, t.ex. 'kön,ålder'
-    full_text = Column(sqlalchemy.Text, nullable=False)
+    full_text = Column(Text, nullable=False)
 
     # Relationer
     attempts = relationship("ComprehensionAttempt", back_populates="text")
@@ -49,7 +51,7 @@ class Reflection(db.Model):
     id = Column(Integer, primary_key=True)
     student_id = Column(Integer, ForeignKey('students.id'), nullable=False)
     text_id = Column(String(50), ForeignKey('texts.text_id'), nullable=False)
-    journal_entry = Column(sqlalchemy.Text, nullable=False)  # AI Collaboration Journal
+    journal_entry = Column(Text, nullable=False)  # AI Collaboration Journal
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     # Relationer
@@ -61,7 +63,7 @@ class TeacherOverride(db.Model):
     id = Column(Integer, primary_key=True)
     teacher_id = Column(String(50), nullable=False)  # Lärar-ID
     student_id = Column(Integer, ForeignKey('students.id'), nullable=False)
-    override_reason = Column(sqlalchemy.Text, nullable=False)
+    override_reason = Column(Text, nullable=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     # Relationer
@@ -72,7 +74,7 @@ class Dialogue(db.Model):
     id = Column(Integer, primary_key=True)
     student_id = Column(Integer, ForeignKey('students.id'), nullable=False)
     topic = Column(String(255), nullable=False)  # Theological topic
-    messages = Column(sqlalchemy.Text, nullable=False)  # JSON list of messages
+    messages = Column(Text, nullable=False)  # JSON list of messages
     timestamp = Column(DateTime, default=datetime.utcnow)
 
     # Relationer
@@ -90,7 +92,7 @@ class ReadingAssignment(db.Model):
     __tablename__ = 'reading_assignments'
     id = Column(Integer, primary_key=True)
     title = Column(String(200), nullable=False)
-    content = Column(sqlalchemy.Text, nullable=False)  # JSON string for texts/questions/strategies
+    content = Column(Text, nullable=False)  # JSON string for texts/questions/strategies
     teacher_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -102,8 +104,8 @@ class StudentResponse(db.Model):
     id = Column(Integer, primary_key=True)
     assignment_id = Column(Integer, ForeignKey('reading_assignments.id'), nullable=False)
     student_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    answers = Column(sqlalchemy.Text, nullable=False)  # JSON of answers
-    strategies = Column(sqlalchemy.Text, nullable=False)  # JSON of selected strategies
+    answers = Column(Text, nullable=False)  # JSON of answers
+    strategies = Column(Text, nullable=False)  # JSON of selected strategies
     self_assessment = Column(Integer, nullable=False)  # Score 1-5
     submitted_at = Column(DateTime, default=datetime.utcnow)
 
@@ -116,7 +118,7 @@ class AIFeedback(db.Model):
     id = Column(Integer, primary_key=True)
     response_id = Column(Integer, ForeignKey('student_responses.id'), nullable=False)
     comprehension_score = Column(Float, nullable=False)
-    recommendations = Column(sqlalchemy.Text, nullable=False)
+    recommendations = Column(Text, nullable=False)
     cefr_level = Column(String(10), nullable=False)  # e.g., 'B1'
     generated_at = Column(DateTime, default=datetime.utcnow)
 
@@ -127,9 +129,9 @@ class WritingAssignment(db.Model):
     __tablename__ = 'writing_assignments'
     id = Column(Integer, primary_key=True)
     title = Column(String(200), nullable=False)
-    description = Column(sqlalchemy.Text, nullable=False)
-    example_novella = Column(sqlalchemy.Text, nullable=True)  # JSON or text of example
-    elements = Column(sqlalchemy.Text, nullable=False)  # JSON: {'undertext': True, 'stil': 'komiskt', etc.}
+    description = Column(Text, nullable=False)
+    example_novella = Column(Text, nullable=True)  # JSON or text of example
+    elements = Column(Text, nullable=False)  # JSON: {'undertext': True, 'stil': 'komiskt', etc.}
     teacher_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -141,8 +143,8 @@ class StudentWriting(db.Model):
     id = Column(Integer, primary_key=True)
     assignment_id = Column(Integer, ForeignKey('writing_assignments.id'), nullable=False)
     student_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    content = Column(sqlalchemy.Text, nullable=False)
-    elements_used = Column(sqlalchemy.Text, nullable=False)  # JSON of elements
+    content = Column(Text, nullable=False)
+    elements_used = Column(Text, nullable=False)  # JSON of elements
     self_assessment = Column(Integer, nullable=False)  # 1-5
     submitted_at = Column(DateTime, default=datetime.utcnow)
 
@@ -154,8 +156,8 @@ class WritingFeedback(db.Model):
     __tablename__ = 'writing_feedbacks'
     id = Column(Integer, primary_key=True)
     writing_id = Column(Integer, ForeignKey('student_writings.id'), nullable=False)
-    element_scores = Column(sqlalchemy.Text, nullable=False)  # JSON: {'undertext': 0.8, 'stil': 0.7}
-    recommendations = Column(sqlalchemy.Text, nullable=False)
+    element_scores = Column(Text, nullable=False)  # JSON: {'undertext': 0.8, 'stil': 0.7}
+    recommendations = Column(Text, nullable=False)
     cefr_level = Column(String(10), nullable=False)
     generated_at = Column(DateTime, default=datetime.utcnow)
 
@@ -167,7 +169,7 @@ class SpeakingExercise(db.Model):
     id = Column(Integer, primary_key=True)
     assignment_id = Column(Integer, ForeignKey('writing_assignments.id'), nullable=False)  # Link to writing for integrated tasks
     audio_url = Column(String(255), nullable=True)  # Stored in cloud (e.g., S3)
-    transcript = Column(sqlalchemy.Text, nullable=True)
+    transcript = Column(Text, nullable=True)
     pronunciation_score = Column(Float, nullable=True)  # AI-computed
     created_at = Column(DateTime, default=datetime.utcnow)
 

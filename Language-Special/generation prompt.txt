@@ -1,0 +1,24 @@
+Create a Python-based command-line application using libraries like Pillow for image handling and ReportLab or similar for PDF generation, that serves as a foundation for generating pictorial crossword puzzles similar to the ones in the provided images. These puzzles feature:
+
+- A rectangular grid (e.g., 10x15 cells) with some cells pre-filled with letters, forming partial words horizontally or vertically.
+- Arrows indicating the direction to fill words (e.g., right, down, left, up).
+- Clues presented as a mix of text phrases (in uppercase Swedish or English words) and small illustrative images placed adjacent to the starting cells of words.
+- A thematic illustration at the top (e.g., children playing on a beach, at a cafe, picking fruit, or grilling), which relates loosely to the puzzle words.
+- A highlighted row or column (e.g., in yellow) that, when solved, reveals a hidden phrase or answer.
+- Titles like "KORSORD" (Swedish for crossword) with subtitles such as "Upp till tretton" (meaning "Up to thirteen," possibly indicating word length or difficulty).
+- Optional Sudoku or other mini-puzzles at the bottom, but focus primarily on the crossword.
+- For the music variant ("MUSIKKRYSS ET"), include hidden words (e.g., musical instruments) embedded diagonally or in patterns within the grid, with a question like "Which musical instruments are hidden in the crossword?"
+
+Make the app language-agnostic at its core: Allow input of word lists, clue texts, and image paths in any language (start with support for English and Swedish). Users should provide:
+
+- A JSON config file defining the grid size, pre-filled letters, arrow positions, clue texts/images, theme image, and the hidden answer.
+- Generate the puzzle as a printable PDF or image output.
+
+Include basic functionality:
+- Grid generation with borders and cell shading.
+- Placing text clues and embedding small images (e.g., from a directory of clipart).
+- Randomizing word placement if no config is provided, using a word bank (e.g., load from a text file).
+- Validation to ensure the grid is solvable and the hidden phrase appears correctly.
+- Example code to generate a sample puzzle based on one of the attached images (e.g., the beach-themed one with words like "INDUSTRI", "HAB MAN", "KANDEGERN", etc.).
+
+Keep the code modular, with classes for Grid, Clue, and Renderer. Use no external APIs beyond standard libraries and the mentioned ones; make it runnable offline. Provide comments and a README for extension.
