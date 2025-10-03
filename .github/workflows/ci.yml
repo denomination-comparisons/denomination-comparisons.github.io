@@ -23,15 +23,16 @@ jobs:
       run: |
         cd app
         python -m pytest tests/ -v
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-    - uses: actions/checkout@v3
-    - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: "your-swedish-app"  # Replace with actual app name
-        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+  # deploy:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Deploy to Heroku
+  #     uses: akhileshns/heroku-deploy@v3.12.12
+  #     with:
+  #       heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+  #       heroku_app_name: "your-swedish-app"  # Replace with actual app name
+  #       heroku_email: ${{ secrets.HEROKU_EMAIL }}
+  # Uncomment the above when Heroku account and secrets are set up
