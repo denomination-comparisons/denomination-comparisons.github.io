@@ -13,12 +13,13 @@ def vr_environment():
 def issue_cert():
     student_id = request.json.get('student_id')
     level = request.json.get('level')
-    # Blockchain integration
-    w3 = web3.Web3(web3.HTTPProvider('https://infura.io/v3/YOUR_KEY'))  # Replace with actual key
-    # Simplified: Assume smart contract for minting NFT
-    # tx_hash = w3.eth.send_transaction(...)  # Placeholder
-    tx_hash = '0xplaceholder'  # Simulate
+    # Blockchain integration - commented out until INFURA_PROJECT_ID and wallet setup
+    # Uncomment when Ethereum wallet and Infura key are configured
+    # w3 = web3.Web3(web3.HTTPProvider(f'https://infura.io/v3/{current_app.config.get("INFURA_PROJECT_ID")}'))
+    # # Add smart contract interaction here for NFT minting
+    # tx_hash = '0x...'  # Real transaction hash from w3.eth.send_transaction(...)
+    tx_hash = '0xplaceholder'  # Simulate - replace with real blockchain tx when keys available
     cert = VRCert(student_id=student_id, cefr_level=level, cert_hash=tx_hash)
     db.session.add(cert)
     db.session.commit()
-    return jsonify({'cert_id': cert.id, 'tx_hash': tx_hash, 'message': 'Certificate issued on blockchain'})
+    return jsonify({'cert_id': cert.id, 'tx_hash': tx_hash, 'message': 'Certificate issued (simulated - enable blockchain for real)'})

@@ -1,0 +1,9 @@
+Analyze the following Python-based educational language learning application codebase and suggest specific improvements for functionality, code quality, user experience, and scalability. The project includes:
+
+- A main Flask app in `C:\Users\mjisa\dev\app` with tools for CEFR analysis, argument visualization, source criticism, text modification, and exam simulation. It has student/teacher dashboards, AI modules, and uses SQLite.
+
+- A separate kallkritik-generator in `C:\Users\mjisa\dev\kallkritik-generator` (simple Flask app).
+
+- Standalone scripts: `text_modifier.py` (simulates LLM-based text adaptation for CEFR levels with a Flask API) and `run.py` (app runner).
+
+Key files to review: app structure, tools/ directory, routes/, templates/, and the text modifier simulation. Focus on integrating real AI/LLMs, enhancing UI/UX, adding robust testing, improving security, and optimizing performance. Provide actionable code changes or architectural recommendations.

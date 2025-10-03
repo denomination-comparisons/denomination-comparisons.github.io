@@ -1,0 +1,41 @@
+### Model Configuration Updates
+The code currently defaults to `'gemini-1.5-pro-latest'` and `'gemini-1.5-pro-vision-latest'`, but Gemini 2.5 Pro is the latest state-of-the-art model (released in March 2025, with stable version in June 2025), offering improved reasoning, coding, multimodal capabilities, and "adaptive thinking" for complex tasks. To optimize for Gemini 2.5 Pro:
+
+- Update `model_name` in `_load_defaults()` to `'gemini-2.5-pro'`.
+- Gemini 2.5 Pro is natively multimodal, so consolidate `vision_model_name` to `'gemini-2.5-pro'` (or use `'gemini-2.5-flash-image-preview'` for faster image tasks if latency is a concern). This eliminates the need for separate vision handling in some cases.
+- Add support for new model variants, e.g., via a config option for `'gemini-2.5-flash'` (a lighter, faster version for cost-efficiency, released June 2025). This could be implemented as a dropdown in CLI args or env vars like `GEMINI_TOOL_MODEL_VARIANT`.
+
+This will leverage longer context windows (up to 2M tokens in experimental modes) and better STEM/coding performance, as noted in Gemini 2.5's release notes.
+
+### Integration with Gemini CLI (v0.9.0-nightly.20251002.aa8b2abe)
+The code mentions "support for Gemini CLI-specific configurations" but doesn't fully utilize the latest Gemini CLI features. Gemini CLI is an open-source Node.js-based terminal agent (GitHub: google-gemini/gemini-cli) for direct Gemini access, with nightly builds like this one adding telemetry for smart edits and workflow improvements (e.g., native diffing, context-aware prompts). Suggestions:
+
+- Detect if running in Gemini CLI environment: Check for env vars like `GEMINI_CLI_SESSION` or `GOOGLE_AI_PRO` (introduced in recent updates for higher limits). If present, adjust `max_concurrent_requests` or enable batching to align with CLI's higher quotas for Pro/Ultra subscribers.
+- Add telemetry support: The nightly build adds core telemetry for edit corrections. Implement optional metrics logging (extend `MetricsCollector`) to send anonymized data via Gemini CLI's API if `enable_metrics` is true and running in CLI mode. Use `google.generativeai` hooks for usage_metadata to track thinking steps.
+- CLI interoperability: Add a subcommand like `gemini-cli-sync` to export configs/results as JSON compatible with Gemini CLI's structured outputs. This allows piping (e.g., `python tool.py analyze file.py | gemini edit`), leveraging CLI's VS Code integration for diffs.
+- Handle nightly-specific fixes: Test for improved responsiveness in narrow terminals (from earlier nightlies); wrap CLI outputs with ANSI codes only if not in Gemini CLI to avoid conflicts.
+
+Install/update Gemini CLI via npm (`npm install -g @google/gemini-cli@0.9.0-nightly.20251002.aa8b2abe`) and ensure your tool's CLI can invoke it subprocess-style for hybrid workflows.
+
+### Prompt and API Call Enhancements
+- Leverage adaptive thinking: In `call_gemini_api`, add a default `system_instruction` like "Think step-by-step before responding, breaking down complex problems." This activates 2.5 Pro's built-in reasoning without extra prompts.
+- Structured outputs: Set `response_mime_type="application/json"` for analysis tools (e.g., CEFR) to get reliable JSON responses. Parse with `response.candidates[0].content.parts[0].text` and validate schema.
+- Multimodal expansions: Extend `call_gemini_api` to support video/audio inputs (Gemini 2.5 handles them natively). Add args for file types in CLI commands.
+- Batch processing: Since config has `enable_batch_processing`, use Gemini's parallel generation for large inputs (e.g., analyze multiple files). Limit to `batch_size` and use `asyncio.gather` for concurrency.
+
+### Dependency and Performance Optimizations
+- SDK upgrade: Explicitly require `google-generativeai>=0.8.0` (supports 2.5 models) in docs or setup.py. Add `pip install --upgrade google-generativeai` to README.
+- Analysis Suite refinements: 
+  - For `cefr`: Integrate Gemini 2.5 for bias detection instead of rule-based (prompt: "Analyze text for CEFR level and biases"). This reduces deps like scikit-learn.
+  - For `concept-map`: Use Gemini to generate relationships from unstructured text before NetworkX, improving input handling.
+  - Load models lazily: Move `self.nlp = self._load_spacy_model()` inside methods to avoid startup overhead.
+- Caching: Extend `TTLCache` to hash prompts + model version for 2.5-specific caches.
+- Error handling: Add retries for rate limits (higher in Gemini CLI Pro mode) and handle new error types like "thinking timeout" in 2.5.
+
+### General Code Quality and Compatibility
+- Versioning: Bump to v1.0.7 with changelog entry for 2.5 support.
+- Testing: Add unit tests for new model calls using mock responses.
+- Language focus: The suite is Swedish-oriented (e.g., sv_core_news_sm, Kelly list). Make language configurable (e.g., add English with en_core_web_sm) for broader use.
+- Security: In `generate_concept_map`, validate input to prevent arbitrary code in regex patterns.
+
+These changes will make the tool more efficient, feature-rich, and aligned with Gemini 2.5 Pro's strengths while integrating seamlessly with the latest Gemini CLI. If no major issues, the code is already well-structured.

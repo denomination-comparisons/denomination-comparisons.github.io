@@ -1,0 +1,175 @@
+Looking at this code designed for Gemini 2.5 Pro in Gemini CLI, here are several optimization suggestions:
+
+## Critical Issues
+
+### 1. **Outdated Model Names**
+```python
+# Current (outdated)
+"model_name": "gemini-1.5-pro-latest",
+"vision_model_name": "gemini-1.5-pro-vision-latest",
+
+# Should be (for Gemini 2.5 Pro)
+"model_name": "gemini-2.0-flash-exp",  # or "gemini-exp-1206"
+"vision_model_name": "gemini-2.0-flash-exp",  # Gemini 2.5 has unified vision
+```
+
+### 2. **Separate Vision Model No Longer Needed**
+Gemini 2.5 Pro has native multimodal capabilities - no need for separate vision models. Simplify the model selection logic.
+
+### 3. **Missing Native Code Execution**
+Gemini 2.5 Pro supports native code execution. Add this capability:
+
+```python
+generation_config = genai.GenerationConfig(
+    temperature=self.config.temperature,
+    max_output_tokens=self.config.max_output_tokens,
+    response_mime_type="text/plain"
+)
+
+# Add code execution tool
+tools = [genai.protos.Tool(code_execution={})]
+```
+
+## Performance Optimizations
+
+### 4. **Leverage Context Caching**
+Gemini 2.5 Pro supports context caching for repeated prompts:
+
+```python
+# Add to Gemini15ProStrategy class
+async def call_gemini_api_with_caching(self, 
+                                       prompt: str,
+                                       system_instruction: Optional[str] = None,
+                                       use_caching: bool = True) -> str:
+    if use_caching and system_instruction:
+        # Use cached_content for system instructions
+        cache = genai.caching.CachedContent.create(
+            model=self.config.model_name,
+            system_instruction=system_instruction,
+            ttl=datetime.timedelta(minutes=60)
+        )
+        model = genai.GenerativeModel.from_cached_content(cache)
+    else:
+        model = genai.GenerativeModel(
+            self.config.model_name,
+            system_instruction=system_instruction
+        )
+```
+
+### 5. **Increase Max Output Tokens**
+Gemini 2.5 Pro supports up to 8,192 output tokens:
+
+```python
+"max_output_tokens": 8192,  # Already correct, but ensure it's used
+```
+
+### 6. **Add Thinking Mode Support**
+Gemini 2.5 Pro has extended thinking capabilities:
+
+```python
+generation_config = genai.GenerationConfig(
+    temperature=self.config.temperature,
+    max_output_tokens=self.config.max_output_tokens,
+    thinking_config=genai.protos.ThinkingConfig(
+        thinking_mode=genai.protos.ThinkingMode.THINKING_MODE_ENABLED
+    )
+)
+```
+
+## Architecture Improvements
+
+### 7. **Async File Operations Incomplete**
+You import `aiofiles` but don't use it. Implement async file reading:
+
+```python
+async def read_file_async(self, file_path: str) -> str:
+    async with aiofiles.open(file_path, 'r', encoding='utf-8') as f:
+        return await f.read()
+```
+
+### 8. **Batch Processing Not Implemented**
+The config enables batch processing but it's not implemented:
+
+```python
+async def batch_analyze(self, code_files: List[str]) -> List[Dict[str, Any]]:
+    semaphore = asyncio.Semaphore(self.config.max_concurrent_requests)
+    
+    async def analyze_with_limit(file_path):
+        async with semaphore:
+            return await self.run_full_analysis(file_path)
+    
+    tasks = [analyze_with_limit(f) for f in code_files]
+    return await asyncio.gather(*tasks)
+```
+
+### 9. **Incomplete Main Function**
+The `run_full_analysis` method is stubbed out. Complete the implementation.
+
+### 10. **Missing CodeAnalyzer Class**
+Referenced but not defined. Add it:
+
+```python
+class CodeAnalyzer:
+    def __init__(self, config: ConfigManager):
+        self.config = config
+    
+    def analyze_complexity(self, code: str) -> Dict[str, Any]:
+        # Implementation needed
+        pass
+```
+
+## Gemini CLI Specific
+
+### 11. **Add Gemini CLI Integration**
+Support Gemini CLI's native features:
+
+```python
+def _load_from_gemini_cli_config(self, config: dict):
+    """Load configuration from Gemini CLI settings."""
+    cli_config_path = Path.home() / ".gemini" / "config.yaml"
+    if cli_config_path.exists():
+        with open(cli_config_path, 'r') as f:
+            cli_config = yaml.safe_load(f)
+            if cli_config:
+                config.update(cli_config)
+```
+
+### 12. **Better Error Messages for CLI**
+Add user-friendly error messages specific to CLI usage:
+
+```python
+except ValueError as e:
+    if "GEMINI_API_KEY" in str(e):
+        logger.error(f"{Colors.FAIL}Error: GEMINI_API_KEY not set.{Colors.ENDC}")
+        logger.info(f"Set it with: export GEMINI_API_KEY='your-key'")
+        logger.info(f"Or in Gemini CLI: gemini config set api_key 'your-key'")
+```
+
+## Minor Improvements
+
+### 13. **Swedish Character Encoding Issues**
+Your strings have encoding issues (Ã¤, Ã¶, etc.). Ensure proper UTF-8:
+
+```python
+"text": "Jag heter Anna."  # Not "Jag heter Anna."
+"Könsobalans"  # Not "KÃ¶nsobalans"
+```
+
+### 14. **Remove Unused Imports**
+`pickle`, `AsyncGenerator`, `Tuple` are imported but unused.
+
+### 15. **Type Hints for Async Methods**
+Add proper return type hints:
+
+```python
+async def call_gemini_api(self, 
+                         prompt: str, 
+                         image_data: Optional[bytes] = None, 
+                         stream: bool = False,
+                         system_instruction: Optional[str] = None) -> str:
+```
+
+### 16. **Safety Settings Could Be Configurable**
+Make safety settings part of config rather than hardcoded.
+
+Would you like me to create an updated version of this code with these improvements implemented?
