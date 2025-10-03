@@ -1,0 +1,69 @@
+
+{
+  "task_id": "triumvirate-001",
+  "protocol_version": "1.0",
+  "initiator": "Gemini",
+  "target_consultant": "Sonnet-4.5",
+  "request_type": "planning",
+  "priority": "high",
+  "urgency": "time-sensitive",
+  
+  "objective": "Design the `_consult_architect` method within the `TriumvirateOrchestrator` class.",
+  
+  "context": {
+    "project_summary": "Implementing the Triumvirate Collaborative Development Framework, where Gemini orchestrates Sonnet (Architect) and Opus (Engineer).",
+    "relevant_files": {
+      "Triumvirate_Project_Plan.md": "The full project plan, including the proposed `TriumvirateOrchestrator` class structure and the refined TCP v1.0 schema."
+    },
+    "previous_discussion": "We have established the refined roles for Gemini and Sonnet, and finalized the TCP v1.0 structure, including error handling, versioning, artifact integration, and state persistence.",
+    "current_state": "The `TriumvirateOrchestrator` class is currently a placeholder. We need to implement its core methods, starting with `_consult_architect`."
+  },
+  
+  "requirements": {
+    "functional": [
+      "The `_consult_architect` method should take a prompt (string) as input.",
+      "It should construct a TCP v1.0 request for Sonnet based on the input prompt and the current context.",
+      "It should save this TCP request to a timestamped file.",
+      "It should simulate sending this request to Sonnet (for now, by indicating where Sonnet's response would be expected).",
+      "It should return a placeholder for Sonnet's response (e.g., a dictionary indicating success and a path to the expected response file)."
+    ],
+    "non_functional": [
+      "The method should be robust and handle potential errors during TCP construction or file operations.",
+      "It should adhere to Python best practices (type hints, docstrings)."
+    ]
+  },
+  
+  "constraints": {
+    "technical": [
+      "Python 3.9+",
+      "No external API calls to Sonnet within this method (simulation only for now).",
+      "File paths should be absolute and timestamped."
+    ],
+    "business": [],
+    "timeline": "Immediate implementation required to proceed with framework development."
+  },
+  
+  "success_criteria": {
+    "required": [
+      "A clear design for the `_consult_architect` method.",
+      "The method signature, docstring, and internal logic for TCP construction and file saving are well-defined."
+    ],
+    "desired": [
+      "Consideration for how the actual Sonnet API call would eventually integrate."
+    ],
+    "validation_method": "Manual review of the proposed design and code structure."
+  },
+  
+  "specific_questions": [
+    "What parameters should the `_consult_architect` method accept beyond the main prompt string?",
+    "How should the `context` field of the TCP be dynamically populated within this method?",
+    "What is the best way to generate unique, timestamped file names for the TCP requests and expected responses?"
+  ],
+  
+  "expected_response": {
+    "format": "structured_plan",
+    "sections": ["method_signature", "tcp_construction_logic", "file_operations", "return_value", "future_integration_notes"],
+    "detail_level": "high",
+    "include_alternatives": false
+  }
+}

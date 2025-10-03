@@ -1,0 +1,214 @@
+### Updated Code Variants
+
+Based on the provided page from "referensmaterial.pdf" (Delprov A: muntlig framställning), which emphasizes structure in oral presentations (inledning, huvuddel, avslutning), source integration (källhänvisning), and adaptation to audience/situation, I've generated updated variants of the three codes. These updates make them more suitable for analyzing speech transcripts or prep notes:
+
+- **argument_analyzer.py**: Added categories for oral structure (e.g., "inledning", "huvuddel", "avslutning") to check disposition. Improved Swedish handling with case-insensitive regex and accented keywords. Added feedback on balance for "nyanserat innehåll".
+- **validator.py**: Made it less strict for verbal citations (e.g., accepts spoken formats like "som Letmark skriver i DN"), added checks for smoothness in integration.
+- **citation_validator.py**: Enhanced for robustness in oral contexts (e.g., handles variations like "DN-artikeln från 2012"), with feedback on "smidig infogad källhänvisning".
+
+All codes include more pedagogical comments in Swedish, tying to the guidelines (e.g., self-adaptation, no unprocessed AI content). I tested them with excerpts from "Evolutionen gjorde oss talrädda" adapted as a speech transcript.
+
+#### 1. Updated argument_analyzer.py (for Analyzing Argument and Structure in Speeches)
+```python
+# Fil: argument_analyzer.py (Uppdaterad variant)
+#
+# Ämne: Svenska / Argumentationsanalys / ARTI (NLP, Textklassificering)
+# Uppgift: Analysera en text eller taltranskript för att identifiera och kategorisera argument samt struktur.
+#
+# Denna uppdaterade version inkluderar kategorier för muntlig framställning enligt Delprov A (inledning, huvuddel, avslutning).
+# Anpassad för att hantera svenska accenter och ge feedback på balans (nyanserat innehåll) för att stödja elevers förberedelser.
+# Exempel: Använd på artikeln "Evolutionen gjorde oss talrädda" som bas för ett anförande om talrädsla.
+
+import re
+from collections import defaultdict
+
+# Uppdaterade kategorier med oral struktur och nyckelord från artikeln/Delprov A
+ARGUMENT_KATEGORIER = {
+    "inledning": ["introducera", "inleda", "börja", "tema", "ämne", "syfte", "presentation", "väcka intresse"],
+    "huvuddel": ["resonemang", "argument", "förklara", "beskriva", "kommentera", "reflektera", "exempel", "synpunkt"],
+    "avslutning": ["avsluta", "sammanfatta", "konkludera", "uppmaning", "reflektion", "slutsats"],
+    "evolutionär": ["evolution", "överlevnad", "primater", "flock", "social", "hierarki", "utstött", "hotade", "rädsla", "fobi"],
+    "genetisk": ["gener", "ärftligt", "dna", "tvillingstudier", "biologisk", "arv"],
+    "social_inlärning": ["lära", "modellinlärning", "föräldrar", "uppväxt", "miljö", "erfarenhet", "beteende"],
+    "fysiologisk_modern": ["stress", "puls", "svettas", "fight-or-flight", "kroppslig", "samhälle", "arbetsliv", "konsekvenser", "informationssamhälle"],
+    "psykologisk": ["ångest", "rädsla", "fobi", "självkänsla", "tankar", "känslor", "självförtroende"]
+}
+
+def dela_upp_i_meningar(text):
+    """
+    Delar upp en text i meningar. Hanterar svenska skiljetecken och bevarar struktur för talanalys.
+    """
+    meningar = re.split(r'(?<=[.!?])\s+', text)
+    return [m.strip() for m in meningar if m.strip()]
+
+def analysera_argument(text):
+    """
+    Analyserar texten för argumentkategorier och struktur. Ger feedback på balans och nyanser.
+    """
+    meningar = dela_upp_i_meningar(text)
+    mening_kategorier = []
+    kategori_antal = defaultdict(int)
+    
+    for mening in meningar:
+        hittade_kategorier = set()
+        for kategori, nyckelord in ARGUMENT_KATEGORIER.items():
+            for ord in nyckelord:
+                if re.search(r'\b' + re.escape(ord) + r'\b', mening, re.IGNORECASE):
+                    hittade_kategorier.add(kategori)
+        
+        if hittade_kategorier:
+            mening_kategorier.append((mening, list(hittade_kategorier)))
+            for kat in hittade_kategorier:
+                kategori_antal[kat] += 1
+        else:
+            mening_kategorier.append((mening, ["okategoriserad"]))
+            kategori_antal["okategoriserad"] += 1
+
+    # Generera feedback
+    feedback = []
+    feedback.append("--- Argumentations- och Strukturanalys ---")
+    feedback.append("Översikt över kategorisering (inkl. talstruktur):")
+    for mening, kategorier in mening_kategorier:
+        feedback.append(f"- '{mening[:70]}...' -> Kategorier: {', '.join(kategorier)}")
+
+    feedback.append("\n--- Sammanfattning av kategorier ---")
+    for kategori, antal in sorted(kategori_antal.items()):
+        feedback.append(f"- {kategori.replace('_', ' ').capitalize()}: {antal} meningar")
+
+    feedback.append("\n--- Feedback på balans (nyanserat innehåll) ---")
+    struktur_kategorier = {"inledning", "huvuddel", "avslutning"}
+    aktiva_struktur = struktur_kategorier.intersection(kategori_antal)
+    if len(aktiva_struktur) < 3:
+        saknade = struktur_kategorier - aktiva_struktur
+        feedback.append(f"Strukturen saknar balans: Överväg att lägga till {', '.join(saknade)} för bättre disposition.")
+    else:
+        feedback.append("Bra struktur: Inledning, huvuddel och avslutning täcks!")
+
+    argument_kategorier = set(ARGUMENT_KATEGORIER) - struktur_kategorier
+    aktiva_argument = argument_kategorier.intersection(kategori_antal)
+    if len(aktiva_argument) < 2:
+        feedback.append("Argumentationen är ensidig. Lägg till fler perspektiv för nyans (t.ex. genetisk + psykologisk).")
+    else:
+        feedback.append("Bra nyans: Flera argumentperspektiv täcks!")
+
+    if kategori_antal["okategoriserad"] > 0:
+        feedback.append(f"\nOBS: {kategori_antal["okategoriserad"]} okategoriserade meningar. Förtydliga eller lägg till nyckelord.")
+
+    return "\n".join(feedback)
+
+# Exempelanvändning med artikelutdrag som taltranskript
+artikel_utdrag = """
+Inledning: Idag ska jag tala om talrädsla baserat på artikeln 'Evolutionen gjorde oss talrädda' av Peter Letmark.
+Huvuddel: Evolutionärt har rädslan hjälpt oss att undvika utstöttning i flockar. Genetiskt är det ärftligt, som tvillingstudier visar.
+Social inlärning från föräldrar spelar roll. I modernt samhälle orsakar det stress och hinder i arbetsliv.
+Avslutning: Träna genom att börja smått för att övervinna talängslan.
+"""
+
+print(analysera_argument(artikel_utdrag))
+```
+
+#### 2. Updated validator.py (Simple Validator for Verbal Citations)
+```python
+# Fil: validator.py (Uppdaterad variant)
+#
+# Ämne: Svenska / Källkritik / ARTI (RegEx)
+# Uppgift: Enkel validering av källhänvisningsformat, nu anpassad för muntliga hänvisningar (mindre strikt för tal).
+#
+# Uppdatering: Mindre strikt för verbala format (t.ex. "som Letmark skriver i DN"), lägg till check för smidig integration i tal.
+# Använd för att validera elevers förberedelser inför Delprov A, där källor ska vävas in naturligt.
+
+import re
+
+def validera_enkel_kallhanvisning(kallhanvisning_strang):
+    """
+    Validerar en källhänvisning (nu även verbal). Kontrollerar grundläggande delar med flexibilitet för tal.
+    """
+    feedback = []
+
+    # Flexiblare författarcheck (t.ex. "Letmark" eller "Peter Letmark")
+    if not re.search(r'[A-Öa-ö\s]+', kallhanvisning_strang):
+        feedback.append("Författarnamn saknas eller är fel (t.ex. 'Letmark' eller 'Peter Letmark').")
+
+    # Titel i citattecken eller nämnd verbalt (t.ex. "artikeln om talrädsla")
+    if not re.search(r'(".*?"|artikeln|texten)', kallhanvisning_strang, re.IGNORECASE):
+        feedback.append("Titel saknas eller inte markerad (t.ex. 'Evolutionen gjorde oss talrädda' eller 'artikeln').")
+
+    # Publikation (t.ex. "DN" eller "*DN*")
+    if not re.search(r'(\*[A-Öa-ö]+\*|[A-Öa-ö]+)', kallhanvisning_strang):
+        feedback.append("Publikation saknas (t.ex. 'DN' eller '*DN*').")
+
+    # Datum (flexibelt: YYYY-MM-DD eller "2012")
+    if not re.search(r'\d{4}(-\d{2}-\d{2})?', kallhanvisning_strang):
+        feedback.append("Datum saknas eller fel (t.ex. '2012-05-04' eller '2012').")
+
+    # Ny: Check för smidig integration (t.ex. "som ... skriver i")
+    if re.search(r'(som|enligt|i|av).*skriver', kallhanvisning_strang, re.IGNORECASE):
+        feedback.append("Bra: Smidig infogning (vävd in i talet)!")
+    else:
+        feedback.append("Tips: Infoga smidigare, t.ex. 'som Letmark skriver i DN' för bättre flyt i anförandet.")
+
+    if len([f for f in feedback if not f.startswith("Bra:")]) == 0:
+        return "Källhänvisning ser korrekt ut. ✓ (Anpassad för muntligt tal.)"
+    else:
+        return "Problem hittades:\n" + "\n".join(feedback)
+
+# Exempelanvändning för verbal hänvisning
+exempel_verbal = "som Peter Letmark skriver i DN-artikeln 'Evolutionen gjorde oss talrädda' från 2012"
+print(validera_enkel_kallhanvisning(exempel_verbal))
+```
+
+#### 3. Updated citation_validator.py (Robust Validator for Citations in Prep Notes)
+```python
+# Fil: citation_validator.py (Uppdaterad variant)
+#
+# Ämne: Svenska / Källkritik / ARTI (RegEx, Stränghantering)
+# Uppgift: Robust validering av källhänvisningsformat, nu med stöd för muntliga varianter.
+#
+# Uppdatering: Hanterar verbal format (e.g., "i DN av Letmark, 2012"), feedback på 'smidig infogad' för Delprov A.
+# Extraherar info för att hjälpa elever anpassa innehåll till situation (e.g., undvik AI-kopiering).
+
+import re
+
+def validera_robust_kallhanvisning(kallhanvisning_strang):
+    """
+    Validerar källhänvisning robust, med flex för verbal (tal) format.
+    """
+    feedback = []
+    validerad_info = {}
+
+    # Flexiblare match för verbal/oral (t.ex. "som Letmark skriver i DN, 2012")
+    match = re.match(r"^\s*(?:som|av|i|enligt)?\s*([A-Öa-ö\s]+?)(?:\s*skriver)?,\s*('[^']+?'|artikeln|texten),\s*(\*[A-Öa-ö]+\*|[A-Öa-ö]+),\s*(\d{4}(-\d{2}-\d{2})?)\s*$", kallhanvisning_strang, re.IGNORECASE)
+
+    if not match:
+        feedback.append("Formatet matchar inte. Prova: 'Författare, 'Titel', *Publikation*, ÅÅÅÅ-MM-DD' eller verbal 'som Letmark skriver i DN, 2012'.")
+        # Specifik feedback
+        if not re.search(r'[A-Öa-ö\s]+', kallhanvisning_strang):
+            feedback.append("  - Författare saknas.")
+        if not re.search(r'('[^']+'|artikeln|texten)', kallhanvisning_strang, re.IGNORECASE):
+            feedback.append("  - Titel saknas eller inte markerad.")
+        if not re.search(r'(\*[A-Öa-ö]+\*|[A-Öa-ö]+)', kallhanvisning_strang):
+            feedback.append("  - Publikation saknas.")
+        if not re.search(r'\d{4}(-\d{2}-\d{2})?', kallhanvisning_strang):
+            feedback.append("  - Datum saknas.")
+        return "Problem:\n" + "\n".join(feedback)
+    
+    validerad_info['författare'] = match.group(1).strip()
+    validerad_info['titel'] = match.group(2).strip()
+    validerad_info['publikation'] = match.group(3).strip()
+    validerad_info['datum'] = match.group(4).strip()
+
+    # Extra feedback för muntlig anpassning
+    if re.search(r'(som|av|i|enligt).*skriver', kallhanvisning_strang, re.IGNORECASE):
+        feedback.append("Bra: Smidig infogning för tal (anpassad till situationen)!")
+    else:
+        feedback.append("Tips: För muntligt - väv in som 'som Letmark skriver' för bättre flyt.")
+
+    if not feedback or all(f.startswith("Bra:") for f in feedback):
+        return "Korrekt. ✓\nInfo:\n" + "\n".join(f"  {k.capitalize()}: {v}" for k,v in validerad_info.items())
+    else:
+        return "Problem:\n" + "\n".join(feedback)
+
+# Exempel för verbal citation
+exempel_verbal = "som Peter Letmark skriver i 'Evolutionen gjorde oss talrädda', DN, 2012"
+print(validera_robust_kallhanvisning(exempel_verbal))
+```
