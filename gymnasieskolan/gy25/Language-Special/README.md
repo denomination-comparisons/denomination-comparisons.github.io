@@ -4,16 +4,16 @@ This special category contains language-agnostic tools for text processing, usef
 
 ## Contents
 
-- `argument_analyzer.py`: Analyzes arguments in text for structure and balance.
-- `consolidated_citation_validator.py`: Validates citations in robust or simple mode.
-- `task_manager.py`: Command-line task manager with email reminders.
+- `swedish_argument_analyzer.py`: Analyzes arguments in Swedish text for structure and balance.
+- `swedish_citation_validator.py`: Validates citations in Swedish texts, robust or simple mode.
+- `language_task_manager.py`: Command-line task manager for language learning tasks.
 
 ## Usage
 
 Run scripts directly with Python:
 
-- `python argument_analyzer.py` (includes example)
-- `python consolidated_citation_validator.py` (choose mode)
-- `python task_manager.py --help` for task management
+- `python swedish_argument_analyzer.py` (includes example)
+- `python swedish_citation_validator.py` (choose mode)
+- `python language_task_manager.py --help` for task management
 
 These tools support Swedish language education, focusing on argumentation, source criticism, and organization.
