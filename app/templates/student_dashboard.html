@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h2>Välkommen, Elev {{ student_id }}!</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5>Dina Framsteg</h5>
+                <p>Aktuell Nivå: {{ progress.current_level }}</p>
+                <p>Antal Försök: {{ progress.attempts_count }}</p>
+                <p>Genomsnittlig Poäng: {{ "%.1f"|format(progress.average_score) }}%</p>
+            </div>
+        </div>
+        <div class="mt-3">
+            <h5>Rekommenderad Nästa Nivå: {{ recommended_level }}</h5>
+            <a href="/student/texts" class="btn btn-primary">Välj Text</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h5>AI Förklaring</h5>
+        <p>ARTI-koppling: Regression används för att anpassa svårighetsgraden baserat på din prestanda.</p>
+    </div>
+</div>
+{% endblock %}

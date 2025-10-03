@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Argumentkartan{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="mb-3">Argumentkartan</h1>
+            <p class="lead mb-4">Klistra in en text (t.ex. en debattartikel) för att analysera och visualisera dess argumentstruktur.</p>
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form id="argument-form">
+                        <div class="mb-3">
+                            <label for="text-input" class="form-label fs-5">Text att analysera:</label>
+                            <textarea class="form-control" id="text-input" rows="12" placeholder="Skriv eller klistra in din text här..." required></textarea>
+                        </div>
+                        <button type="submit" id="submit-btn" class="btn btn-primary btn-lg">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" id="spinner" style="display: none;"></span>
+                            Analysera & Visualisera
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="result-container" class="mt-5" style="display: none;">
+                <h2 class="mb-3">Argumentstruktur</h2>
+                <div id="error-display" class="alert alert-danger" style="display: none;"></div>
+                <div class="card">
+                    <div class="card-body text-center bg-light">
+                        <!-- Mermaid.js will render the graph inside this div -->
+                        <div id="mermaid-graph" class="mermaid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Include the Mermaid.js library -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: false });
+
+    document.getElementById('argument-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const text = document.getElementById('text-input').value;
+        
+        // UI elements
+        const submitButton = document.getElementById('submit-btn');
+        const spinner = document.getElementById('spinner');
+        const resultContainer = document.getElementById('result-container');
+        const mermaidGraphContainer = document.getElementById('mermaid-graph');
+        const errorDisplay = document.getElementById('error-display');
+
+        // --- Start loading state ---
+        submitButton.disabled = true;
+        spinner.style.display = 'inline-block';
+        resultContainer.style.display = 'none';
+        errorDisplay.style.display = 'none';
+        mermaidGraphContainer.innerHTML = 'Bearbetar och bygger graf...'; // Placeholder text
+
+        try {
+            const response = await fetch('/tools/argument-visualizer', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: text }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: `Servern svarade med ett fel (status ${response.status}).` }));
+                throw new Error(errorData.error);
+            }
+
+            const data = await response.json();
+            const mermaidSyntax = data.argument_graph;
+
+            // --- Render the graph ---
+            resultContainer.style.display = 'block';
+
+            // Use the Mermaid API to render the graph
+            const { svg } = await mermaid.render('graphDiv', mermaidSyntax);
+            mermaidGraphContainer.innerHTML = svg;
+
+        } catch (error) {
+            console.error('Fetch Error:', error);
+            errorDisplay.textContent = 'Ett fel uppstod: ' + error.message;
+            errorDisplay.style.display = 'block';
+            resultContainer.style.display = 'block'; // Show container to display the error
+            mermaidGraphContainer.innerHTML = ''; // Clear any previous graph
+        } finally {
+            // --- End loading state ---
+            submitButton.disabled = false;
+            spinner.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}

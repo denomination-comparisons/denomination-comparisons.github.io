@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}NP-simulatorn: Skrivuppgift{% endblock %}
+
+{% block content %}
+<style>
+    #timer {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #0d6efd;
+        position: sticky;
+        top: 80px; /* Adjust based on your navbar height */
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">NP-simulatorn: Skrivuppgift ✍️</h2>
+                    <p class="card-text">Läs uppgiften nedan och skriv din text i textrutan. Lycka till!</p>
+                    <hr>
+                    <div id="prompt-container" class="mb-4">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="writing-area" rows="25" placeholder="Börja skriva din text här..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="text-center" id="timer-card">
+                <div id="timer">--:--</div>
+                <small class="text-muted">Tid kvar</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const promptContainer = document.getElementById('prompt-container');
+        const timerDisplay = document.getElementById('timer');
+        const examTimeInMinutes = 90;
+        let timeRemainingInSeconds = examTimeInMinutes * 60;
+        let timerInterval;
+
+        async function fetchPrompt() {
+            try {
+                // We use POST to trigger the generation, even though we aren't sending data
+                const response = await fetch('/tools/writing-exam', { method: 'POST' });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const promptText = await response.text();
+                promptContainer.innerHTML = `<p>${promptText.replace(/\n/g, '<br>')}</p>`;
+                startTimer(); // Start timer only after prompt is loaded
+            } catch (error) {
+                console.error('Error fetching writing prompt:', error);
+                promptContainer.innerHTML = '<div class="alert alert-danger">Kunde inte ladda skrivuppgiften. Ladda om sidan för att försöka igen.</div>';
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            if (timeRemainingInSeconds <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = "00:00";
+                document.getElementById('writing-area').disabled = true;
+                alert("Tiden är slut!");
+                return;
+            }
+
+            timeRemainingInSeconds--;
+
+            const minutes = Math.floor(timeRemainingInSeconds / 60);
+            const seconds = timeRemainingInSeconds % 60;
+
+            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        
+        // Fetch the prompt as soon as the page loads
+        fetchPrompt();
+    });
+</script>
+{% endblock %}

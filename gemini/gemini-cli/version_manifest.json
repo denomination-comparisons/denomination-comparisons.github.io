@@ -1,0 +1,8 @@
+{
+    "C:\\Users\\mjisa\\dev\\gemini\\gemini-cli\\optimized_integrated_tool_v1.0.5.py": {
+        "version": "1.0.5",
+        "description": "Standalone tool optimized for Gemini 2.5 Pro, with advanced configuration, code analysis, and project-wide scanning.",
+        "dependencies": ["Gemini CLI", "Gemini 2.5 Pro Model"],
+        "revision_notes": "Updated to 1.0.5 by synthesizing the best features from multiple AI models, focusing on performance, advanced Gemini 2.5 Pro capabilities, and improved developer experience."
+    }
+}

@@ -1,0 +1,161 @@
+### Analysis of Current App State
+
+The Flask app at "C:\Users\mjisa\dev\app" is a robust educational platform for Swedish language learning, aligned with CEFR levels (A2-B2 focus) and Swedish curriculum elements. Core components include:
+- **Modules**: Reading comprehension (assignments with strategies like "sökläsa" and "läsa mellan raderna"), novella writing/analysis (elements like undertext, konflikt, berättarperspektiv), CEFR text modification (simplification via TextProcessor), AI-driven feedback (comprehension scoring, strategy recommendations using SentenceTransformers).
+- **Architecture**: Blueprints (e.g., /assignments, /writing), models (e.g., ReadingAssignment, WritingAssignment, StudentResponse, AIFeedback), TextProcessor (NLP for parsing, question generation, adaptation).
+- **Features**: Teacher uploads/inputs, student interactive exercises (strategy selection, self-assessment), dashboards for progress.
+- **Strengths**: Modular (easy extension), AI-integrated (personalized feedback), curriculum-aligned (e.g., inference questions match Gy25 emphasis on bildung and democracy in language subjects, per Skolverket syllabus).
+- **Limitations**: Lacks speaking/listening, collaboration, gamification; UI is web-focused (not mobile-optimized); analytics are basic; scalability may suffer under high load without caching/async; security assumes basic auth but needs advanced (e.g., CORS, rate limiting).
+
+As of October 3, 2025, the app aligns with Gy25 reforms (updating upper secondary syllabi for Swedish/English, emphasizing second-language perspectives, authentic use, and democratic skills like critical reading) and research-based pedagogy (e.g., bridging research-teaching gap via authentic tasks, translanguaging for multilingual support, top techniques like spaced repetition and explicit strategy teaching).
+
+### Detailed Development Proposals
+
+#### 1. New Modules/Features
+- **Speaking/Pronunciation Module**: Add audio input for pronunciation practice, aligned with Gy25's oral communication goals. Use browser-based recording; AI analyzes via speech-to-text (STT) for accuracy/fluency feedback. Pedagogy: Research-backed (e.g., rewilding classroom for authentic speaking).
+- **Collaborative Writing**: Real-time co-editing of novellas, fostering peer review (translanguaging in groups). Use Socket.IO for WebSockets.
+- **Gamification**: Points for completions, badges for mastery (e.g., "Undertext Expert"), leaderboards. Aligns with motivation research (e.g., gamified SLA techniques).
+
+Architectural Changes: New blueprint `/speaking`; model `SpeakingExercise` (audio_url, transcript, score). Extend TextProcessor for STT (integrate Vosk or Whisper via torchaudio, as per available libs).
+
+Code Snippet (models.py addition):
+```python
+class SpeakingExercise(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    assignment_id = db.Column(db.Integer, db.ForeignKey('writing_assignment.id'))  # Link to writing for integrated tasks
+    audio_url = db.Column(db.String(255))  # Stored in cloud (e.g., S3)
+    transcript = db.Column(db.Text)
+    pronunciation_score = db.Column(db.Float)  # AI-computed
+```
+
+Code Snippet (text_processor.py enhancement):
+```python
+import torch
+import torchaudio  # For audio processing
+from torchaudio.models import wav2vec2_base  # Pre-trained for STT
+
+class TextProcessor:
+    # Existing methods...
+    def analyze_pronunciation(self, audio_path, target_text):
+        waveform, sr = torchaudio.load(audio_path)
+        model = wav2vec2_base()
+        emissions = model(waveform)[0]
+        # Simplified scoring; compute WER (Word Error Rate)
+        student_transcript = self.stt_model.transcribe(emissions)  # Placeholder STT
+        wer = self.compute_wer(student_transcript, target_text)
+        feedback = f"Pronunciation accuracy: {1 - wer:.2f}. Suggestions: Focus on vowels."
+        return wer, feedback
+
+    def compute_wer(self, hyp, ref):
+        # Simple Levenshtein-based WER (implement or use jiwer lib if available)
+        return 0.1  # Placeholder
+```
+
+#### 2. Advanced AI Integration
+- **Real-time LLM for Conversations**: Use Groq/OpenAI API for chat-based speaking practice (e.g., role-plays in Swedish). Personalized paths: ML recommender (e.g., based on past scores, suggest next module).
+- **Pedagogy Alignment**: Incorporate authentic language use (per Sato et al., 2025); adaptive via ML (e.g., scikit-learn for clustering student data).
+
+Architectural Changes: New `/ai_chat` blueprint; Celery tasks for LLM calls. Extend AIFeedback for paths (add `recommended_next` field).
+
+Code Snippet (ai_chat/routes.py):
+```python
+from flask import Blueprint, request, jsonify
+from groq import Groq  # Or OpenAI
+ai_chat = Blueprint('ai_chat', __name__)
+client = Groq(api_key=current_app.config['GROQ_API_KEY'])
+
+@ai_chat.route('/converse', methods=['POST'])
+def converse():
+    user_input = request.json['input']
+    response = client.chat.completions.create(
+        model="mixtral-8x7b-32768",
+        messages=[{"role": "user", "content": f"Respond in Swedish for language practice: {user_input}"}]
+    )
+    return jsonify({'response': response.choices[0].message.content})
+```
+
+Code Snippet (Personalized Path in text_processor.py):
+```python
+from sklearn.cluster import KMeans  # For simple personalization
+
+def generate_learning_path(self, student_scores):
+    data = np.array(student_scores).reshape(-1, 1)  # e.g., [reading_score, writing_score]
+    kmeans = KMeans(n_clusters=3)
+    kmeans.fit(data)
+    cluster = kmeans.predict([[np.mean(student_scores)]])[0]
+    if cluster == 0: return "Focus on speaking module (low scores)"
+    # Map to CEFR/Gy25: e.g., low = A2 reading drills
+```
+
+#### 3. UI/UX Improvements
+- **Mobile App**: Convert to PWA (manifest.json, service workers) for offline access.
+- **Accessibility**: Add ARIA labels, keyboard nav; WCAG compliance.
+- **Visualizations**: Interactive charts (e.g., progress radar for skills like "undertext usage").
+
+Architectural Changes: Add static/manifest.json; integrate Chart.js/D3 in dashboards.
+
+Code Snippet (templates/dashboard.html enhancement):
+```html
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="progressChart"></canvas>
+<script>
+var ctx = document.getElementById('progressChart').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'radar',
+    data: { labels: ['Reading', 'Writing', 'Speaking'], datasets: [{ data: [{{ student.scores }}] }] }
+});
+</script>
+<!-- ARIA: <div role="img" aria-label="Progress radar chart showing skills"> -->
+```
+
+#### 4. Data Analytics and Teacher Tools
+- **Progress Reports**: Aggregate queries, export PDF/CSV.
+- **Adaptive Difficulty**: Use scores to adapt texts (e.g., CEFR level auto-adjust).
+
+Architectural Changes: New `/analytics` blueprint; model `ProgressReport`.
+
+Code Snippet (analytics/routes.py):
+```python
+from flask import Blueprint, send_file
+import pandas as pd
+analytics = Blueprint('analytics', __name__)
+
+@analytics.route('/report/<int:student_id>')
+def generate_report(student_id):
+    responses = StudentResponse.query.filter_by(student_id=student_id).all()
+    df = pd.DataFrame([r.__dict__ for r in responses])
+    df.to_csv('report.csv')
+    return send_file('report.csv', as_attachment=True)
+```
+
+#### 5. Security, Performance, Deployment
+- **Security**: Add CORS, rate limiting (Flask-Limiter), OAuth for auth.
+- **Performance**: Redis caching, Gzip, Celery for tasks.
+- **Deployment**: Docker/AWS; multi-language via Flask-Babel (support English for immigrants).
+- **Best Practices (2025)**: Modular blueprints, schemas for validation (per web:10/11).
+
+Architectural Changes: Config for Redis/Celery; i18n in templates.
+
+Code Snippet (app/__init__.py):
+```python
+from flask_limiter import Limiter
+from flask_babel import Babel
+from redis import Redis
+limiter = Limiter(app, key_func=get_remote_address)
+babel = Babel(app)
+redis = Redis(host='localhost')
+# Celery config...
+```
+
+#### 6. Alignment with Curriculum and Pedagogy
+- Gy25: Emphasize democracy/bildung (e.g., discussions on novella themes like bullying in "Nu när du är stilla").
+- Pedagogy: Integrate translanguaging (allow code-switching in chats), structured literacy (explicit strategy teaching), authentic tasks (real conversations).
+
+### Roadmap with Priorities
+1. **High Priority (1-3 months)**: AI enhancements (real-time LLM, personalized paths) – Builds on TextProcessor; quick wins for engagement.
+2. **Medium (3-6 months)**: New modules (speaking, collaboration) – Aligns with Gy25 oral skills; test pedagogy integration.
+3. **Medium (3-6 months)**: UI/UX (PWA, accessibility) – Improves access for diverse users.
+4. **Low (6-9 months)**: Analytics/tools – Data-driven insights post-user growth.
+5. **Low (6-12 months)**: Security/perf/deploy – Scale for production; multi-lang for inclusivity.
+
+Estimated effort: 40-60 hours per priority phase. Test iteratively with pytest/Selenium.

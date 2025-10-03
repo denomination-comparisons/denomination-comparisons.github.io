@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+
+{% block title %}Critical Inquiry Suite{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Critical Inquiry Suite</h1>
+    <p class="lead">A collection of AI-powered tools designed to enhance critical thinking, text analysis, and research.</p>
+    <hr class="my-4">
+    <p>Select a tool below to begin.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">CEFR Text Analyzer</h5>
+                <p class="card-text">Analyze a text to determine its linguistic difficulty (CEFR level). Also identifies potential biases and sensitive topics.</p>
+                <a href="{{ url_for('tools.cefr_analyzer') }}" class="btn btn-primary mt-auto">Go to Analyzer</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Source Criticism Helper</h5>
+                <p class="card-text">Generate critical thinking questions for any text to guide your source analysis and evaluation.</p>
+                <a href="{{ url_for('tools.source_criticism') }}" class="btn btn-primary mt-auto">Go to Helper</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Concept Mapper</h5>
+                <p class="card-text">Visualize the relationships between concepts in your research by creating a dynamic concept map.</p>
+                <a href="{{ url_for('tools.concept_mapper') }}" class="btn btn-primary mt-auto">Go to Mapper</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Text-anpassningsverktyg</h5>
+                <p class="card-text">Anpassa en text till en specifik CEFR-nivå, antingen för att förenkla den eller göra den mer avancerad.</p>
+                <a href="{{ url_for('tools.text_modifier') }}" class="btn btn-primary mt-auto">Go to Modifier</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Argumentkartan</h5>
+                <p class="card-text">Analysera en text för att automatiskt visualisera dess argumentstruktur, inklusive tes, argument och bevis.</p>
+                <a href="{{ url_for('tools.argument_visualizer') }}" class="btn btn-primary mt-auto">Go to Visualizer</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">NP-simulator: Läsförståelse</h5>
+                <p class="card-text">Generera automatiskt provfrågor från valfri text för att öva på läsförståelse i stil med Nationella Proven.</p>
+                <a href="{{ url_for('tools.reading_exam') }}" class="btn btn-primary mt-auto">Starta verktyget</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">NP-simulator: Skrivuppgift</h5>
+                <p class="card-text">Få en realistisk skrivuppgift och genomför den på tid, precis som på det riktiga provet.</p>
+                <a href="{{ url_for('tools.writing_exam') }}" class="btn btn-primary mt-auto">Starta verktyget</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Process Book Guide</h5>
+                <p class="card-text">Upload a PDF or text file of a teacher's guide, select options for CEFR adaptation, source criticism, etc., and get processed outputs.</p>
+                <a href="{{ url_for('tools.process_book_guide_page') }}" class="btn btn-primary mt-auto">Go to Processor</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+I’ve reviewed your **`optimized_integrated_tool_v1.0.6.py`**, and it’s already well-structured for **Gemini 2.5 Pro in Gemini CLI v0.9.0-nightly.20251002**. But since the Gemini stack evolves quickly, here are targeted improvements you could make to better align with performance, maintainability, and CLI integration:
+
+---
+
+### 🔧 Suggested Improvements
+
+#### 1. **Update for Gemini 2.5 Pro defaults**
+
+* Your `ConfigManager` still defaults to `gemini-1.5-pro-latest` and `gemini-1.5-pro-vision-latest`.
+  Since the tool is positioned for **Gemini 2.5 Pro**, update:
+
+  ```python
+  "model_name": "gemini-2.5-pro-latest",
+  "vision_model_name": "gemini-2.5-pro-vision-latest",
+  ```
+* This avoids fallback confusion in the CLI.
+
+#### 2. **Use new Gemini CLI structured outputs**
+
+* Gemini CLI v0.9.0 supports richer structured response serialization (`--json`, `--raw`).
+  Wrap outputs in a standard schema instead of plain `print(json.dumps(...))`.
+  Example:
+
+  ```python
+  def cli_output(data: Dict[str, Any], raw: bool = False):
+      if raw:
+          print(data)
+      else:
+          print(json.dumps(data, indent=2, ensure_ascii=False))
+  ```
+
+  Then call `cli_output(results)` in command handlers. This keeps consistency with the CLI ecosystem.
+
+#### 3. **Async optimizations**
+
+* You mix `asyncio.to_thread` and `ThreadPoolExecutor`. To reduce thread overhead, standardize on one model:
+
+  * Use `asyncio.to_thread` exclusively for sync APIs.
+  * Remove the unused `self.executor` in `Gemini15ProStrategy` (currently not leveraged).
+
+#### 4. **Retry strategy alignment**
+
+* Your `retry_with_backoff` decorator retries only on `APIError`.
+  In Gemini 2.5 CLI, transient **network errors** (`aiohttp.ClientError`) and **429 rate limits** are common.
+  Extend to:
+
+  ```python
+  except (APIError, aiohttp.ClientError, TimeoutError) as e:
+  ```
+
+#### 5. **Analysis Suite improvements**
+
+* **spaCy model loading**: Instead of auto-downloading at runtime (may fail in offline CLI use), add a config flag:
+
+  ```yaml
+  auto_download_models: true
+  ```
+
+  so power users can disable it.
+* **CEFR classifier**: Training data is extremely small (4 examples). Add a fallback heuristic when `RandomForestClassifier` confidence is < X%, otherwise predictions may look misleading.
+
+#### 6. **Config enhancements**
+
+* Cache location: move cache files under `$XDG_CACHE_HOME/gemini_tool/` instead of working dir.
+* Metrics: add an option to **export Prometheus-style metrics** (`--metrics-port`) if the CLI runs as a service.
+
+#### 7. **CLI polish**
+
+* Use `choices` for `--output` formats (`json`, `yaml`, `txt`) to give flexibility.
+* Add `--quiet` mode for scripting (suppress banners/colors, output only raw data).
+
+#### 8. **Housekeeping**
+
+* `IntegratedTool.run_full_analysis` is a placeholder (`pass`). Either remove it until implemented, or raise `NotImplementedError` to avoid silent no-ops.
+* `aiofiles` is imported but unused → safe to drop.
+* `pickle` is imported but unused → safe to drop.
+* Logging: consider rotating logs via `logging.handlers.RotatingFileHandler` instead of a static `gemini_tool.log`.
+
+---
+
+👉 Would you like me to **draft a cleaned-up `v1.0.7` patch** with these improvements (ready to run in Gemini CLI v0.9.0), or just a diff snippet so you can apply selectively?

@@ -1,0 +1,189 @@
+Of course. Your script is well-structured and already incorporates many best practices like configuration management, logging, and asynchronous operations. To further optimize it for the latest Gemini 2.5 Pro model within the Gemini CLI environment, here are several targeted improvements.
+
+The most significant enhancements involve shifting from Python-based logic to model-based reasoning by leveraging Gemini's native **Tool Use (Function Calling)** and **JSON Mode**.
+
+-----
+
+## 1\. Leverage Native Tool Use for the Analysis Suite
+
+Instead of having your CLI logic call specific analysis functions (`cefr`, `kallkritik`), you can define these functions as **tools** for Gemini. This allows the model to intelligently decide *which* analysis to run based on a more natural prompt.
+
+### **Why It's an Improvement:**
+
+  * **Flexibility:** Users can make more general requests like `"Analyze this text for bias and reading level"` and the model will correctly call both `analyze_cefr` and `generate_source_criticism`.
+  * **Offloads Logic:** You move the decision-making logic from your Python code into the model's reasoning capabilities.
+  * **Extensibility:** Adding new analysis tools is simpler; you just define the function and add it to the toolset.
+
+### **How to Implement It:**
+
+First, define your Python functions as tools the model can understand. Then, modify your API call to pass these tools and handle the model's response, which might be a request to call one of your functions.
+
+**Example Refactoring (`Gemini15ProStrategy` and `main`):**
+
+```python
+# In Gemini15ProStrategy or a new tool handling class
+from google.generativeai.types import FunctionDeclaration, Tool
+
+# Assuming 'suite' is an instance of AnalysisSuite
+suite = AnalysisSuite(ConfigManager()) 
+
+# 1. Define your Python functions as tools for the model
+cefr_tool = FunctionDeclaration(
+    name="analyze_cefr",
+    description="Analyzes a Swedish text for its CEFR linguistic difficulty level and detects potential gender bias in pronouns.",
+    parameters={
+        "type": "object",
+        "properties": {
+            "text": {
+                "type": "string",
+                "description": "The Swedish text to be analyzed."
+            }
+        },
+        "required": ["text"]
+    }
+)
+
+kallkritik_tool = FunctionDeclaration(
+    name="generate_source_criticism",
+    description="Generates a list of critical thinking questions for a given Swedish text to encourage source criticism.",
+    parameters={
+        "type": "object",
+        "properties": {
+            "text": {
+                "type": "string",
+                "description": "The Swedish text to generate questions for."
+            }
+        },
+        "required": ["text"]
+    }
+)
+
+# 2. In your API call method, create a Tool object
+analysis_tools = Tool(function_declarations=[cefr_tool, kallkritik_tool])
+
+# 3. Update the API call to include the tools
+# model = genai.GenerativeModel(...)
+# response = await model.generate_content_async(prompt, tools=[analysis_tools])
+# function_call = response.candidates[0].content.parts[0].function_call
+
+# 4. Handle the function call from the model
+# if function_call.name == "analyze_cefr":
+#    args = function_call.args
+#    result = suite.analyze_cefr(text=args['text'])
+#    # Now send the result back to the model to get a final summary
+#
+# elif function_call.name == "generate_source_criticism":
+#    # ... handle this call
+```
+
+With this, your CLI could have a single, powerful `analyze` command that takes a generic prompt and a text file.
+
+-----
+
+## 2\. Embrace Structured Output with JSON Mode
+
+Your script currently gets a plain text response and then uses `json.dumps()` on your own Python dictionary. Gemini 2.5 Pro can be instructed to **output a valid JSON object directly**, which is far more reliable.
+
+### **Why It's an Improvement:**
+
+  * **Reliability:** Eliminates the risk of the model returning text that can't be parsed into your expected structure.
+  * **Simplicity:** You remove the need for manual string parsing or complex regex on the model's output. The output is guaranteed to be machine-readable.
+
+### **How to Implement It:**
+
+Modify the `GenerationConfig` and update your prompt to instruct the model to return JSON.
+
+**Example Refactoring (`Gemini15ProStrategy.call_gemini_api`):**
+
+```python
+# In call_gemini_api method
+
+# 1. Change the response_mime_type in GenerationConfig
+generation_config = genai.GenerationConfig(
+    temperature=self.config.temperature,
+    max_output_tokens=self.config.max_output_tokens,
+    response_mime_type="application/json" # Changed from "text/plain"
+)
+
+# 2. Update your prompt to specify the JSON schema
+# This can be part of the system_instruction or the main prompt
+json_prompt_instruction = """
+Analyze the following text. Your response MUST be a valid JSON object
+with the following structure:
+{
+  "cefr_level": "The estimated CEFR level (e.g., 'B2')",
+  "analysis_summary": "A brief explanation of the CEFR result.",
+  "bias_warnings": ["A list of strings describing any detected biases."],
+  "critical_questions": ["A list of source criticism questions."]
+}
+"""
+full_prompt = f"{json_prompt_instruction}\n\nText to analyze:\n---\n{prompt}"
+
+# 3. The response will be a JSON string, ready to be parsed
+# response = await model.generate_content_async(full_prompt)
+# result_dict = json.loads(response.text)
+```
+
+-----
+
+## 3\. Decouple Heavy Dependencies for the CLI
+
+The `concept-map` tool uses `matplotlib` and `networkx` to directly generate a PNG image. For a CLI tool, this has two drawbacks: `matplotlib` is a heavy dependency, and outputting a binary format like PNG is less flexible than text.
+
+### **Why It's an Improvement:**
+
+  * **Lighter Dependencies:** Replacing `matplotlib` makes your tool easier and faster to install, especially in containerized environments.
+  * **Flexibility (Unix Philosophy):** Outputting a standard graph description language like **DOT** allows the user to pipe the output to other tools (like Graphviz) to render it as a PNG, SVG, or any other format they choose.
+
+### **How to Implement It:**
+
+Modify the `generate_concept_map` function to output a DOT string instead of rendering a PNG.
+
+**Example Refactoring (`AnalysisSuite.generate_concept_map`):**
+
+```python
+# You'll need to pip install pydot
+# import networkx as nx
+
+def generate_concept_map(self, text_input: str, output_path: str) -> str:
+    """Generates a concept map in DOT format and saves it to a file."""
+    G = nx.DiGraph()
+    # ... (your existing logic to parse text_input and build the graph G) ...
+
+    if not G.nodes():
+        raise ValueError("No valid relationships found in input.")
+
+    # Use NetworkX's built-in pydot integration to generate a DOT string
+    try:
+        from networkx.drawing.nx_pydot import to_pydot
+        pydot_graph = to_pydot(G)
+        # Add edge labels, which are not directly handled by the basic to_pydot
+        for edge in G.edges(data=True):
+            if 'label' in edge[2]:
+                p_edge = pydot_graph.get_edge(edge[0], edge[1])[0]
+                p_edge.set_label(edge[2]['label'])
+
+        dot_output = pydot_graph.to_string()
+
+    except ImportError:
+        # Fallback if pydot is not installed
+        logger.warning("pydot library not found. Outputting simple edge list.")
+        dot_output = "digraph G {\n"
+        for u, v, data in G.edges(data=True):
+            label = data.get('label', '')
+            dot_output += f'  "{u}" -> "{v}" [label="{label}"];\n'
+        dot_output += "}"
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(dot_output)
+        
+    return f"Concept map in DOT format saved to {output_path}.\nRender with Graphviz: dot -Tpng {output_path} -o map.png"
+```
+
+-----
+
+## 4\. Minor Code Refinements
+
+  * **Use Native Async Methods:** The `google-generativeai` library provides native `async` methods. Using `await model.generate_content_async(...)` is more efficient than wrapping the synchronous call with `asyncio.to_thread`.
+  * **Read from stdin:** For a CLI tool, it's standard practice to read from standard input if a file argument is not provided. This allows for piping, e.g., `cat report.txt | your-tool cefr`. You can implement this in your `main` function using `sys.stdin`.
+  * **Simplify CEFR Model:** Your pre-trained `RandomForestClassifier` is clever but brittle as it's trained on only four examples. Given Gemini 2.5 Pro's advanced reasoning, you could achieve similar or better results by providing those four examples directly in the prompt as a **few-shot example**. This removes the `scikit-learn` dependency and makes the logic more transparent.

@@ -1,0 +1,9 @@
+Analyze the current state of the expanded Flask-based Swedish language learning app at "C:\Users\mjisa\dev\app", now including modules for reading assignments, novella writing/analysis, speaking/pronunciation, AI chat, and personalized paths. Suggest additional development ideas to enhance functionality, user engagement, scalability, and educational impact. Focus on:
+
+- Emerging technologies (e.g., VR/AR for immersive learning, blockchain for certifications).
+- Advanced pedagogies (e.g., AI tutors, peer learning networks, cultural integration).
+- Global expansion (e.g., multi-language support, international curricula).
+- Sustainability and ethics (e.g., data privacy, inclusive design, long-term maintenance).
+- Integration with external tools (e.g., Google Classroom, Duolingo APIs).
+
+Provide detailed proposals, code snippets for key features, architectural changes, and an updated roadmap with priorities. Ensure suggestions align with CEFR, Gy25, and modern SLA research.

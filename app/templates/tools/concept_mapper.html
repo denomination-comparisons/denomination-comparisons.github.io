@@ -1,0 +1,36 @@
+
+{% extends "base.html" %}
+
+{% block title %}Concept Mapper{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Concept Mapper</h2>
+    <p>Visualize connections in your research. Enter relationships one per line using the format: <code>Source -> Target [Label]</code></p>
+
+    <form method="POST">
+        <div class="form-group">
+            <textarea class="form-control" name="text" rows="10" placeholder="Gud -> Abraham [Sluter förbund med]
+Abraham -> Isak [Fader till]
+Jesus -> Lärjungarna [Instiftar nytt förbund med]">{{ original_text or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Generate Map</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger mt-4">{{ error }}</div>
+    {% endif %}
+
+    {% if image_filename %}
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>Your Generated Concept Map</h3>
+        </div>
+        <div class="card-body text-center">
+            <img src="{{ url_for('static', filename=image_filename) }}" class="img-fluid" alt="Generated Concept Map">
+            <p class="mt-2"><a href="{{ url_for('static', filename=image_filename) }}" target="_blank">View full size</a></p>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

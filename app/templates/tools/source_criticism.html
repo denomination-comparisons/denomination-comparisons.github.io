@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+
+{% block title %}Source Criticism Helper{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Source Criticism Helper</h2>
+    <p>Paste a text below to generate a set of critical thinking questions that will guide your analysis.</p>
+
+    <form method="POST">
+        <div class="form-group">
+            <textarea class="form-control" name="text" rows="10" placeholder="Paste the text you want to analyze here...">{{ original_text or '' }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Generate Questions</button>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger mt-4">{{ error }}</div>
+    {% endif %}
+
+    {% if result %}
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3>Your Critical Questions</h3>
+        </div>
+        <div class="card-body">
+            <p>Use these questions to deepen your understanding and evaluation of the text.</p>
+            
+            {% if result.warnings %}
+                <div class="alert alert-warning">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Heads up!</strong>
+                    <ul>
+                    {% for warning in result.warnings %}
+                        <li>{{ warning }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <ul class="list-group list-group-flush">
+                {% for question in result.questions %}
+                    <li class="list-group-item">{{ question }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
