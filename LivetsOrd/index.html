@@ -2,13 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Livets Ord – Index (Machine-Readable)</title>
+  <title>Livets Ord – Index (with JSON-LD)</title>
   <meta name="description" content="Structured index of all Livets Ord chapter files for automatic parsing." />
+
+  <!-- JSON-LD for structured parsing -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Livets Ord",
+    "description": "Structured listing of chapters and pages for Livets Ord in the Denomination Comparisons project.",
+    "hasPart": [
+      {
+        "@type": "CreativeWorkSeries",
+        "name": "Chapter 1: Uppenbarelsen",
+        "identifier": "chapter-1",
+        "hasPart": [
+          {"@type": "CreativeWork", "name": "Page 7", "url": "chapter-1-uppenbarelsen-page-7.html"},
+          {"@type": "CreativeWork", "name": "Page 8", "url": "chapter-1-uppenbarelsen-page-8.html"},
+          {"@type": "CreativeWork", "name": "Page 9", "url": "chapter-1-uppenbarelsen-page-9.html"},
+          {"@type": "CreativeWork", "name": "Page 10", "url": "chapter-1-uppenbarelsen-page-10.html"},
+          {"@type": "CreativeWork", "name": "Page 11", "url": "chapter-1-uppenbarelsen-page-11.html"},
+          {"@type": "CreativeWork", "name": "Page 12", "url": "chapter-1-uppenbarelsen-page-12.html"},
+          {"@type": "CreativeWork", "name": "Page 13", "url": "chapter-1-uppenbarelsen-page-13.html"},
+          {"@type": "CreativeWork", "name": "Page 14", "url": "chapter-1-uppenbarelsen-page-14.html"},
+          {"@type": "CreativeWork", "name": "Page 15", "url": "chapter-1-uppenbarelsen-page-15.html"},
+          {"@type": "CreativeWork", "name": "Page 16", "url": "chapter-1-uppenbarelsen-page-16.html"},
+          {"@type": "CreativeWork", "name": "Page 17", "url": "chapter-1-uppenbarelsen-page-17.html"},
+          {"@type": "CreativeWork", "name": "Page 18", "url": "chapter-1-uppenbarelsen-page-18.html"},
+          {"@type": "CreativeWork", "name": "Full Chapter Source", "url": "chapter-1-uppenbarelsen.md"}
+        ]
+      },
+      {
+        "@type": "CreativeWorkSeries",
+        "name": "Chapter 2: Angelologi",
+        "identifier": "chapter-2",
+        "hasPart": [
+          {"@type": "CreativeWork", "name": "Markdown Source", "url": "chapter-2-angelologi.md"}
+        ]
+      },
+      {
+        "@type": "CreativeWorkSeries",
+        "name": "Chapter 3: Soteriologi",
+        "identifier": "chapter-3",
+        "hasPart": [
+          {"@type": "CreativeWork", "name": "Markdown Source", "url": "chapter-3-soteriologi.md"}
+        ]
+      },
+      {
+        "@type": "CreativeWork",
+        "name": "Foreword",
+        "hasPart": [
+          {"@type": "CreativeWork", "name": "HTML Version", "url": "foreword.html"},
+          {"@type": "CreativeWork", "name": "Markdown Version", "url": "foreword.md"}
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <h1>Livets Ord – File Index</h1>
 
-  <!-- Each chapter section lists its HTML and Markdown files -->
   <section data-chapter="1" data-title="Uppenbarelsen">
     <h2>Chapter 1: Uppenbarelsen</h2>
     <ul>
