@@ -1,0 +1,233 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "optimized_for": "Claude Sonnet 4.5",
+    "book_title": "The Foundations of Our Faith",
+    "subtitle": "New revised version",
+    "author": "Ulf Ekman",
+    "content_status": "partial",
+    "chapters_completed": ["preface", "chapter_1"],
+    "chapters_total": "unknown",
+    "last_updated": "2025-11-03",
+    "base_url": "https://denomination-comparisons.github.io/english/charismatic/livets-ord/",
+    "parsing_notes": "Page-by-page structure with separate HTML files. Some pages estimated/placeholder."
+  },
+  
+  "structure": {
+    "front_matter": {
+      "file": "front-matter.html",
+      "contains": ["copyright", "contents", "dedication"],
+      "pages": null
+    },
+    "preface": {
+      "file": "preface.html",
+      "pages": "9-11",
+      "status": "complete"
+    },
+    "chapters": [
+      {
+        "number": 1,
+        "title": "Revelation",
+        "pages": "13-35",
+        "status": "complete",
+        "files": [
+          "chapter1-page13.html",
+          "chapter1-page14.html",
+          "chapter1-page15.html",
+          "chapter1-page16.html",
+          "chapter1-page17.html",
+          "chapter1-page18.html",
+          "chapter1-page19.html",
+          "chapter1-page20.html",
+          "chapter1-page21.html",
+          "chapter1-page22.html",
+          "chapter1-page23.html",
+          "chapter1-page24.html",
+          "chapter1-page25.html",
+          "chapter1-page26.html",
+          "chapter1-page27.html",
+          "chapter1-page28-29.html",
+          "chapter1-page30-31.html",
+          "chapter1-page32-33.html",
+          "chapter1-page34-35.html"
+        ],
+        "estimated_pages": ["chapter1-page27.html", "chapter1-page28-29.html", "chapter1-page30-31.html", "chapter1-page32-33.html", "chapter1-page34-35.html"]
+      }
+    ],
+    "back_matter": {
+      "file": "back-matter.html",
+      "contains": ["about_the_book", "about_the_author"],
+      "pages": null
+    },
+    "appendix": {
+      "file": "appendix.html",
+      "title": "Three Early Church Creeds",
+      "status": "placeholder"
+    }
+  },
+
+  "theological_concepts": [
+    {
+      "term": "Revelation",
+      "primary_chapter": 1,
+      "pages": "13-35",
+      "category": "theology_proper",
+      "subcategories": ["divine_communication", "epistemology", "biblical_authority"],
+      "related_terms": ["Scripture", "Inspiration", "Divine Communication", "Prophetic Word", "Biblical Authority"],
+      "files": ["chapter1-page13.html"],
+      "description": "God's self-disclosure and communication to humanity",
+      "importance": "foundational"
+    },
+    {
+      "term": "Scripture",
+      "primary_chapter": 1,
+      "pages": "13-35",
+      "category": "bibliology",
+      "subcategories": ["biblical_authority", "inspiration", "inerrancy"],
+      "related_terms": ["Revelation", "Biblical Authority", "Word of God", "Canon"],
+      "files": ["chapter1-page13.html"],
+      "description": "The written Word of God",
+      "importance": "foundational"
+    },
+    {
+      "term": "Inspiration",
+      "primary_chapter": 1,
+      "pages": "13-35",
+      "category": "bibliology",
+      "subcategories": ["divine_authorship", "human_authorship"],
+      "related_terms": ["Scripture", "Revelation", "Holy Spirit", "Biblical Authority"],
+      "files": ["chapter1-page13.html"],
+      "description": "The process by which God superintended biblical authors",
+      "importance": "foundational"
+    }
+  ],
+
+  "scripture_references": [
+    {
+      "reference": "2 Timothy 3:16",
+      "book": "2_Timothy",
+      "chapter": 3,
+      "verse": 16,
+      "testament": "new",
+      "topics": ["inspiration", "scripture", "divine_authorship"],
+      "likely_chapters": [1],
+      "likely_pages": ["13-35"],
+      "context": "All Scripture is God-breathed",
+      "relevance": "primary_text_on_inspiration"
+    },
+    {
+      "reference": "2 Peter 1:20-21",
+      "book": "2_Peter",
+      "chapter": 1,
+      "verses": [20, 21],
+      "testament": "new",
+      "topics": ["inspiration", "prophecy", "holy_spirit"],
+      "likely_chapters": [1],
+      "likely_pages": ["13-35"],
+      "context": "Prophecy never had its origin in human will",
+      "relevance": "primary_text_on_inspiration"
+    },
+    {
+      "reference": "Hebrews 1:1-2",
+      "book": "Hebrews",
+      "chapter": 1,
+      "verses": [1, 2],
+      "testament": "new",
+      "topics": ["revelation", "progressive_revelation", "christ"],
+      "likely_chapters": [1],
+      "likely_pages": ["13-35"],
+      "context": "God spoke through prophets, finally through His Son",
+      "relevance": "progressive_revelation"
+    }
+  ],
+
+  "denominational_context": {
+    "movement": "Charismatic",
+    "organization": "Livets Ord (Word of Life)",
+    "location": "Sweden",
+    "tradition": "Pentecostal/Charismatic",
+    "theological_emphases": [
+      "biblical_authority",
+      "holy_spirit_empowerment",
+      "spiritual_gifts",
+      "faith_teaching",
+      "church_growth"
+    ],
+    "notes": "Part of denomination-comparisons project for comparative theology analysis"
+  },
+
+  "cross_references": {
+    "Revelation": {
+      "related_concepts": ["Inspiration", "Scripture", "Prophetic Word", "Divine Communication", "Biblical Authority"],
+      "contrasts_with": ["Human Philosophy", "Natural Theology", "Rationalism"],
+      "builds_upon": [],
+      "leads_to": ["Biblical Authority", "Doctrine of Scripture"]
+    },
+    "Inspiration": {
+      "related_concepts": ["Revelation", "Scripture", "Holy Spirit", "Biblical Authority", "Inerrancy"],
+      "contrasts_with": ["Human Authorship Alone", "Mere Religious Literature"],
+      "builds_upon": ["Revelation"],
+      "leads_to": ["Biblical Authority", "Hermeneutics"]
+    },
+    "Scripture": {
+      "related_concepts": ["Revelation", "Inspiration", "Canon", "Biblical Authority", "Word of God"],
+      "contrasts_with": ["Tradition Only", "Church Authority Over Scripture"],
+      "builds_upon": ["Revelation", "Inspiration"],
+      "leads_to": ["Biblical Interpretation", "Doctrine Formation"]
+    }
+  },
+
+  "people": [
+    {
+      "name": "Ulf Ekman",
+      "role": "author",
+      "context": "Founder of Livets Ord (Word of Life), Swedish charismatic leader",
+      "relevance": "primary_author",
+      "files": ["back-matter.html"]
+    }
+  ],
+
+  "historical_references": [
+    {
+      "item": "Early Church Creeds",
+      "era": "early_church",
+      "relevance": "foundational_doctrine",
+      "files": ["appendix.html"],
+      "status": "placeholder",
+      "notes": "Appendix to contain three major creeds"
+    }
+  ],
+
+  "search_optimization": {
+    "quick_lookups": {
+      "revelation_chapter": "chapter1-page13.html",
+      "about_author": "back-matter.html",
+      "creeds": "appendix.html",
+      "preface": "preface.html"
+    },
+    "topic_clusters": {
+      "bibliology": ["Scripture", "Inspiration", "Biblical Authority", "Canon", "Inerrancy"],
+      "theology_proper": ["Revelation", "Divine Communication", "God's Nature"],
+      "pneumatology": ["Holy Spirit", "Spiritual Gifts", "Inspiration"],
+      "ecclesiology": ["Church", "Word of Life", "Charismatic Movement"]
+    }
+  },
+
+  "parsing_instructions": {
+    "for_ai": "This index is structured for programmatic access. Use 'theological_concepts' for doctrinal analysis, 'scripture_references' for biblical citations, 'cross_references' for conceptual relationships, and 'structure' for navigation.",
+    "query_patterns": [
+      "To find a concept: Check 'theological_concepts' array",
+      "To find Bible verses: Check 'scripture_references' array",
+      "To understand relationships: Check 'cross_references' object",
+      "To navigate content: Check 'structure' object",
+      "For quick access: Check 'search_optimization.quick_lookups'"
+    ],
+    "update_protocol": "When new chapters are added, update 'chapters_completed', add entries to 'theological_concepts', 'scripture_references', and expand 'cross_references'. Increment version number."
+  },
+
+  "comparison_notes": {
+    "vs_keywords_html": "This JSON format provides structured data for programmatic parsing rather than human-readable alphabetical lists",
+    "vs_manifest_json": "More detailed than a simple manifest; includes semantic relationships and contextual metadata",
+    "optimization_target": "Claude Sonnet 4.5 and similar LLMs that benefit from rich, structured metadata with explicit relationships"
+  }
+}
