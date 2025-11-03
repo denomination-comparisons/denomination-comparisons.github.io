@@ -720,4 +720,276 @@ flera skäl:
 1.Man kan aldrig kommunicera tankar utan ord.  
 
 2. Bibeln hänvisar ofta till ett enda ord. Paulus argumenterar till exempel utifrån det  
-enskilda ordet ”säd” i Galaterbrevet 3:16. Han säger
+enskilda ordet ”säd” i Galaterbrevet 3:16. Han säger också i Första Korintierbrevet  
+2:13:  
+”Detta förkunnar vi också, inte med ord som mänsklig visdom lär utan med  
+ord som Anden lär, när vi återger andliga ting med andliga ord.” Alltså är även  
+de enskilda orden givna av Gud. Hur kan vi annars veta när enskilda ord är viktiga  
+och när de inte är det?  
+3. Påståendet gör människan till domare över Guds ord, istället för att  
+Guds ord är domare över människan. En del teologer har sagt: ”Bibeln är inte Guds ord,  
+men Guds ord finns i Bibeln”. Detta är ett både försåtligt och farligt uttalande. Helt  
+godtyckligt bestämmer enskilda människor om vad i Bibeln som är Guds ord och vad  
+sominte är det. Med ett sådant resonemang ställs man snart inför en rad problem:  
+a)Det blir jag, inte Gud, som bestämmer vad Gud har sagt.  
+b)Det jag uppfattar som Guds ord, kanske någon annaninte  
+uppfattar som Guds ord.  
+c)Det som verkar vara Guds ord idag, kanske inte är Guds ord  
+imorgon.  
+Med andra ord blir allt subjektivt och relativt. Guds ord däremot är objektivt och  
+orubbligt, för alla människor och i alla tider. Hans ord är en fast klippa att bygga huset  
+på (Matt 7:24).  
+
+## Jesus trodde på Bibeln
+
+Vad hade då Jesus för bibelsyn? Det intressanta är nämligen inte vad olika kyrkor,  
+traditioner, rörelser och predikanter har haft för bibelsyn. Det viktiga är att se hur  
+Bibeln ser på sig själv och hur Jesus såg på Skrifterna.  
+
+Ungefär tio procent av Jesu dagliga samtal är citat från Gamla testamentet. I alla  
+svåra situationer använde sig Jesus av citat från Gamla testamentet. Här är några  
+
+exempel:  
+
+1. När Satan frestade honom i öknen (Matt 4:1-11).  
+2. När han angreps av fariséerna (Matt 15:1-9).  
+3. När han diskuterade med motståndare och utgick ifrån enskilda ord i Skriften  
+(Matt 22:43-45).  
+4. När han förråddes och fängslades (Matt 26:31).  
+5. När han dog på korset (Matt 27:46).  
+I Bergspredikan står det klart att Jesus utgick från att varje ord och varje bokstav i  
+Skriften var betydelsefulla. I Matteus 5:18 säger han:  
+”Amen säger jag er: Innan  
+himmel och jord förgår, skall inte en enda bokstav, inte en prick i lagen förgå, förrän  
+allt har skett.” Om sina egna ord (som vi har nedskrivna i Nya testamentet) säger Jesus  
+i Matteus 24:35:  
+”Himmel och jord skall förgås, men mina ord skall aldrig förgås.”  
+Varje gång Jesus talar om en person, en händelse eller ett profetiskt uttalande i Gamla  
+testamentet, så utgår han alltid ifrån att det som står är sant. Aldrig någonsin ifrågasätter  
+eller förvanskar han Skrifterna. Aldrig någonsin betvivlar Jesus sanningarna eller  
+existensen av personer som finns omnämnda i Gamla testamentet.  
+
+Jesus talar om Adam och Eva som historiska personer som en gång har levat (Matt  
+19:4; Mark 10:6-7). Här citerar Jesus med stor frimodighet i Första Moseboken 1:27  
+och 2:24. Jesus talar vidare om Abel som en verklig historiskt levande person (Matt  
+23:35). I Lukas 17:26-27 talar Jesus om Noa, om arken, och om”den dag då Noa gick  
+in i arken”. För Jesus var detta inte några fabler eller myter, utan Guds Son accepterade  
+Noa som en fysisk person, som verkligen byggde en stor ark och som på en viss  
+historisk dag gick in i denna ark för att undkomma den stora floden. Jesus talade också  
+om Lot och om städerna Sodom och Gomorra som historiska självklarheter (Matt 10:15,  
+11:24; Luk 17:29). Han talade vidare om drottning Saba av Söderlandet som besökte  
+Salomo (Matt 12:42). Han talade om profeten Jona och han betvivlade inte dennes  
+upplevelser  
+”i den stora fiskens buk”  
+(Matt 12:40).  
+
+I Johannes 8:31-32 säger Jesus:  
+”Om ni förblir i mitt ord, är ni verkligen mina  
+lärjungar, och ni skall förstå sanningen, och sanningen skall göra er fria.”  
+
+Jesus är Guds Son. Han är Gud ”kommen i köttet”, det vill säga Ordet som blev kött  
+och som tog sin boning ibland oss (Joh 1:14). Han är sanningen (Joh 14:6); hans ord är  
+eviga (Matt 24:35) och de gör människor fria  
+(Joh 8:31-32). Därför måste man dra  
+slutsatsen att man kan lita på allt vad Jesus säger.  
+
+En del människor har påstått att Jesus kanske talade sanning om himmelska ting, men  
+att han delade folks okunnighet om det jordiska på den tiden. Men då gör man Jesus,  
+Guds Son, till en opålitlig lögnare, fångad i  
+människors fördomar. Men det var han inte.  
+Tvärtom säger han i Johannes 3:12:  
+
+Omniinte  
+tror  
+när  
+jagtalar  
+tiller  
+omdet  
+somhör  
+jordentill,hur  
+skallnidå  
+kunna  
+tro,när  
+jagtalar  
+tiller  
+omdet  
+somhör  
+himlentill?  
+
+Jesus var sann och trovärdig i allt vad han sade, och han var helt förankrad i Gamla  
+testamentets historiska och moraliska sanningar. Detta märks också när han talade om  
+Gamla testamentets böcker. Han konstaterade att Mose skrev Moseböckerna (Mark  
+10:4-5; Joh 5:46-47, jfr också 2 Mos 17:14). Han accepterade som ett faktum att Daniel  
+skrev Daniels bok (Matt 24:15). I Lukas 16:31 säger Jesus att tron på Gamla testamentet  
+är en förutsättning för att tro på under. Längre fram förankrar Jesus sin uppståndelse i  
+Skrifterna, vilket visar att accepterandet av Gamla testamentet är av avgörande  
+betydelse (Luk 24:13-27, 44).  
+
+## Ha samma bibelsyn som Jesus!
+
+Varför är nu allt detta viktigt? Jo, därför att många moderna teologer har med sin  
+förnekelseteologi inriktat sig på att angripa och förneka den historiska riktigheten i  
+Bibelns angivelser av platser, tider och personer, och av hur olika bibelböcker  
+uppkommit. Vad man ofta förnekar eller förklarar bort, det accepterade Jesus utan  
+omsvep. Han som var Ordet visste om någon hur Skrifterna kom till. Han, som var  
+sanningen, visste hur sanningens Ande inspirerade Bibeln. Jesus litade på hela Guds  
+ord, på dess auktoritet och tillförlitlighet, och som lärjunge till honom kan också du göra  
+det. Jesu egna lärjungar hade samma bibelsyn som Jesus; den första församlingen,  
+urkyrkan, hade den bibelsynen och kristenheten har genom tiderna alltid haft denna syn  
+på Bibeln.  
+
+I alla tider av väckelse och reformation har man återvänt till Skrifterna. När Josia var  
+konung i Juda, var templet förfallet och gudstjänsten bortglömd. När templet på  
+konungens befallning skulle restaureras, hittade man lagboken där. Andra Konungaboken  
+
+22:8 säger:  
+”Då sade översteprästen Hilkia till skrivaren Safan: ’Jag har funnit  
+lagboken i Herrens hus.’ ” När konungen fick reda på detta och hörde Herrens ord ur  
+lagboken, började reformationen på allvar (2 Kon 22:8-13). Under reformationen på  
+1500-talet i Europa var det likadant. När Martin Luther och hans efterföljare blev  
+berörda av Gud, så var det för att de upptäckte Bibeln, accepterade Bibeln, predikade  
+Bibeln och lydde Bibeln.  
+Att det idag finns en del sekulariserade förnekelseteologer som har skaffat sig  
+inflytande på olika teologiska seminarier och institutioner, betyder föga. Deras ord  
+kommer att vissna, falla ned och försvinna, men Jesu ord och Bibelns vittnesbörd om  
+sig själv kommer att bestå. ”…mina ord skall aldrig förgå” (Matt 24:35).  
+
+När Paulus predikar evangeliet så säger han:  
+Mendet  
+bekänner  
+jagför  
+digatt  
+jagenligt  
+”denvägen”  
+somde  
+kallar  
+för  
+ensekt,tjänar  
+mina  
+fäders  
+Gudpå  
+det  
+sättet  
+att  
+jag  
+tror  
+på  
+allt  
+somär  
+skrivet  
+ilagenochhos  
+profeterna.  
+
+Apg24:14  
+För Paulus var det självklart att tro på allt i Skrifterna. Det var en gudstjänst för honom.  
+Därför säger han också i Romarbrevet 15:4:  
+
+Tyallt  
+somtidigare  
+har  
+skrivits  
+är  
+skrivet  
+tillvår  
+undervisning,för  
+att  
+vigenomdenuthållighet  
+ochtröst  
+som  
+Skrifterna  
+ger  
+skallbevara  
+vårt  
+hopp.  
+
+Guds ord är evigt, klart, tydligt och starkt, och har i sig allt vad vi behöver för vår  
+frälsning. I Petrus andra brev 1:4 står det att Gud har  
+”…gett oss sina dyrbara och  
+mycket stora löften [dvs ordet], för att ni i kraft av dem skall få del av gudomlig  
+natur, sedan ni kommit undan det fördärv som på grund av begäret finns i världen”.  
+Ordet har alltså en enorm förmåga att frälsa, beskydda, bevara och utveckla.  
+
+Ordet, som Gud har gett oss i Bibeln, är inspirerat av Guds Ande:  
+”ledda  
+av den  
+helige Ande har människor talat vad de fått från Gud”  
+(2 Petr 1:21). Ordet är fast och  
+tillförlitligt, och Petrus säger att”ni gör rätt i att hålla er till det som till ett ljus som  
+lyser på en mörk plats, tills dagen gryr och morgonstjärnan går upp i era hjärtan” (2  
+Petr 1:19).  
+
+Ingen har sagt att allt i Bibeln är helt lättillgängligt eller att där inte finns problem.  
+Men den är Guds ord! När en troende i sitt hjärta har accepterat Jesus som sin Herre  
+och litar på hans ord, då kommer den helige Ande att utlägga och förklara Skrifterna för  
+honom.  
+
+## Principer för bibeltolkning
+
+Om man vill vara trogen Bibeln och dess egna intentioner, kan man inte läsa eller tolka  
+den hur som helst. Bibeln innehåller nämligen sina egna tolkningsprinciper och den ger  
+mening och klarhet när dessa principer förstås och följs.  
+
+Paulus ger ett exempel på detta när han skriver:  
+”Ty vi skriver inget annat till er än  
+det ni läser och kan förstå. Och jag hoppas att ni ända till slutet kommer att förstå”  
+(2 Kor 1:13). Bibeln har inga dolda budskap utan det vi läser ”är vad det står, betyder  
+vad det står, och blir vad det står”. Det är därför man måste hålla sig till vad som står  
+skrivet.  
+
+Paulus säger i Första Korintierbrevet 4:6:  
+Bröder,detta  
+har  
+jagför  
+er  
+skulltillämpatpå  
+migochApollos,för  
+att  
+niskalllära  
+er  
+denregelnnär  
+det  
+gäller  
+oss  
+att  
+inte  
+gå  
+utöver  
+vadSkriftensäger  
+ochinte  
+skryta  
+över  
+enledare  
+på  
+denandres  
+bekostnad.  
+
+Bibeln är klar och tydlig och den kan förklara sig själv. Här följer några principer för  
+hur Bibeln skall läsas och förstås:  
+
+1. Man måste förutsätta att Bibeln är auktoritativ och sann om man skall förstå vad  
+den säger. Man måste, med andra ord, acceptera Bibelns egna intentioner, för att till  
+fullo förstå dess budskap.  
+
+2. Skrift tolkar skrift och det ena bibelordet förklarar det andra:  
+”Summan av ditt  
+ord är sanning” (Ps 119:160).  
+3. Ett bibelord har grundläggande  
+en betydelse, men kan ha flera tillämpningar.  
+4. Den bokstavliga meningen är den rätta meningen. Det betyder vad det står skrivet,  
+och inte något annat fördolt.  
+5. Upplevelser måste tolkas i ljuset av ordet, inte ordet i ljuset av upplevelser.  
+6. Bibelns syfte är inte i första hand att öka vår kunskap eller stilla vår nyfikenhet,  
+utan syftet är att förvandla våra liv. Detta innebär att den helige Ande ger sanningen  
+åt dem som med ödmjukt hjärta söker Gud för att lyssna, lyda och bli förvandlade.  
+7. Varje person är beroende av den helige Ande för att förstå Skrifterna.  
+8. Varje person har själv friheten, rätten och ansvaret att utforska och följa ordet  
+efter sitt av den helige Ande upplysta samvete.  
+9. Kyrkohistoria och traditioner kan vara vägledande, men är på intet sätt avgörande  
+för förståelsen av ordet.  
+10. Guds löften genom hela Bibeln är tillgängliga genom den helige Ande för varje  
+troende i varje generation.  
+11. Klara bibelställen förklarar dunkla. Centrala bibelord förklarar perifera.  
+12. Centrum i Bibeln är Jesus Kristus. Han är ”Ordets kärna (centrum) och stjärna  
+(ljus och klarhet)”.  
+13. Ett bibelord kan läsas  
+ur sitt sammanhang (annars måste man ständi...
