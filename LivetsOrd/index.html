@@ -77,150 +77,223 @@
   </footer>
   <script>
     const promptText = `
-Du har tillgång till hela det digitaliserade materialet från projektet "Livets Ord" här:
-https://denomination-comparisons.github.io/LivetsOrd/index2.html
-Matrix-fil: https://denomination-comparisons.github.io/LivetsOrd/livets-ord-doctrinal-matrix-sv.json
-Materialet består av separata HTML-sidor som motsvarar boksidor ur en informell katekes
-för Livets Ord-rörelsen. Innehållet täcker teman som:
-- Uppenbarelsen
-- Teologi (Läran om Gud)
-- Kristologi och Soteriologi
-- Pneumatologi (Läran om Anden)
-- Antropologi (Läran om människan)
-- Angelologi (Läran om änglarna)
-- Ekklesiologi (Läran om församlingen)
-- Eskatologi (Läran om den yttersta tiden)
-- Appendix: tre fornkyrkliga trosbekännelser
-Direkta länkresurser:
-- chapter-1-uppenbarelsen-page-7.html
-- chapter-1-uppenbarelsen-page-8.html
-- chapter-1-uppenbarelsen-page-9.html
-- chapter-1-uppenbarelsen-page-10.html
-- chapter-1-uppenbarelsen-page-11.html
-- chapter-1-uppenbarelsen-page-12.html
-- chapter-1-uppenbarelsen-page-13.html
-- chapter-1-uppenbarelsen-page-14.html
-- chapter-1-uppenbarelsen-page-15.html
-- chapter-1-uppenbarelsen-page-16.html
-- chapter-1-uppenbarelsen-page-17.html
-- chapter-1-uppenbarelsen-page-18.html
-- chapter-1-uppenbarelsen-page-19.html
-  
-- chapter-2-teologi-laran-om-Gud-page-21.html
-- chapter-2-teologi-laran-om-Gud-page-22.html
-- chapter-2-teologi-laran-om-Gud-page-23.html
-- chapter-2-teologi-laran-om-Gud-page-24.html
-- chapter-2-teologi-laran-om-Gud-page-25.html
-- chapter-2-teologi-laran-om-Gud-page-26.html
-- chapter-2-teologi-laran-om-Gud-page-27.html
-- chapter-2-teologi-laran-om-Gud-page-28.html
-- chapter-2-teologi-laran-om-Gud-page-29.html
-- chapter-2-teologi-laran-om-Gud-page-30.html
-- chapter-2-teologi-laran-om-Gud-page-31.html
-- chapter-2-teologi-laran-om-Gud-page-32.html
-- chapter-2-teologi-laran-om-Gud-page-33.html
-- chapter-2-teologi-laran-om-Gud-page-34.html
-   
-- chapter-3-kristologi-page-36.html
-- chapter-3-kristologi-page-37.html
-- chapter-3-kristologi-page-38.html
-- chapter-3-kristologi-page-39.html
-- chapter-3-kristologi-page-40.html
-- chapter-3-kristologi-page-41.html
-- chapter-3-kristologi-page-42.html
-   
-- chapter-4-pneumatologi-laran-om-Anden-page-44.html
-- chapter-4-pneumatologi-laran-om-Anden-page-45.html
-- chapter-4-pneumatologi-laran-om-Anden-page-46.html
-- chapter-4-pneumatologi-laran-om-Anden-page-47.html
-- chapter-4-pneumatologi-laran-om-Anden-page-48.html
-- chapter-4-pneumatologi-laran-om-Anden-page-49.html
-- chapter-4-pneumatologi-laran-om-Anden-page-50.html
-- chapter-4-pneumatologi-laran-om-Anden-page-51.html
-- chapter-4-pneumatologi-laran-om-Anden-page-52.html
-- chapter-4-pneumatologi-laran-om-Anden-page-53.html
-- chapter-4-pneumatologi-laran-om-Anden-page-54.html
-   
-- chapter-5-antropologi-laran-om-manniskan-page-56.html
-- chapter-5-antropologi-laran-om-manniskan-page-57.html
-- chapter-5-antropologi-laran-om-manniskan-page-58.html
-- chapter-5-antropologi-laran-om-manniskan-page-59.html
-- chapter-5-antropologi-laran-om-manniskan-page-60.html
-- chapter-5-antropologi-laran-om-manniskan-page-61.html
-- chapter-5-antropologi-laran-om-manniskan-page-62.html
-- chapter-5-antropologi-laran-om-manniskan-page-63.html
-- chapter-5-antropologi-laran-om-manniskan-page-64.html
-- chapter-5-antropologi-laran-om-manniskan-page-65.html
-- chapter-5-antropologi-laran-om-manniskan-page-66.html
-- chapter-5-antropologi-laran-om-manniskan-page-67.html
-- chapter-5-antropologi-laran-om-manniskan-page-68.html
-    
-- chapter-6-angelologi-laran-om-anglarna-page-70.html
-- chapter-6-angelologi-laran-om-anglarna-page-71.html
-- chapter-6-angelologi-laran-om-anglarna-page-72.html
-- chapter-6-angelologi-laran-om-anglarna-page-73.html
-- chapter-6-angelologi-laran-om-anglarna-page-74.html
-- chapter-6-angelologi-laran-om-anglarna-page-75.html
-- chapter-6-angelologi-laran-om-anglarna-page-76.html
- 
-- chapter-7-soteriologi-page-78.html
-- chapter-7-soteriologi-page-79.html
-- chapter-7-soteriologi-page-80.html
-- chapter-7-soteriologi-page-81.html
-- chapter-7-soteriologi-page-82.html
-- chapter-7-soteriologi-page-83.html
-- chapter-7-soteriologi-page-84.html
-- chapter-7-soteriologi-page-85.html
-- chapter-7-soteriologi-page-86.html
-- chapter-7-soteriologi-page-87.html
-- chapter-7-soteriologi-page-88.html
-- chapter-7-soteriologi-page-89.html
-- chapter-7-soteriologi-page-90.html
-- chapter-7-soteriologi-page-91.html
-- chapter-7-soteriologi-page-92.html
-- chapter-7-soteriologi-page-93.html
-- chapter-7-soteriologi-page-94.html
-- chapter-7-soteriologi-page-95.html
- 
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-97.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-98.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-99.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-100.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-101.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-102.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-103.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-104.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-105.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-106.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-107.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-108.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-109.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-110.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-111.html
-- chapter-8-ekklesiologi-laran-om-forsamlingen-page-112.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-115.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-116.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-117.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-118.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-119.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-120.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-121.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-122.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-123.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-124.html
-- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-125.html
-- appendix-tre-fornkyrkliga-trosbekannelser-page-127.html
-- appendix-tre-fornkyrkliga-trosbekannelser-page-128.html
-- appendix-tre-fornkyrkliga-trosbekannelser-page-129.html
-Instruktion:
-1. Läs eller analysera innehållet från dessa länkar.
-2. Sammanfatta kort materialets huvudtema och struktur.
-3. Förklara sedan på ett enkelt sätt (så att även någon med grundläggande IT- och teologikunskap förstår)
-   hur man kan använda materialet med ChatGPT (t.ex. för jämförelser, översikt, analys eller undervisning).
-Avsluta med frågan:
-"Vilka frågor har du kring detta material?"
-    `.trim();
+You are GPT-5, and you are to output your answer in Swedish.
+
+This is the start of a discussion thread where I (the Prompter) may later ask follow-up questions about the theology presented in the Livets Ord doctrinal material. The context for this thread is the theological summary and structured excerpts taken from Livets Ord: Trosgrund och Lära (Ulf Ekman et al.).
+
+Important disclaimer:
+
+The models Grok and Claude available at https://denomination-comparisons.github.io/LivetsOrd/
+ can access and relate to the full text of the book.
+
+You, GPT-5, will instead base your answers only on verified verbatim quotes and structured summaries extracted from the book’s doctrinal matrix.
+
+Therefore, your responses are well-informed estimations, not direct readings from the full text. You must always clearly indicate when something is an inference or synthesis rather than a direct quote.
+
+Purpose of this thread:
+
+To allow a conversation in Swedish where I can ask about theological topics (e.g. the Trinity, the Holy Spirit, salvation, or end times) as presented in the Livets Ord material.
+
+You should explain terms and doctrines clearly, using simple and accessible Swedish — suitable for someone with limited theological background.
+
+You may also help me understand how these teachings relate to broader Christian traditions (e.g. Lutheran, Reformed, Orthodox, Pentecostal) when relevant.
+
+You are welcome to assist with technical or conceptual guidance if I ask for help understanding how to continue the discussion thread.
+
+Initial request:
+Please begin by giving a clear and approachable summary in Swedish of Livets Ords centrala troslära enligt de tillgängliga citaten och kapitelöversikterna (Kristologi, Pneumatologi, Soteriologi och Eskatologi).
+
+Förklara gärna vad som menas med dessa ord på ett enkelt sätt, och hur de tillsammans formar den övergripande bilden av Gud, människan och framtiden i Livets Ords teologi.
+
+Output everything in Swedish, with a helpful, pedagogical tone.    
+
+###
+
+{
+  "chapters": [
+    "Kapitel 3 – Kristologi",
+    "Kapitel 4 – Pneumatologi",
+    "Kapitel 7 – Soteriologi",
+    "Kapitel 9 – Eskatologi"
+  ],
+  "trinitarian_synthesis_sv": [
+    "• Fadern, Sonen och Anden är tre distinkta personer i en gudom; Jesus är 'den andra personen i gudomen' (p. 36) och Anden kallas 'han' (p. 44).",
+    "• Sonen är evig och en med Fadern: 'Jag och Fadern är ett' (p. 36) och 'av samma väsen som Fadern' (p. 37).",
+    "• Anden är personlig och verksam: 'Anden har personlighet: förmågor, uppgifter och manifestationer' (p. 45) samt 'den gudomliga mirakelförmågan' (p. 46).",
+    "• Jesu person är kristendomens hörnsten: 'Läran om Jesus Kristus är hörnstenen i kristendomen' (p. 36).",
+    "• Korset är uppenbarelsens centrum: 'Försoningen är uppenbarelsens centrum och höjdpunkt' (p. 78).",
+    "• Anden utgjuts på pingstdagen och möjliggör övernaturlig tjänst: 'På pingstdagen utgjöts Anden över allt kött' (matrix) och 'Dopet i den helige Ande är inte detsamma som pånyttfödelsen' (p. 50).",
+    "• Anden leder genom Bibeln: 'Först och främst genom bibelordet, löftena' (p. 53).",
+    "• Eskatologin betonar bokstavlig profetiatolkning och linjär historiesyn: 'Profetior ska förstås bokstavligt, inte som allegorier...' (p. 114).",
+    "• Den övergripande kombinationen: Nicensk/ortodox kristologi + karismatisk pneumatologi + uppenbarelsecentrerad, bokstavlig eskatologi."
+  ],
+  "dogmatic_structure": {
+    "kristologi": [
+      "• Jesus är Gud och den andra personen i gudomen: 'Vi har redan nämnt att Jesus är den andra personen i gudomen… Han är Gud!' (p. 36).",
+      "• Han är evig: 'Jesus är av evighet, av samma väsen som Fadern' (p. 37).",
+      "• Han är en med Fadern: 'Jesus säger själv: Jag och Fadern är ett' (p. 36).",
+      "• Han är född, ej skapad: 'född och icke skapad' (p. 37).",
+      "• Kristologin är person-centrerad: 'Kristendomen är inte uppbyggd kring en central läropunkt, utan kring en person' (p. 36)."
+    ],
+    "pneumatologi": [
+      "• Anden är en person: 'Anden är en person, Jesus kallade honom han inte den' (p. 44).",
+      "• Anden har personlighet och uppgifter: 'Anden har personlighet: förmågor, uppgifter och manifestationer' (p. 45).",
+      "• Anden är mirakulös kraft: 'Anden är den gudomliga mirakelförmågan och övernaturliga visdomen' (p. 46).",
+      "• Pingstdagen är församlingens födelsedag: 'Pingstdagen är församlingens födelsedag' (p. 49).",
+      "• Dop i Anden ≠ pånyttfödelse: 'Dopet i den helige Ande är inte detsamma som pånyttfödelsen' (p. 50).",
+      "• Anden utdelar nio nådegåvor (1 Kor 12): 'De nio nådegåvorna…' (p. 51).",
+      "• Balans mellan gåvor och frukt: 'Andens frukter... gåvor behöver inte automatiskt tyda på ett moget kristet liv' (p. 53).",
+      "• Andens ledning sker främst genom Bibelordet men också genom direkta manifestationer (p. 53)."
+    ],
+    "soteriologi": [
+      "• Försoningen är uppenbarelsens centrum: 'Försoningen är uppenbarelsens centrum och höjdpunkt' (p. 78).",
+      "• Kristendomen är uppenbarels religion: 'Kristendomen är uppenbarelsereligion' (p. 79).",
+      "• Jesu död är ställföreträdande: 'Jesu ställföreträdande död på Golgata' (p. 78).",
+      "• Frälsningen är relationell: 'Jesus är vår själs älskade, vår Försonare och vår Herre' (p. 82).",
+      "• Korset kan förstås genom Anden: 'Korset är inget 'mysterium'... Anden kan ge förståelse' (p. 80)."
+    ],
+    "eskatologi": [
+      "• Profetior tolkas bokstavligt: 'Profetior ska förstås bokstavligt, inte som allegorier eller symboler' (p. 114).",
+      "• Ingen 'förandligning' av skrifter: 'Profetior ska inte 'förandligas'' (p. 114).",
+      "• Bibeln har en linjär historiesyn: 'Bibelns tänkande är linjärt, inte cykliskt' (p. 114).",
+      "• Församlingen som mysterium i Guds plan: 'Församlingen fanns i Guds plan från evigheten (Ef 1:9)' (p. 114).",
+      "• Dispensational premillennialism: rapture, tribulation, Antikrist, Tusenårsrike (pp. 117–121; representativa utdrag).",
+      "• Jesu profetior om Jerusalem ses som bokstavligt uppfyllda: 'Jesu profetior om Jerusalem gick i bokstavlig uppfyllelse' (p. 114)."
+    ]
+  },
+  "tradition_labels": [
+    "nicensk-ortodox: 'Jesus är av evighet, av samma väsen som Fadern… född och icke skapad' (p. 37).",
+    "karismatisk-pentekostal: 'Dopet i den helige Ande… började de tala nya tungomål' (p. 50) och nio nådegåvor (p. 51).",
+    "dispensational-premillennial: 'Profetior ska förstås bokstavligt…' (p. 114) och uttalanden om rapture, tribulation och tusenårsrike (pp. 117–121)."
+  ],
+  "comparative_table": {
+    "kristologi": {
+      "nicene": "Full överensstämmelse med Nicene/Chalcedon: Jesus är 'Gud av Gud… av samma väsen som Fadern' (p. 37) – anti-arianism och konsubstantialitet.",
+      "pentecostal": "Delar fokus på Jesu person och tillbedjan; betonar relationell kristocentrism snarare än systematisk teologi (p. 36).",
+      "reformed": "Mindre betoning på strikt kalvinsk systematik (t.ex. predestination) och mer fokus på uppenbarelsecentrerad relation (p. 36, 79)."
+    },
+    "pneumatologi": {
+      "nicene": "Bekräftar Andens personlighet och gudomlighet ('han', p. 44), i linje med Konstantinopel 381.",
+      "pentecostal": "Tydligt pingstdrag: Andedop som separerbart fenomen, manifestativa gåvor, tungotal/profetia och mirakel (pp. 49–51).",
+      "reformed": "Avviker från cessationistiska positioner; går emot gått-ur-modellen genom att betona nutida gåvor och manifestationer (p. 50–51)."
+    },
+    "soteriologi": {
+      "nicene": "Försoningsfokus ligger i linje med ortodox fokus på inkarnationens frälsande verkan (p. 78).",
+      "pentecostal": "Delad betoning på personlig upplevelse genom Anden, men mindre fokus på helgelse som strikt process; mer på uppenbarelse och relation (p. 82).",
+      "reformed": "Accepterar substitutiv försoning men saknar tecken på begränsad försoning; mer uppenbarelse- och erfarenhetscentrerad än typiskt reformationsteologisk framställning (p. 78–79)."
+    },
+    "eskatologi": {
+      "nicene": "Nicénsk tro är i första hand kristologi/trinitetslära; den är tyst i fråga om moderna dispensationalistiska detaljer – skiljaktigheten ligger där (p. 114).",
+      "pentecostal": "Många pingströrelser tenderar att vara premillennial/amply literalistiska; Livets Ords position ligger väl inom detta spektrum (pp. 114–121).",
+      "reformed": "Reformerade traditioner är ofta amillennial eller postmillennial och skulle kritisera bokstavlig tolkning av profetior och dispensational indelning (p. 114)."
+    }
+  },
+  "hermeneutical_note": [
+    "• Anden är både illuminatör och kraftgivare: 'Först och främst genom bibelordet, löftena' (p. 53) samt 'övernaturliga förmågor började flöda' (p. 50).",
+    "• Uppenbarelsecentrism + bokstavlig hermeneutik: 'Profetior ska förstås bokstavligt, inte som allegorier...' (p. 114) innebär att profetiska texter får historisk-bokstavlig vikt.",
+    "• Pingst-utgjutet perspektiv formar epistemologi: pingstdagen markerar 'Andens tid' och församlingens födelse (pp. 48–49).",
+    "• Balansprincip: gåvor kräver frukt; gåvor i sig visar inte nödvändigtvis mognad (p. 53)."
+  ],
+  "bias_flags": [
+    {
+      "flag": "Anti-subordinationism (anti-JW)",
+      "quote": "inte en gud… utan 'Gud av Gud… född och icke skapad'",
+      "page": 37,
+      "file": "/LivetsOrd/chapter-3-kristologi-page-37.html"
+    },
+    {
+      "flag": "Revelation-centrism",
+      "quote": "Kristendomen är uppenbarelsereligion – uppenbarelsen handlar ytterst om försoningen",
+      "page": 79,
+      "file": "/LivetsOrd/chapter-7-soteriologi-page-79.html"
+    },
+    {
+      "flag": "Charismatic-experientialism",
+      "quote": "Anden är 'den gudomliga mirakelförmågan och övernaturliga visdomen'",
+      "page": 46,
+      "file": "/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-46.html"
+    },
+    {
+      "flag": "Soteriological core",
+      "quote": "Försoningen är uppenbarelsens centrum och höjdpunkt",
+      "page": 78,
+      "file": "/LivetsOrd/chapter-7-soteriologi-page-78.html"
+    },
+    {
+      "flag": "Pentecostal distinctives",
+      "quote": "Dopet i den helige Ande är inte detsamma som pånyttfödelsen",
+      "page": 50,
+      "file": "/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-50.html"
+    },
+    {
+      "flag": "Prophetic literalism / Dispensationalism",
+      "quote": "Profetior ska förstås bokstavligt, inte som allegorier eller symboler",
+      "page": 114,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html"
+    },
+    {
+      "flag": "Church–Israel distinction",
+      "quote": "Församlingen fanns i Guds plan från evigheten (Ef 1:9) ... Inkluderar alla folk, inte bara det judiska folket (Ef 2:11-17, 3:6).",
+      "page": 114,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html"
+    },
+    {
+      "flag": "Pre-trib rapture leaning",
+      "quote": "Församlingen kommer att ryckas upp i seger till härligheten (1 Tess 4:16-17). Gud alltid skyddar församlingen mot dom",
+      "page": 119,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-119.html"
+    }
+  ],
+  "quotes_used": [
+    {
+      "text": "Läran om Jesus Kristus är hörnstenen i kristendomen. ... I det här kapitlet skall vi se vem denne Jesus är.",
+      "page": 36,
+      "file": "/LivetsOrd/chapter-3-kristologi-page-36.html"
+    },
+    {
+      "text": "Jesus är av evighet, av samma väsen som Fadern, lika mycket Gud som Fadern, ... 'född och icke skapad' (Nicænska trosbekännelsen).",
+      "page": 37,
+      "file": "/LivetsOrd/chapter-3-kristologi-page-37.html"
+    },
+    {
+      "text": "Anden är en person, Jesus kallade honom 'han' inte 'den' (Joh 14:17).",
+      "page": 44,
+      "file": "/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-44.html"
+    },
+    {
+      "text": "Anden är 'den gudomliga mirakelförmågan och övernaturliga visdomen'.",
+      "page": 46,
+      "file": "/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-46.html"
+    },
+    {
+      "text": "Försoningen är uppenbarelsens centrum och höjdpunkt. Allt i Bibeln strålar samman i Jesu ställföreträdande död på Golgata.",
+      "page": 78,
+      "file": "/LivetsOrd/chapter-7-soteriologi-page-78.html"
+    },
+    {
+      "text": "Profetior ska förstås bokstavligt, inte som allegorier eller symboler. Profetior ska inte 'förandligas'.",
+      "page": 114,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html"
+    },
+    {
+      "text": "Tusenårsriket. Jesus regerar som Messias utifrån templet i Jerusalem över jorden i tusen år (Upp 20:1-6).",
+      "page": 117,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-117.html"
+    },
+    {
+      "text": "Församlingen kommer att ryckas upp i seger till härligheten (1 Tess 4:16-17).",
+      "page": 119,
+      "file": "/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-119.html"
+    }
+  ],
+  "disclaimer_sv": "Analysen återger Livets Ords egna formuleringar som primärkällor och är strikt deskriptiv. Inga normativa eller värderande omdömen görs om lärornas sanning eller giltighet."
+}
+
+
+
+
+
+`.trim();
 
     const grokPromptText = `
 Du har tillgång till hela det digitaliserade materialet från projektet "Livets Ord" här:
