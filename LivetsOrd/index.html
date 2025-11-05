@@ -58,8 +58,7 @@
     materialet och ställer en enkel fråga om hur du vill använda det.
   </p>
   <button id="copyClaudePromptBtn">Kopiera Claude-prompt</button>
-  <p id="copiedMsg" class="success-msg">Prompten har kopierats till urklipp.</p>
-  <p id="copiedClaudeMsg" class="success-msg">Claude-prompten har kopierats till urklipp.</p>
+  <p id="copiedClaudeMsg" style="color:green; display:none;">Claude-prompten har kopierats till urklipp.</p>
 
   <h2>Referens</h2>
   <p>
@@ -425,9 +424,7 @@ Avsluta med frågan:
       try {
         await navigator.clipboard.writeText(claudePromptText);
         document.getElementById('copiedClaudeMsg').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('copiedClaudeMsg').style.display = 'none';
-        }, 3000);
+        
       } catch {
         alert('Kunde inte kopiera Claude-prompten automatiskt. Kopiera den manuellt via konsolen.');
         console.log(claudePromptText);
