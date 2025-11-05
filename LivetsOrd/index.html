@@ -36,47 +36,45 @@
 </head>
 <body>
   <h1>Livets Ord – Digitaliserad katekes</h1>
-
   <p>
     Detta arkiv innehåller digitaliserade boksidor som fungerar som en informell
     katekes för Livets Ord-rörelsen. Syftet är att möjliggöra teologisk analys,
     textjämförelser och reflektion med hjälp av AI-modeller såsom ChatGPT.
   </p>
-
   <p>
     Tryck på knappen nedan för att kopiera en färdig ChatGPT-prompt som sammanfattar
     materialet och ställer en enkel fråga om hur du vill använda det.
   </p>
-
   <button id="copyPromptBtn">Kopiera ChatGPT-prompt</button>
   <p id="copiedMsg" style="color:green; display:none;">Prompten har kopierats till urklipp.</p>
-
+  <p>
+    Tryck på knappen nedan för att kopiera en färdig Grok-optimerad prompt som sammanfattar
+    materialet och ställer en enkel fråga om hur du vill använda det.
+  </p>
+  <button id="copyGrokPromptBtn">Kopiera Grok-prompt</button>
+  <p id="copiedGrokMsg" style="color:green; display:none;">Prompten har kopierats till urklipp.</p>
   <h2>Referens</h2>
   <p>
     Källmaterialet finns tillgängligt i fulltext här:
     <a href="https://denomination-comparisons.github.io/LivetsOrd/index2.html">
       https://denomination-comparisons.github.io/LivetsOrd/index2.html
-      
+     
     </a>
-    Matrix-fil för AI-modeller som föredrar en sådan ingång: 
+    Matrix-fil för AI-modeller som föredrar en sådan ingång:
     <a href="https://denomination-comparisons.github.io/LivetsOrd/livets-ord-doctrinal-matrix-sv.json">
   https://denomination-comparisons.github.io/LivetsOrd/livets-ord-doctrinal-matrix-sv.json
     </a>
   </p>
-
   <footer>
     <p>Denomination Comparisons – Livets Ord Project</p>
   </footer>
-
   <script>
     const promptText = `
 Du har tillgång till hela det digitaliserade materialet från projektet "Livets Ord" här:
 https://denomination-comparisons.github.io/LivetsOrd/index2.html
 Matrix-fil: https://denomination-comparisons.github.io/LivetsOrd/livets-ord-doctrinal-matrix-sv.json
-
 Materialet består av separata HTML-sidor som motsvarar boksidor ur en informell katekes
 för Livets Ord-rörelsen. Innehållet täcker teman som:
-
 - Uppenbarelsen
 - Teologi (Läran om Gud)
 - Kristologi och Soteriologi
@@ -86,9 +84,7 @@ för Livets Ord-rörelsen. Innehållet täcker teman som:
 - Ekklesiologi (Läran om församlingen)
 - Eskatologi (Läran om den yttersta tiden)
 - Appendix: tre fornkyrkliga trosbekännelser
-
 Direkta länkresurser:
-
 - chapter-1-uppenbarelsen-page-7.html
 - chapter-1-uppenbarelsen-page-8.html
 - chapter-1-uppenbarelsen-page-9.html
@@ -102,7 +98,7 @@ Direkta länkresurser:
 - chapter-1-uppenbarelsen-page-17.html
 - chapter-1-uppenbarelsen-page-18.html
 - chapter-1-uppenbarelsen-page-19.html
-   
+  
 - chapter-2-teologi-laran-om-Gud-page-21.html
 - chapter-2-teologi-laran-om-Gud-page-22.html
 - chapter-2-teologi-laran-om-Gud-page-23.html
@@ -117,7 +113,7 @@ Direkta länkresurser:
 - chapter-2-teologi-laran-om-Gud-page-32.html
 - chapter-2-teologi-laran-om-Gud-page-33.html
 - chapter-2-teologi-laran-om-Gud-page-34.html
-    
+   
 - chapter-3-kristologi-page-36.html
 - chapter-3-kristologi-page-37.html
 - chapter-3-kristologi-page-38.html
@@ -125,7 +121,7 @@ Direkta länkresurser:
 - chapter-3-kristologi-page-40.html
 - chapter-3-kristologi-page-41.html
 - chapter-3-kristologi-page-42.html
-    
+   
 - chapter-4-pneumatologi-laran-om-Anden-page-44.html
 - chapter-4-pneumatologi-laran-om-Anden-page-45.html
 - chapter-4-pneumatologi-laran-om-Anden-page-46.html
@@ -137,7 +133,7 @@ Direkta länkresurser:
 - chapter-4-pneumatologi-laran-om-Anden-page-52.html
 - chapter-4-pneumatologi-laran-om-Anden-page-53.html
 - chapter-4-pneumatologi-laran-om-Anden-page-54.html
-    
+   
 - chapter-5-antropologi-laran-om-manniskan-page-56.html
 - chapter-5-antropologi-laran-om-manniskan-page-57.html
 - chapter-5-antropologi-laran-om-manniskan-page-58.html
@@ -151,7 +147,7 @@ Direkta länkresurser:
 - chapter-5-antropologi-laran-om-manniskan-page-66.html
 - chapter-5-antropologi-laran-om-manniskan-page-67.html
 - chapter-5-antropologi-laran-om-manniskan-page-68.html
-     
+    
 - chapter-6-angelologi-laran-om-anglarna-page-70.html
 - chapter-6-angelologi-laran-om-anglarna-page-71.html
 - chapter-6-angelologi-laran-om-anglarna-page-72.html
@@ -159,7 +155,7 @@ Direkta länkresurser:
 - chapter-6-angelologi-laran-om-anglarna-page-74.html
 - chapter-6-angelologi-laran-om-anglarna-page-75.html
 - chapter-6-angelologi-laran-om-anglarna-page-76.html
-  
+ 
 - chapter-7-soteriologi-page-78.html
 - chapter-7-soteriologi-page-79.html
 - chapter-7-soteriologi-page-80.html
@@ -178,7 +174,7 @@ Direkta länkresurser:
 - chapter-7-soteriologi-page-93.html
 - chapter-7-soteriologi-page-94.html
 - chapter-7-soteriologi-page-95.html
-  
+ 
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-97.html
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-98.html
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-99.html
@@ -195,7 +191,6 @@ Direkta länkresurser:
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-110.html
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-111.html
 - chapter-8-ekklesiologi-laran-om-forsamlingen-page-112.html
-
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-115.html
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-116.html
@@ -208,21 +203,163 @@ Direkta länkresurser:
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-123.html
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-124.html
 - chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-125.html
-
 - appendix-tre-fornkyrkliga-trosbekannelser-page-127.html
 - appendix-tre-fornkyrkliga-trosbekannelser-page-128.html
 - appendix-tre-fornkyrkliga-trosbekannelser-page-129.html
-
 Instruktion:
 1. Läs eller analysera innehållet från dessa länkar.
 2. Sammanfatta kort materialets huvudtema och struktur.
 3. Förklara sedan på ett enkelt sätt (så att även någon med grundläggande IT- och teologikunskap förstår)
    hur man kan använda materialet med ChatGPT (t.ex. för jämförelser, översikt, analys eller undervisning).
-
 Avsluta med frågan:
 "Vilka frågor har du kring detta material?"
     `.trim();
 
+    const grokPromptText = `
+Du har tillgång till hela det digitaliserade materialet från projektet "Livets Ord" här:
+https://denomination-comparisons.github.io/LivetsOrd/index2.html
+Matrix-fil: https://denomination-comparisons.github.io/LivetsOrd/livets-ord-doctrinal-matrix-sv.json
+Materialet består av separata HTML-sidor som motsvarar boksidor ur en informell katekes
+för Livets Ord-rörelsen. Innehållet täcker teman som:
+- Uppenbarelsen
+- Teologi (Läran om Gud)
+- Kristologi och Soteriologi
+- Pneumatologi (Läran om Anden)
+- Antropologi (Läran om människan)
+- Angelologi (Läran om änglarna)
+- Ekklesiologi (Läran om församlingen)
+- Eskatologi (Läran om den yttersta tiden)
+- Appendix: tre fornkyrkliga trosbekännelser
+Direkta länkresurser:
+- chapter-1-uppenbarelsen-page-7.html
+- chapter-1-uppenbarelsen-page-8.html
+- chapter-1-uppenbarelsen-page-9.html
+- chapter-1-uppenbarelsen-page-10.html
+- chapter-1-uppenbarelsen-page-11.html
+- chapter-1-uppenbarelsen-page-12.html
+- chapter-1-uppenbarelsen-page-13.html
+- chapter-1-uppenbarelsen-page-14.html
+- chapter-1-uppenbarelsen-page-15.html
+- chapter-1-uppenbarelsen-page-16.html
+- chapter-1-uppenbarelsen-page-17.html
+- chapter-1-uppenbarelsen-page-18.html
+- chapter-1-uppenbarelsen-page-19.html
+  
+- chapter-2-teologi-laran-om-Gud-page-21.html
+- chapter-2-teologi-laran-om-Gud-page-22.html
+- chapter-2-teologi-laran-om-Gud-page-23.html
+- chapter-2-teologi-laran-om-Gud-page-24.html
+- chapter-2-teologi-laran-om-Gud-page-25.html
+- chapter-2-teologi-laran-om-Gud-page-26.html
+- chapter-2-teologi-laran-om-Gud-page-27.html
+- chapter-2-teologi-laran-om-Gud-page-28.html
+- chapter-2-teologi-laran-om-Gud-page-29.html
+- chapter-2-teologi-laran-om-Gud-page-30.html
+- chapter-2-teologi-laran-om-Gud-page-31.html
+- chapter-2-teologi-laran-om-Gud-page-32.html
+- chapter-2-teologi-laran-om-Gud-page-33.html
+- chapter-2-teologi-laran-om-Gud-page-34.html
+   
+- chapter-3-kristologi-page-36.html
+- chapter-3-kristologi-page-37.html
+- chapter-3-kristologi-page-38.html
+- chapter-3-kristologi-page-39.html
+- chapter-3-kristologi-page-40.html
+- chapter-3-kristologi-page-41.html
+- chapter-3-kristologi-page-42.html
+   
+- chapter-4-pneumatologi-laran-om-Anden-page-44.html
+- chapter-4-pneumatologi-laran-om-Anden-page-45.html
+- chapter-4-pneumatologi-laran-om-Anden-page-46.html
+- chapter-4-pneumatologi-laran-om-Anden-page-47.html
+- chapter-4-pneumatologi-laran-om-Anden-page-48.html
+- chapter-4-pneumatologi-laran-om-Anden-page-49.html
+- chapter-4-pneumatologi-laran-om-Anden-page-50.html
+- chapter-4-pneumatologi-laran-om-Anden-page-51.html
+- chapter-4-pneumatologi-laran-om-Anden-page-52.html
+- chapter-4-pneumatologi-laran-om-Anden-page-53.html
+- chapter-4-pneumatologi-laran-om-Anden-page-54.html
+   
+- chapter-5-antropologi-laran-om-manniskan-page-56.html
+- chapter-5-antropologi-laran-om-manniskan-page-57.html
+- chapter-5-antropologi-laran-om-manniskan-page-58.html
+- chapter-5-antropologi-laran-om-manniskan-page-59.html
+- chapter-5-antropologi-laran-om-manniskan-page-60.html
+- chapter-5-antropologi-laran-om-manniskan-page-61.html
+- chapter-5-antropologi-laran-om-manniskan-page-62.html
+- chapter-5-antropologi-laran-om-manniskan-page-63.html
+- chapter-5-antropologi-laran-om-manniskan-page-64.html
+- chapter-5-antropologi-laran-om-manniskan-page-65.html
+- chapter-5-antropologi-laran-om-manniskan-page-66.html
+- chapter-5-antropologi-laran-om-manniskan-page-67.html
+- chapter-5-antropologi-laran-om-manniskan-page-68.html
+    
+- chapter-6-angelologi-laran-om-anglarna-page-70.html
+- chapter-6-angelologi-laran-om-anglarna-page-71.html
+- chapter-6-angelologi-laran-om-anglarna-page-72.html
+- chapter-6-angelologi-laran-om-anglarna-page-73.html
+- chapter-6-angelologi-laran-om-anglarna-page-74.html
+- chapter-6-angelologi-laran-om-anglarna-page-75.html
+- chapter-6-angelologi-laran-om-anglarna-page-76.html
+ 
+- chapter-7-soteriologi-page-78.html
+- chapter-7-soteriologi-page-79.html
+- chapter-7-soteriologi-page-80.html
+- chapter-7-soteriologi-page-81.html
+- chapter-7-soteriologi-page-82.html
+- chapter-7-soteriologi-page-83.html
+- chapter-7-soteriologi-page-84.html
+- chapter-7-soteriologi-page-85.html
+- chapter-7-soteriologi-page-86.html
+- chapter-7-soteriologi-page-87.html
+- chapter-7-soteriologi-page-88.html
+- chapter-7-soteriologi-page-89.html
+- chapter-7-soteriologi-page-90.html
+- chapter-7-soteriologi-page-91.html
+- chapter-7-soteriologi-page-92.html
+- chapter-7-soteriologi-page-93.html
+- chapter-7-soteriologi-page-94.html
+- chapter-7-soteriologi-page-95.html
+ 
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-97.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-98.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-99.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-100.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-101.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-102.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-103.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-104.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-105.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-106.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-107.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-108.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-109.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-110.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-111.html
+- chapter-8-ekklesiologi-laran-om-forsamlingen-page-112.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-115.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-116.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-117.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-118.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-119.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-120.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-121.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-122.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-123.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-124.html
+- chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-125.html
+- appendix-tre-fornkyrkliga-trosbekannelser-page-127.html
+- appendix-tre-fornkyrkliga-trosbekannelser-page-128.html
+- appendix-tre-fornkyrkliga-trosbekannelser-page-129.html
+Instruktion:
+1. Använd ditt browse_page-verktyg för att hämta och analysera innehållet från dessa länkar. Sammanfatta och bearbeta informationen med dina verktyg för att säkerställa noggrannhet och djup.
+2. Sammanfatta kort materialets huvudtema och struktur.
+3. Förklara sedan på ett enkelt sätt (så att även någon med grundläggande IT- och teologikunskap förstår)
+   hur man kan använda materialet med Grok (t.ex. för jämförelser, översikt, analys eller undervisning, med stöd av realtidsdata eller X-sökningar om relevant).
+Avsluta med frågan:
+"Vilka frågor har du kring detta material?"
+    `.trim();
     document.getElementById('copyPromptBtn').addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(promptText);
@@ -230,6 +367,15 @@ Avsluta med frågan:
       } catch {
         alert('Kunde inte kopiera prompten automatiskt. Kopiera den manuellt via konsolen.');
         console.log(promptText);
+      }
+    });
+    document.getElementById('copyGrokPromptBtn').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(grokPromptText);
+        document.getElementById('copiedGrokMsg').style.display = 'block';
+      } catch {
+        alert('Kunde inte kopiera prompten automatiskt. Kopiera den manuellt via konsolen.');
+        console.log(grokPromptText);
       }
     });
   </script>
