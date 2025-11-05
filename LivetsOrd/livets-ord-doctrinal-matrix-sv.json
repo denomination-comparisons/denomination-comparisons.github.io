@@ -1,0 +1,610 @@
+{
+  "project": {
+    "name": "Livets Ord - Informell Katekes",
+    "description": "Digitaliserad systematisk teologi från Livets Ord-rörelsen",
+    "base_url": "https://denomination-comparisons.github.io/LivetsOrd/",
+    "repository_url": "https://github.com/denomination-comparisons/LivetsOrd",
+    "total_pages": 129,
+    "theological_tradition": "Karismatisk/Pingstlig",
+    "language": "Swedish",
+    "key_characteristics": [
+      "Uppenbarelsereligion - betoning på gudomlig uppenbarelse",
+      "Bokstavlig bibeltolkning",
+      "Linjärt historiesyn (ej cykliskt)",
+      "Starka profetiska element",
+      "Karismatisk pneumatologi"
+    ]
+  },
+  "chapters": [
+    {
+      "chapter_number": 1,
+      "title": "Uppenbarelsen",
+      "title_en": "Revelation",
+      "pages": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "page_count": 13,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-7.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-8.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-9.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-10.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-11.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-12.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-13.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-14.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-15.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-16.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-17.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-18.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-1-uppenbarelsen-page-19.html"
+      ],
+      "themes": [
+        "Kristendom som uppenbarelsereligion",
+        "Guds uppenbarelse genom Jesus och Anden",
+        "Bibelns auktoritet",
+        "Allmän och speciell uppenbarelse"
+      ],
+      "content": {
+        "summary": "Kapitlet etablerar kristendomen som en uppenbarelsereligion där kunskap om Gud kommer genom övernaturlig förmedling, inte mänsklig insikt. Uppenbarelsen är nödvändig eftersom människan är separerad från Gud genom synd. Gud uppenbarar sig både genom allmän uppenbarelse (naturen) och speciell uppenbarelse (Bibeln, Jesus, Anden).",
+        "key_points": [
+          "Petrus bekännelse kom genom uppenbarelse, inte mänsklig förståelse (Matt 16:17)",
+          "Jesus själv kom som uppenbarelse av 'Livets Ord' (1 Joh 1:1-2)",
+          "Uppenbarelse definieras som 'avslöjande av kunskap genom gudomlig eller övernaturlig förmedling'",
+          "Syftet med uppenbarelse: förmedla vem Gud är, ge frälsning och återställa gemenskap",
+          "Före syndafallet talade Gud direkt, efter syndafallet genom uppenbarelse",
+          "Uppenbarelsen är nödvändig eftersom synder skiljer människan från Gud (Jes 59:2)"
+        ],
+        "scripture_references": [
+          "Matt 16:17 - Petrus bekännelse",
+          "1 Joh 1:1-2 - Livets Ord uppenbarades",
+          "Hebr 1:1-2 - Gud talade genom profeter, nu genom Sonen",
+          "1 Kor 2:9-10 - Anden uppenbarar vad Gud berett",
+          "Jes 59:2 - Synder skiljer från Gud"
+        ],
+        "theological_emphasis": "Stark betoning på att kristen tro grundar sig på övernaturlig uppenbarelse, inte mänsklig spekulation eller filosofi. Kunskapen om Gud är gåva, inte mänsklig prestation."
+      }
+    },
+    {
+      "chapter_number": 2,
+      "title": "Teologi - Läran om Gud",
+      "title_en": "Theology - The Doctrine of God",
+      "pages": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34],
+      "page_count": 14,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-21.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-22.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-23.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-24.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-25.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-26.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-27.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-28.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-29.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-30.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-31.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-32.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-33.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-2-teologi-laran-om-Gud-page-34.html"
+      ],
+      "themes": [
+        "Guds existens som självklar",
+        "Guds enhet, evighet och allmakt",
+        "Gud uppenbarad i Jesus Kristus",
+        "Guds transcendens och immanens"
+      ],
+      "content": {
+        "summary": "Kapitlet etablerar Guds existens som självklar - aldrig ifrågasatt i Bibeln. Gud är den ende, evige, levande Guden i motsats till döda avgudar. Han är transcendent (bor i otillgängligt ljus) men uppenbarar sig själv begripligt genom Skriften och Kristus. Guds namn 'Jag Är' uttrycker hans eviga, självexisterande natur. Jesus sammanfattar och tydliggör Guds väsen genom inkarnationen.",
+        "key_points": [
+          "Guds existens är självklar i Bibeln, aldrig försvarad eller ifrågasatt",
+          "Endast dåren säger 'Det finns ingen Gud' (Ps 53:2)",
+          "Gud är odödlig, bor i otillgängligt ljus (1 Tim 6:16)",
+          "Guds namn är 'Jag Är' (Jahve) - den självexisterande (2 Mos 3:14)",
+          "Gud är den evige, den ende, den levande Guden",
+          "Avgudarna är tomma, döda, utan kraft",
+          "Jesus bekräftar: 'Herren, vår Gud, Herren är en' (Mark 12:29)",
+          "Guds enhet, evighet och allmakt är grundläggande",
+          "Jesus 'utstrålar Guds härlighet och uppenbarar hans väsen' (Hebr 1:3)",
+          "Gud synliggör sig genom skapelsen (skuggbilder och konturer)"
+        ],
+        "scripture_references": [
+          "Ps 53:2 - Dåren förnekar Gud",
+          "1 Tim 6:16 - Gud i otillgängligt ljus",
+          "Matt 6:9 - Fader vår i himlen",
+          "2 Mos 3:14 - Jag Är den Jag Är",
+          "Mark 12:29, 32 - Herren är en",
+          "Hebr 1:3 - Sonen uppenbarar Guds väsen"
+        ],
+        "theological_emphasis": "Klassisk teistisk teologi med stark betoning på Guds transcendens och enhet. Tydlig monotheism i linje med Shema (Mark 12:29). Samtidigt inkarnatorisk kristologi - Gud gör sig begriplig genom Jesus. Polemik mot avgudadyrkan och ateism. Guds självexistens (aseitet) genom namnet 'Jag Är'."
+      }
+    },
+    {
+      "chapter_number": 3,
+      "title": "Kristologi",
+      "title_en": "Christology",
+      "pages": [36, 37, 38, 39, 40, 41, 42],
+      "page_count": 7,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-36.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-37.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-38.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-39.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-40.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-41.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-3-kristologi-page-42.html"
+      ],
+      "themes": [
+        "Jesus är Gud - den andra personen i gudomen",
+        "Jesu gudomlighet och evighet",
+        "Jesus som hörnsten i kristendomen",
+        "Inkarnationen och uppenbarelsen av Fadern"
+      ],
+      "content": {
+        "summary": "Kristologi är hörnstenen i kristendomen - inte en läropunkt utan en person. Jesus är den andra personen i gudomen, Guds enfödde Son. Kapitlet betonar starkt Jesu fullständiga gudomlighet: Han är Gud, inte skapad utan 'framsprungen ur Fadern'. Lärjungarna, som judar, tillbad Jesus - vilket visar att de förstod att han var Gud. Jesus är evig, existerade innan Abraham, och hade härlighet hos Fadern innan världen skapades.",
+        "key_points": [
+          "Kristendomen är byggd kring en person, inte en läropunkt",
+          "Jesus är den andra personen i gudomen, Guds Son",
+          "Johannes fastslår: 'Ordet var Gud' (Joh 1:1) - Jesus är Gud",
+          "Lärjungarna var judar som bara skulle tillbe en Gud - ändå tillbad de Jesus (Luk 24:51-52)",
+          "Jesus är 'den Enfödde, som själv är Gud' (Joh 1:18)",
+          "'Enfödd' betyder inte skapad utan 'framsprungen ur Gud'",
+          "Syftet: visa människorna vem Gud är och frälsa dem",
+          "Jesus säger själv: 'Jag och Fadern är ett' (Joh 10:30)",
+          "Jesus är evig: 'Jag Är, redan innan Abraham blev till' (Joh 8:58)",
+          "Jesus hade härlighet hos Gud innan världen skapades (Joh 17:5, 24)",
+          "Jesus är 'för evigt Gud, för evig Son'"
+        ],
+        "scripture_references": [
+          "Joh 1:1 - I begynnelsen var Ordet, Ordet var Gud",
+          "Joh 1:18 - Den Enfödde, som själv är Gud",
+          "Rom 1:23 - Varning mot människotillbedjan",
+          "Luk 24:51-52 - Lärjungarna tillbad Jesus",
+          "Joh 10:30 - Jag och Fadern är ett",
+          "Joh 8:58 - Jag Är, innan Abraham blev till",
+          "Joh 17:5, 24 - Härlighet hos Fadern före skapelsen"
+        ],
+        "theological_emphasis": "Mycket stark och tydlig bekännelse av Jesu fullständiga gudomlighet. Klassisk ortodox kristologi i linje med Nicaea och Chalcedon. Polemik mot arianismen (Jesus som skapad). Betonar att tillbedjan av Jesus inte är avgudadyrkan eftersom han verkligen är Gud. Kristocentrism - Jesus är centrum, inte läror. Evig Sonskap - Jesus är evigt Son, inte blev Son vid inkarnationen."
+      }
+    },
+    {
+      "chapter_number": 4,
+      "title": "Pneumatologi - Läran om Anden",
+      "title_en": "Pneumatology - The Doctrine of the Holy Spirit",
+      "pages": [44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54],
+      "page_count": 11,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-44.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-45.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-46.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-47.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-48.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-49.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-50.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-51.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-52.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-53.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-4-pneumatologi-laran-om-Anden-page-54.html"
+      ],
+      "themes": [
+        "Den Helige Andes person och personlighet",
+        "Andens gåvor och manifestationer",
+        "Andens verk genom historien",
+        "Andens tidsålder (från pingst)"
+      ],
+      "content": {
+        "summary": "Kapitlet betonar starkt att den Helige Ande är en person i gudomen, inte bara en kraft. Han har varit verksam sedan skapelsen men manifesterades särskilt på pingstdagen. Han är 'Hjälparen' (parakleten) som gör Guds och Jesu verk levande för den troende.",
+        "key_points": [
+          "Anden är en person, Jesus kallade honom 'han' inte 'den' (Joh 14:17)",
+          "Anden har personlighet: förmågor, uppgifter och manifestationer",
+          "Anden fanns före pingstdagen, verksam sedan skapelsen (1 Mos 1:2)",
+          "På pingstdagen utgjöts Anden över allt kött",
+          "Anden verkar i och genom församlingen under 'Andens tidsålder'",
+          "Anden gör allt Gud är och Jesus gjort levande för den troende",
+          "Anden är 'den gudomliga mirakelförmågan och övernaturliga visdomen'"
+        ],
+        "scripture_references": [
+          "Joh 14:17 - Sanningens Ande",
+          "1 Mos 1:2 - Guds Ande svävade över vattnet",
+          "Joh 3:6-8 - Anden",
+          "1 Kor 3:16 - Guds Ande",
+          "Rom 8:9 - Kristi Ande",
+          "Rom 8:2 - Livets Ande",
+          "Hebr 10:29 - Nådens Ande"
+        ],
+        "thirteen_names_of_holy_spirit": [
+          "Anden (Joh 3:6-8)",
+          "Guds Ande (1 Kor 3:16)",
+          "Herrens Ande (Jes 11:2)",
+          "Kristi Ande (Rom 8:9)",
+          "Jesu Kristi Ande (Fil 1:19)",
+          "Jesu Ande (Apg 16:7)",
+          "[Guds] Sons Ande (Gal 4:6)",
+          "Den helige Ande (Luk 11:13)",
+          "Sanningens Ande (Joh 14:17)",
+          "Livets Ande (Rom 8:2)",
+          "Nådens Ande (Hebr 10:29)",
+          "Härlighetens Ande (1 Petr 4:14)",
+          "Hjälparen, parakleten (Joh 14:26)"
+        ],
+        "theological_emphasis": "Tydligt karismatisk betoning med fokus på Andens personliga och övernaturliga verk. Stark poäng att Anden inte är abstrakt kraft utan personlig Gud som aktivt verkar i troende."
+      }
+    },
+    {
+      "chapter_number": 5,
+      "title": "Antropologi - Läran om människan",
+      "title_en": "Anthropology - The Doctrine of Man",
+      "pages": [56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68],
+      "page_count": 13,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-56.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-57.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-58.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-59.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-60.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-61.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-62.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-63.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-64.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-65.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-66.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-67.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-5-antropologi-laran-om-manniskan-page-68.html"
+      ],
+      "themes": [
+        "Människan skapad av Gud (ej evolution)",
+        "Skapad till Guds avbild",
+        "Skapelsens krona och förvaltare",
+        "Människans unika position"
+      ],
+      "content": {
+        "summary": "Kapitlet betonar starkt att människan är unikt skapad av Gud till hans avbild, inte resultat av slumpmässig evolution. Människan är skapelsens krona, satt att förvalta skapelsen under Gud. Hela Bibeln handlar om människan och Guds frälsningsplan. Människan är lik Gud men skild från honom - beroende av Gud men över skapelsen.",
+        "key_points": [
+          "Människan är något oerhört unikt med existentiella frågor om identitet och mening",
+          "Hela Bibeln handlar om människan och Guds frälsningsplan",
+          "Många lever utan att komma ut i sin fulla potential - tragiskt",
+          "Människan är skapad av Gud, inte resultat av slumpmässig evolution",
+          "Inte gradvis utvecklad till 'naken apa' utan formad av Guds hand",
+          "Inte 'intelligent driftsvarelse' utan skapad till Guds avbild",
+          "Treenigheten i skapelsen: 'Låt oss göra människor' (1 Mos 1:26 - plural)",
+          "Människan är skapelsens krona och herre, inte slutled i evolution",
+          "Människan är under Gud men över skapelsen",
+          "Satt att förvalta skapelsen och vara Guds medarbetare",
+          "Människan är skapad av Gud och därmed skild från honom",
+          "Inte Gud, inte del av Gud, inte 'liten gud' - en människa",
+          "Unikt förärad gudslikhet men alltid beroende av Gud"
+        ],
+        "scripture_references": [
+          "Ps 8:4-7 - Vad är människan? Krönt med ära",
+          "1 Mos 1:26-27 - Skapad till Guds avbild, man och kvinna"
+        ],
+        "theological_emphasis": "Stark kreationism och polemik mot evolutionsteori. Människan har värdighet genom att vara skapad, inte genom evolutionär utveckling. Betonar både människans storhet (Guds avbild, skapelsens krona) och hennes beroende (alltid under Gud). Tydlig distinktion mellan Skapare och skapelse - ingen panteism eller gudsidentifikation. Trinitarisk antydan i 'låt oss göra'. Fokus på människans potential och tragiken i att inte leva i den."
+      }
+    },
+    {
+      "chapter_number": 6,
+      "title": "Angelologi - Läran om änglarna",
+      "title_en": "Angelology - The Doctrine of Angels",
+      "pages": [70, 71, 72, 73, 74, 75, 76],
+      "page_count": 7,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-70.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-71.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-72.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-73.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-74.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-75.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-6-angelologi-laran-om-anglarna-page-76.html"
+      ],
+      "themes": [
+        "Det övernaturligas verklighet",
+        "Änglars existens och kategorier",
+        "Änglar som budbärare och tjänare",
+        "Goda och fallna änglar"
+      ],
+      "content": {
+        "summary": "Kapitlet försvarar läran om änglar mot modern sekulariserad rationalism som förnekar det övernaturliga. Bibeln och Jesus själv bekräftar änglars och demoners existens. Ordet 'ängel' betyder 'budbärare' (hebreiska mal'ak, grekiska angelos). Änglarna är skapade andliga varelser som fanns före människans skapelse och överträffar människan i kraft och intelligens. De delas in i två kategorier: heliga/utvalda änglar och fallna/onda änglar (demoner).",
+        "key_points": [
+          "Sekulariserad rationalism har förnekat det övernaturliga under 1900-talet",
+          "Detta har påverkat delar av kristenheten - urvattat evangeliet",
+          "Jesus själv talade om änglar, Satan och demoner",
+          "Jesus var i direkt konfrontation med demoner och fick hjälp av änglar",
+          "Läran om änglar är betydelsefull - slår fast den bibliska undervisningen om osynlig andevärld",
+          "Klassisk kristendom har alltid trott på änglar och andemakter",
+          "Tilltron till övernaturligt är inte anti-intellektuellt utan realistiskt",
+          "'Ängel' = 'budbärare' (mal'ak/angelos)",
+          "Änglarna fanns före skapelsen men är skapade varelser",
+          "Andliga varelser som överträffar människan i kraft och intelligens",
+          "Två kategorier: Heliga/utvalda änglar och fallna/onda änglar",
+          "Gud skapade inte onda änglar - det förutsätter ett syndafall bland änglarna",
+          "Änglarna finns i härskaror om många tusen"
+        ],
+        "scripture_references": [
+          "Joh 14:6 - Jesus är vägen, sanningen och livet",
+          "Mark 8:38 - Heliga änglar",
+          "1 Tim 5:21 - Utvalda änglar",
+          "Matt 25:41 - Fallna änglar",
+          "Ef 6:11-12 - Onda andevarelser",
+          "Hes 28:11-19 - Syndafallet bland änglar",
+          "Upp 12:4, 7, 9 - Änglars fall",
+          "Luk 2:13 - En stor himmelsk här",
+          "Hebr 12:22 - Änglar i mång tusental",
+          "Matt 26:53 - Änglahärskaror tillgängliga för Jesus"
+        ],
+        "theological_emphasis": "Apologetisk ton mot modernism och sekularisering. Försvarar biblisk världsbild med övernaturlig dimension. Polemik mot teologer som förnekar änglar och demoner. Betonar kontinuitet med klassisk kristendom. Realistisk syn på andlig verklighet - både god och ond. Implikt stöd för andlig warfare teologi genom betoning på både goda och onda andemakter."
+      }
+    },
+    {
+      "chapter_number": 7,
+      "title": "Soteriologi - Läran om frälsningen",
+      "title_en": "Soteriology - The Doctrine of Salvation",
+      "pages": [78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95],
+      "page_count": 18,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-78.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-79.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-80.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-81.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-82.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-83.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-84.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-85.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-86.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-87.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-88.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-89.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-90.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-91.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-92.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-93.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-94.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-7-soteriologi-page-95.html"
+      ],
+      "themes": [
+        "Försoningen som uppenbarelsens centrum",
+        "Korset och Jesu ställföreträdande död",
+        "Olika försoningsläror genom historien",
+        "Personlig relation till Frälsaren"
+      ],
+      "content": {
+        "summary": "Soteriologin centrerar helt på Jesu försoningsverk på korset. Kapitlet betonar att försoningen är uppenbarelsens höjdpunkt och att hela Bibeln pekar mot korset. Medan olika försoningsläror existerar, betonas att det viktigaste inte är att förstå en särskild teori utan att älska Försonaren själv - Jesus.",
+        "key_points": [
+          "Försoningen är uppenbarelsens centrum och höjdpunkt",
+          "Allt i Bibeln strålar samman i Jesu ställföreträdande död på Golgata",
+          "Kristendomen är uppenbarelsereligion - uppenbarelsen handlar ytterst om försoningen",
+          "Olika aspekter av försoningen har betonats genom historien, ibland lett till stridigheter",
+          "Korset är inget 'mysterium' i betydelsen obegripligt - Anden kan ge förståelse",
+          "Bibelns 'mysterium' betyder hemlighet som nu blivit uppenbarad",
+          "Det personliga förhållandet till Jesus som Frälsare är centralt",
+          "Jesus är 'vår själs älskade, vår Försonare och vår Herre'"
+        ],
+        "scripture_references": [
+          "Ef 3:18-19 - Kristi kärlek överstiger kunskap",
+          "Joh 1:29 - Guds lamm som tar bort världens synd",
+          "Joh 3:16 - Gud älskade världen och utgav sin Son",
+          "Jes 53:4-5 - Herrens lidande tjänare",
+          "Kol 2:14-15 - Strukit ut skuldebrevet, avväpnat makter",
+          "Upp 1:18 - Har nycklarna till döden och helvetet",
+          "Rom 11:33 - Guds outgrundliga domar",
+          "Upp 13:8 - Lammet som blev slaktat"
+        ],
+        "theological_emphasis": "Stark emotionell och devotional betoning. Fokus inte primärt på systematisk försoningsteori utan på personlig kärlek till Jesus. Kristocentriskt med djup tillbedjan. Samtidigt polemik mot att göra korset till abstrakta 'mysterium' - Anden ger verklig förståelse."
+      }
+    },
+    {
+      "chapter_number": 8,
+      "title": "Ekklesiologi - Läran om församlingen",
+      "title_en": "Ecclesiology - The Doctrine of the Church",
+      "pages": [97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112],
+      "page_count": 16,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-97.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-98.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-99.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-100.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-101.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-102.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-103.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-104.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-105.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-106.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-107.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-108.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-109.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-110.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-111.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-8-ekklesiologi-laran-om-forsamlingen-page-112.html"
+      ],
+      "themes": [
+        "Församlingens tidsålder",
+        "Pingstdagen som församlingens födelse",
+        "Ekklesia - utkallad från världen",
+        "Församlingen i Guds eviga plan"
+      ],
+      "content": {
+        "summary": "Efter Jesu uppståndelse och himmelsfärd börjar en ny tidsålder - församlingens tidsålder, även kallad Andens tidsålder, nådens tidsålder och hedningarnas tidsålder. Församlingen fanns i Guds plan från evigheten men var en hemlighet till pingstdagen. Den föddes när 120 lärjungar blev uppfyllda med helig Ande och började tala i tungor. 'Ekklesia' betyder 'utkallad' - kallad ut från världen för att älska och tjäna Gud i Jesus Kristus. Församlingen inkluderar alla folk, inte bara judar.",
+        "key_points": [
+          "Församlingens tidsålder börjar efter Jesu uppståndelse och himmelsfärd",
+          "Också kallad: Andens tidsålder, nådens tidsålder, hedningarnas tidsålder",
+          "Församlingen fanns i Guds plan från evigheten (Ef 1:9)",
+          "Den var en hemlighet intill yttersta tiden (Ef 1:10)",
+          "Den var något nytt för lärjungarna (Apg 1:6-8)",
+          "Ett nytt steg i Guds uppenbarelseplan (Ef 3:6)",
+          "Inkluderar alla folk, inte bara det judiska folket (Ef 2:11-17, 3:6)",
+          "Församlingen föddes på pingstdagen när 120 lärjungar blev uppfyllda med Anden (Apg 2:1-4)",
+          "Jesus hade bara nämnt församlingen några få gånger (t.ex. Matt 16:18)",
+          "'Ekklesia' = 'utkallad från folket', tidigare använt om politisk folkförsamling",
+          "Guds ekklesia = utkallade från världen för att älska och tjäna Gud i Jesus",
+          "När Anden utgöts gavs uppenbarelsen om församlingen",
+          "Flera förändringar: Anden utgiven på nytt sätt, missionsbefall till alla nationer, apostlarna som ledarskap"
+        ],
+        "scripture_references": [
+          "Ef 1:9 - I Guds plan från evigheten",
+          "Ef 1:10 - Hemlighet intill yttersta tiden",
+          "Apg 1:6-8 - Något nytt för lärjungarna",
+          "Ef 3:6 - Nytt steg i uppenbarelsen",
+          "Ef 2:11-17, 3:6 - Alla folk inkluderade",
+          "Joh 14:26 - Anden utgjuten",
+          "Apg 2:17, 33 - Pingstdagens utgutelse",
+          "Apg 2:1-4 - 120 lärjungar, nya tungor",
+          "Matt 16:18 - Bygga min församling"
+        ],
+        "theological_emphasis": "Dispensationalistisk ecklesiologi - tydlig avgränsning mellan Israel och församlingen. Församlingen som något nytt i frälsningshistorien, inte fortsättning på Israel. Pingstdagen som avgörande vändpunkt. Starkt pneumatologiskt - Andens utgutelse definierande för församlingens natur. Universell omfattning - alla folk, inte etniskt begränsad. Mysterium teologi - församlingen var dold hemlighet som nu uppenbarats."
+      }
+    },
+    {
+      "chapter_number": 9,
+      "title": "Eskatologi - Läran om den yttersta tiden",
+      "title_en": "Eschatology - The Doctrine of Last Things",
+      "pages": [114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125],
+      "page_count": 12,
+      "file_urls": [
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-114.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-115.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-116.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-117.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-118.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-119.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-120.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-121.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-122.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-123.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-124.html",
+        "https://denomination-comparisons.github.io/LivetsOrd/chapter-9-eskatologi-laran-om-den-yttersta-tiden-page-125.html"
+      ],
+      "themes": [
+        "Linjär historiesyn vs cyklisk",
+        "Profetians bokstavliga uppfyllelse",
+        "Jesu profetior om Jerusalem",
+        "Gud som historiens Herre"
+      ],
+      "content": {
+        "summary": "Kapitlet etablerar en linjär historiesyn där Bibeln börjar med skapelsen och slutar med nya himlar och ny jord. Profetior ska tolkas bokstavligt och historiskt, inte allegoriskt eller symboliskt. Jesus profetior om Jerusalems förstörelse gick i bokstavlig uppfyllelse. Guds triumf kommer till slut trots hur hopplöst det ser ut.",
+        "key_points": [
+          "Bibelns tänkande är linjärt, inte cykliskt (som hinduismen)",
+          "Bibeln börjar med 'I begynnelsen' (1 Mos 1:1) och slutar med nya himlar/ny jord (Upp 21:1-2)",
+          "Gud är historiens Gud - styr, leder och ingriper ständigt",
+          "Profetior ska förstås bokstavligt, inte som allegorier eller symboler",
+          "Profetior ska inte 'förandligas' (spiritualiseras)",
+          "Jesu profetior om Jerusalem gick i bokstavlig uppfyllelse (Matt 23:38, 24:2, Luk 21:24)",
+          "Profetia = beskrivning av verkliga historiska skeenden som ännu ligger i framtiden",
+          "Bespottare kommer ifrågasätta profetiskt ord eftersom det dröjer (2 Petr 3:3-4)"
+        ],
+        "scripture_references": [
+          "1 Mos 1:1 - I begynnelsen skapade Gud",
+          "Upp 21:1-2 - Nya himlar och ny jord",
+          "Matt 23:38 - Ert hus står öde",
+          "Matt 24:2 - Inte sten på sten",
+          "Luk 21:24 - Jerusalem trampas ner av hedningar",
+          "2 Petr 3:3-4 - Bespottare i yttersta tiden"
+        ],
+        "theological_emphasis": "Stark betoning på bokstavlig profetiatillämpning. Polemik mot allegorisk eller symbolisk tolkning. Premillennial/dispensationalistisk ton med fokus på Israel och bokstavlig uppfyllelse av profetior. Optimistisk historiesyn där Gud triumferar fullständigt."
+      }
+    }
+  ],
+  "appendix": {
+    "title": "Tre fornkyrkliga trosbekännelser",
+    "title_en": "Three Early Church Creeds",
+    "pages": [127, 128, 129],
+    "page_count": 3,
+    "file_urls": [
+      "https://denomination-comparisons.github.io/LivetsOrd/appendix-tre-fornkyrkliga-trosbekannelser-page-127.html",
+      "https://denomination-comparisons.github.io/LivetsOrd/appendix-tre-fornkyrkliga-trosbekannelser-page-128.html",
+      "https://denomination-comparisons.github.io/LivetsOrd/appendix-tre-fornkyrkliga-trosbekannelser-page-129.html"
+    ],
+    "content": {
+      "apostolic_creed": {
+        "swedish_name": "Den apostoliska trosbekännelsen",
+        "key_elements": [
+          "Tro på Gud Fader allsmäktig",
+          "Jesus Kristus - avlad av Helige Ande, född av jungfrun Maria",
+          "Korsfäst under Pontius Pilatus",
+          "Nederstigen till dödsriket, uppstånden tredje dagen",
+          "Sittande på Faderns högra sida",
+          "Återkomst för att döma levande och döda",
+          "Tro på den Helige Ande",
+          "En helig allmännelig kyrka",
+          "Syndernas förlåtelse, de dödas uppståndelse, evigt liv"
+        ]
+      },
+      "nicene_creed": {
+        "swedish_name": "Den nicänska trosbekännelsen",
+        "key_elements": [
+          "En enda Gud, allsmäktig Fader",
+          "Jesus Kristus - Guds enfödde Son, född före all tid",
+          "Gud av Gud, ljus av ljus, sann Gud av sann Gud",
+          "Född och icke skapad, samma väsen som Fadern",
+          "Genom honom är allt skapat",
+          "Tagit mandom genom Helige Ande av jungfrun Maria",
+          "Korsfäst under Pontius Pilatus",
+          "Uppstånden tredje dagen efter skrifterna",
+          "Återkomst i härlighet",
+          "Helige Ande - Herren och livgivaren",
+          "Utgår av Fadern och Sonen (filioque)",
+          "En enda helig allmännelig och apostolisk kyrka",
+          "Ett dop till syndernas förlåtelse"
+        ]
+      },
+      "athanasian_creed": {
+        "swedish_name": "Den athanasianska trosbekännelsen",
+        "note": "Avfattad mot arianerna",
+        "key_elements": [
+          "Allmänneliga kristna tron nödvändig för salighet",
+          "En enda Gud i tre personer, tre personer i en enda gudom",
+          "Varken sammanblanda personerna eller söndra väsendet",
+          "Tre distinkte personer: Fader, Son, Helig Ande",
+          "En gudom - lika i ära, evigt majestät",
+          "Alla tre: oskapade, omätliga, eviga, allsmäktiga",
+          "Inte tre eviga/oskapade/omätliga/allsmäktiga - utan EN",
+          "Fadern av ingen gjord eller skapad eller född",
+          "Sonen av Fadern allena - inte gjord/skapad - utan FÖDD",
+          "Helige Ande av Fadern och Sonen - inte gjord/skapad/född - utan UTGÅENDE (filioque)",
+          "Alla tre personer lika eviga och lika stora",
+          "KRISTOLOGI: Jesus Kristus är i lika mån Gud och människa",
+          "Gud som född av Faderns väsen före all tid",
+          "Människa som född av moderns väsen i tiden",
+          "Helt och fullt Gud OCH helt och fullt människa",
+          "Jämlik Fadern efter gudomlig natur, ringare efter mänsklig natur",
+          "En enda Kristus - inte två",
+          "Gudomlig natur inte förvandlad till mänsklig",
+          "Mänsklig natur antagen av Gud",
+          "Naturerna inte sammanblandade - personen bildar enheten",
+          "Som själ och kropp bildar en människa, så Gud och människa en Kristus",
+          "Kristus lidit, nedstigit till dödsriket, uppstått, uppstigit",
+          "Sitter på Faderns högra sida, ska återkomma för att döma",
+          "Alla människor uppstår med sina kroppar",
+          "Avlägga räkenskap för gärningar",
+          "De som gjort gott - evigt liv; de som gjort ont - evig eld"
+        ],
+        "theological_significance": "Mycket detaljerad treenighetslära och kristologi. Balanserar Guds enhet och trehet. Tydlig mot arianismen (Sonen skapad) och modalismen (en person i tre skepnader). Bekräftar både Jesu fullständiga gudomlighet och fullständiga människoblivande. Chalcedonsk kristologi - två naturer utan sammanblandning. Inkluderar filioque (Anden utgår från Fadern OCH Sonen). Soteriologisk ram - tro nödvändig för salighet."
+      }
+    },
+    "theological_significance": "Inkluderandet av de fornkyrkliga trosbekännelserna visar att Livets Ord vill förankra sin lära i historisk ortodox kristendom. Särskilt nicänska bekännelsen med 'samma väsen som Fadern' etablerar tydlig anti-ariansk ståndpunkt och bekräftar klassisk treenighetsläro."
+  },
+  "needed_files": [],
+  "completion_status": {
+    "all_chapters_analyzed": true,
+    "all_appendix_complete": true,
+    "total_pages_documented": 129,
+    "content_coverage": "100%",
+    "last_updated": "2025-11-05"
+  },
+  "comparative_analysis": {
+    "distinctive_emphases": [
+      "Stark karismatisk pneumatologi - Anden som aktiv person",
+      "Bokstavlig profetiatillämpning - polemik mot allegorisering",
+      "Devotional kristologi - personlig kärlek till Jesus centralt",
+      "Uppenbarelsereligion - kunskap genom övernaturlig förmedling",
+      "Linjär historiesyn med eschatologiskt fokus"
+    ],
+    "orthodox_connections": [
+      "Använder fornkyrkliga trosbekännelser",
+      "Klassisk treenighetslära",
+      "Bekänner Jesu gudomlighet och människoblivande",
+      "Står i historisk kristen tradition"
+    ],
+    "comparison_notes": {
+      "vs_lutheran": "Mer karismatisk betoning på Andens gåvor och manifestationer. Luthersk tradition mer sakramental.",
+      "vs_reformed": "Liknande fokus på uppenbarelse och Skriftens auktoritet. Reformerta mer systematiskt-teologiska, mindre karismatiska.",
+      "vs_catholic": "Båda värdesätter historisk tradition (trosbekännelser), men Livets Ord mer fokus på direkt Andupplevelse.",
+      "vs_pentecostal": "Mycket nära pingstteologi med karismatisk pneumatologi och bokstavlig bibeltolkning."
+    }
+  }
+}
