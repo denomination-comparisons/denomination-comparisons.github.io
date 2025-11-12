@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Analyses – Fallback Prompt Builder</title>
+<style>
+  body {
+    font-family: system-ui, sans-serif;
+    background: #fafafa;
+    color: #222;
+    padding: 1.5rem;
+    line-height: 1.5;
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  p { max-width: 60ch; }
+  textarea {
+    width: 100%;
+    height: 60vh;
+    padding: 1rem;
+    font-family: ui-monospace, monospace;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0.6rem;
+    margin-top: 1rem;
+    box-shadow: 0 0 4px #ddd inset;
+  }
+  button {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1rem;
+    border: none;
+    background: #0059b3;
+    color: #fff;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  }
+  button:hover { background: #004a94; }
+</style>
+</head>
+<body>
+
+<h1>Fallback Prompt Generator (index2.html)</h1>
+<p>
+This tool compiles excerpts from all <code>.md</code>, <code>.json</code>, and <code>.txt</code> files in
+<code>Swedish/ecumenic/skavlan-2025-10-16/ai-analyses/</code> into one AI-agnostic prompt (~30 000 chars max).
+You can copy the resulting text below and paste it into any AI chat to provide context.
+</p>
+
+<button id="fetchBtn">Fetch and Compile Prompt</button>
+<textarea id="output" placeholder="The compiled prompt will appear here..." readonly></textarea>
+
+<script>
+const owner = "denomination-comparisons";
+const repo = "denomination-comparisons.github.io";
+const folderPath = "Swedish/ecumenic/skavlan-2025-10-16/ai-analyses";
+const output = document.getElementById("output");
+const fetchBtn = document.getElementById("fetchBtn");
+
+fetchBtn.onclick = async () => {
+  output.value = "Fetching file list...";
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}`);
+    const files = await res.json();
+    const validFiles = files.filter(f => /\.(md|json|txt)$/i.test(f.name));
+
+    let combined = `# AI Context Compilation
+This prompt compiles partial analyses from:
+https://denomination-comparisons.github.io/Swedish/ecumenic/skavlan-2025-10-16/
+and its subfolder:
+https://denomination-comparisons.github.io/Swedish/ecumenic/skavlan-2025-10-16/ai-analyses/
+
+These excerpts summarize cross-AI analyses (e.g., ChatGPT, Claude, Gemini, Grok) of the Skavlan & Sverige episode “Sveriges lataste buddhist”, focusing on Swedish religious attitudes.
+---
+`;
+
+    const MAX_TOTAL = 30000;
+    const MAX_PER_FILE = 5000;
+    let totalLength = combined.length;
+
+    for (const f of validFiles) {
+      const resp = await fetch(f.download_url);
+      let text = await resp.text();
+
+      // Trim per file
+      if (text.length > MAX_PER_FILE) {
+        text = text.slice(0, MAX_PER_FILE) + "\n[...excerpt truncated...]\n";
+      }
+
+      combined += `\n\n====================\nFILE: ${f.name}\n====================\n\n${text}\n`;
+
+      totalLength = combined.length;
+      if (totalLength > MAX_TOTAL) {
+        combined = combined.slice(0, MAX_TOTAL) + "\n[...total excerpt limit reached...]\n";
+        break;
+      }
+    }
+
+    combined += `\n\n---\nAt this point, the AI reading this should ask:\n“What follow up questions do you have about this material?”`;
+
+    output.value = combined;
+  } catch (err) {
+    console.error(err);
+    output.value = "Error fetching or compiling files.";
+  }
+};
+</script>
+
+</body>
+</html>
+
