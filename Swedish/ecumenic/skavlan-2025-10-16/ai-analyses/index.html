@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Analyses – Skavlan & Sverige (2025-10-16)</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #222;
+    }
+    header {
+      background: #20232a;
+      color: #fff;
+      padding: 1rem 1.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+    main {
+      display: flex;
+      flex-direction: row;
+      height: calc(100vh - 70px);
+    }
+    nav {
+      width: 280px;
+      background: #f0f0f0;
+      border-right: 1px solid #ddd;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    nav h2 {
+      font-size: 1.1rem;
+      margin-top: 0;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    li a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    li a:hover {
+      text-decoration: underline;
+    }
+    article {
+      flex: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+    }
+    pre {
+      background: #fff;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      overflow-x: auto;
+    }
+    .loading {
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>AI Analyses – Skavlan & Sverige (2025-10-16)</h1>
+  </header>
+  <main>
+    <nav>
+      <h2>Available Analyses</h2>
+      <ul id="fileList"></ul>
+    </nav>
+    <article id="content">
+      <p class="loading">Loading file list…</p>
+    </article>
+  </main>
+
+  <script type="module">
+    const folder = "./";
+    const content = document.getElementById("content");
+    const list = document.getElementById("fileList");
+
+    // GitHub Pages does not list directories automatically.
+    // So, provide a manual file list if needed, OR infer via a JSON manifest later.
+    const supportedExtensions = [".md", ".json", ".txt"];
+
+    async function loadFileList() {
+      try {
+        const res = await fetch(folder);
+        const text = await res.text();
+
+        // Try to extract file names from the HTML directory listing
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, "text/html");
+        const links = [...doc.querySelectorAll("a")]
+          .map(a => a.getAttribute("href"))
+          .filter(href => supportedExtensions.some(ext => href.endsWith(ext)))
+          .map(name => decodeURIComponent(name));
+
+        if (links.length === 0) {
+          content.innerHTML = "<p>No .md, .json, or .txt files found.</p>";
+        } else {
+          list.innerHTML = links
+            .map(
+              name =>
+                `<li><a href="#" data-file="${name}">${name}</a></li>`
+            )
+            .join("");
+          content.innerHTML = "<p>Select a file to view its contents.</p>";
+        }
+
+        list.addEventListener("click", async e => {
+          if (e.target.matches("a[data-file]")) {
+            e.preventDefault();
+            const fileName = e.target.dataset.file;
+            await loadFile(fileName);
+          }
+        });
+      } catch (err) {
+        content.innerHTML =
+          "<p>⚠️ Could not list files. GitHub Pages may not expose folder index. You can hardcode the file list manually in the script.</p>";
+        console.error(err);
+      }
+    }
+
+    async function loadFile(fileName) {
+      content.innerHTML = `<p class="loading">Loading <code>${fileName}</code> …</p>`;
+      try {
+        const res = await fetch(folder + fileName);
+        if (!res.ok) throw new Error(res.status);
+        const text = await res.text();
+        if (fileName.endsWith(".json")) {
+          const obj = JSON.parse(text);
+          content.innerHTML =
+            "<pre>" + JSON.stringify(obj, null, 2) + "</pre>";
+        } else if (fileName.endsWith(".md")) {
+          // Render markdown lightly
+          const html = text
+            .replace(/^###### (.*)$/gm, "<h6>$1</h6>")
+            .replace(/^##### (.*)$/gm, "<h5>$1</h5>")
+            .replace(/^#### (.*)$/gm, "<h4>$1</h4>")
+            .replace(/^### (.*)$/gm, "<h3>$1</h3>")
+            .replace(/^## (.*)$/gm, "<h2>$1</h2>")
+            .replace(/^# (.*)$/gm, "<h1>$1</h1>")
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+            .replace(/\*(.*?)\*/g, "<em>$1</em>")
+            .replace(/`(.*?)`/g, "<code>$1</code>")
+            .replace(/\n/g, "<br>");
+          content.innerHTML = `<article>${html}</article>`;
+        } else {
+          content.innerHTML = `<pre>${text}</pre>`;
+        }
+      } catch (err) {
+        content.innerHTML = `<p>⚠️ Failed to load <code>${fileName}</code>.</p>`;
+        console.error(err);
+      }
+    }
+
+    loadFileList();
+  </script>
+</body>
+</html>
