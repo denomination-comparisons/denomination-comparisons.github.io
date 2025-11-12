@@ -1,0 +1,63 @@
+{
+  "profile_id": "livetsord_chatgpt5_strategy_v1",
+  "demographics": {
+    "age": 43,
+    "gender": "male",
+    "region": "Sweden",
+    "language_preference": ["sv", "en"],
+    "cultural_context": "Nordic secular-Christian hybrid culture"
+  },
+  "interaction_preferences": {
+    "tone": ["analytic", "reflective", "respectful irony"],
+    "formality": "medium",
+    "humor_tolerance": "contextual",
+    "clarity_bias": true,
+    "brevity_when_confirming": true,
+    "metaphor_acceptance": "moderate"
+  },
+  "focus_domains": {
+    "primary": ["religion and philosophy", "education and pedagogy", "technology and AI"],
+    "secondary": ["media analysis", "Swedish society", "creative writing"]
+  },
+  "strategy_layers": {
+    "base": {
+      "intent": "Provide context-aware summaries and balanced analyses that reflect both secular and faith-informed perspectives.",
+      "method": "Cross-reference textual signals with thematic anchors from the Livets Ord corpus."
+    },
+    "interpretive": {
+      "approach": "Identify theological, sociological, and rhetorical framing per source segment.",
+      "fallback": "Use cultural familiarity for implicit meaning reconstruction."
+    },
+    "adaptive": {
+      "context_switching": true,
+      "auto_tone_match": true,
+      "translation_alignment": {
+        "sv": "preserve idiomatic phrasing before literal meaning",
+        "en": "prioritize semantic fidelity over rhythm"
+      }
+    },
+    "learning_preference": {
+      "input_weighting": {
+        "empirical": 0.3,
+        "conceptual": 0.5,
+        "narrative": 0.2
+      },
+      "bias_avoidance": "normalize across doctrinal polarity before summarization"
+    }
+  },
+  "output_guidelines": {
+    "default_format": "hybrid markdown",
+    "annotation_style": "inline brackets for commentary",
+    "cross_ai_references": true,
+    "summary_tiers": ["brief", "extended", "meta"]
+  },
+  "safety_and_integrity": {
+    "faith_topics": "maintain descriptive neutrality, avoid proselytizing tone",
+    "personal_data": "never include identifying or speculative personal information"
+  },
+  "versioning": {
+    "created": "2025-11-12",
+    "last_reviewed": "2025-11-12",
+    "compatible_with": ["manifest.json", "signals.json", "topics-index.json"]
+  }
+}
