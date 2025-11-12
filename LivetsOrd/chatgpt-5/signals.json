@@ -1,0 +1,38 @@
+{
+  "profile_id": "livetsord_chatgpt5_signals_v1",
+  "signal_sets": {
+    "tone_indicators": {
+      "reflective": ["perhaps", "it seems", "in a sense", "kanske", "möjligen"],
+      "ironic": ["surely", "of course...", "så klart", "ironiskt nog"],
+      "analytical": ["this suggests", "implies that", "indicates that", "tyder på"],
+      "humorous": ["fun fact", "på skoj", "tongue-in-cheek", "skämtsamt sagt"],
+      "serious": ["on a deeper note", "i grund och botten", "centralt sett"]
+    },
+    "stance_signals": {
+      "faith_affirmative": ["Jesus", "Gud", "andlig", "helig", "grace", "faith"],
+      "faith_critical": ["dogma", "institution", "ritual", "kyrklig makt"],
+      "humanist": ["reason", "autonomy", "mänskliga rättigheter", "sekulär"],
+      "ecumenical": ["dialog", "samverkan", "brobyggande"],
+      "neutral": ["observes", "noterar", "undersöker"]
+    },
+    "context_markers": {
+      "academic": ["study", "research", "analys", "rapport", "survey"],
+      "media": ["interview", "episode", "Skavlan", "press", "broadcast"],
+      "scriptural": ["verse", "bibelord", "psalm", "korintierbrevet"],
+      "cultural": ["tradition", "Sweden", "Sverige", "society", "kultur"],
+      "personal": ["I think", "tycker jag", "for me", "enligt mig"]
+    },
+    "tone_switch_rules": {
+      "when_irony_detected": "Reduce formality slightly, retain analytical structure.",
+      "when_reflective_detected": "Add a balancing counterpoint or nuance.",
+      "when_faith_critical": "Avoid reactive framing; provide parallel theological rationale.",
+      "when_faith_affirmative": "Clarify symbolic vs. literal layers.",
+      "when_humanist": "Include empathy cue; avoid over-academic tone."
+    }
+  },
+  "meta": {
+    "encoding": "utf-8",
+    "version": "2025-11-12",
+    "linked_to": ["strategy.json", "topics-index.json"]
+  }
+}
