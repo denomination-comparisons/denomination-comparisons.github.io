@@ -1,169 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Analyses – Skavlan & Sverige (2025-10-16)</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fafafa;
-      color: #222;
-    }
-    header {
-      background: #20232a;
-      color: #fff;
-      padding: 1rem 1.5rem;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-    }
-    main {
-      display: flex;
-      flex-direction: row;
-      height: calc(100vh - 70px);
-    }
-    nav {
-      width: 280px;
-      background: #f0f0f0;
-      border-right: 1px solid #ddd;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    nav h2 {
-      font-size: 1.1rem;
-      margin-top: 0;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
-    li a {
-      color: #0066cc;
-      text-decoration: none;
-    }
-    li a:hover {
-      text-decoration: underline;
-    }
-    article {
-      flex: 1;
-      padding: 1.5rem;
-      overflow-y: auto;
-    }
-    pre {
-      background: #fff;
-      padding: 1rem;
-      border: 1px solid #ddd;
-      overflow-x: auto;
-    }
-    .loading {
-      color: #777;
-      font-style: italic;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Analyses Index</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; background: #fafafa; color: #222; }
+  h1 { font-size: 1.6rem; }
+  ul { list-style: none; padding: 0; }
+  li { margin: 0.4rem 0; }
+  a { color: #0059b3; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  pre, article { background: #fff; padding: 1rem; border-radius: 0.6rem; box-shadow: 0 0 4px #ccc; margin-top: 1rem; overflow-x: auto; }
+  #content { margin-top: 2rem; }
+</style>
 </head>
 <body>
-  <header>
-    <h1>AI Analyses – Skavlan & Sverige (2025-10-16)</h1>
-  </header>
-  <main>
-    <nav>
-      <h2>Available Analyses</h2>
-      <ul id="fileList"></ul>
-    </nav>
-    <article id="content">
-      <p class="loading">Loading file list…</p>
-    </article>
-  </main>
+<h1>AI Analyses</h1>
+<p>Files from <code>Swedish/ecumenic/skavlan-2025-10-16/ai-analyses/</code></p>
+<ul id="file-list"><li>Loading files…</li></ul>
 
-  <script type="module">
-    const folder = "./";
-    const content = document.getElementById("content");
-    const list = document.getElementById("fileList");
+<div id="content"><em>Select a file to view its content.</em></div>
 
-    // GitHub Pages does not list directories automatically.
-    // So, provide a manual file list if needed, OR infer via a JSON manifest later.
-    const supportedExtensions = [".md", ".json", ".txt"];
+<script>
+const owner = "denomination-comparisons";
+const repo = "denomination-comparisons.github.io";
+const folderPath = "Swedish/ecumenic/skavlan-2025-10-16/ai-analyses";
 
-    async function loadFileList() {
-      try {
-        const res = await fetch(folder);
-        const text = await res.text();
+const fileList = document.getElementById("file-list");
+const contentDiv = document.getElementById("content");
 
-        // Try to extract file names from the HTML directory listing
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
-        const links = [...doc.querySelectorAll("a")]
-          .map(a => a.getAttribute("href"))
-          .filter(href => supportedExtensions.some(ext => href.endsWith(ext)))
-          .map(name => decodeURIComponent(name));
-
-        if (links.length === 0) {
-          content.innerHTML = "<p>No .md, .json, or .txt files found.</p>";
-        } else {
-          list.innerHTML = links
-            .map(
-              name =>
-                `<li><a href="#" data-file="${name}">${name}</a></li>`
-            )
-            .join("");
-          content.innerHTML = "<p>Select a file to view its contents.</p>";
-        }
-
-        list.addEventListener("click", async e => {
-          if (e.target.matches("a[data-file]")) {
-            e.preventDefault();
-            const fileName = e.target.dataset.file;
-            await loadFile(fileName);
-          }
-        });
-      } catch (err) {
-        content.innerHTML =
-          "<p>⚠️ Could not list files. GitHub Pages may not expose folder index. You can hardcode the file list manually in the script.</p>";
-        console.error(err);
-      }
+fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${folderPath}`)
+  .then(res => res.json())
+  .then(files => {
+    const validFiles = files.filter(f => /\.(md|json|txt)$/i.test(f.name));
+    if (validFiles.length === 0) {
+      fileList.innerHTML = "<li>No .md, .json, or .txt files found.</li>";
+      return;
     }
+    fileList.innerHTML = "";
+    validFiles.forEach(f => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = "#";
+      a.textContent = f.name;
+      a.onclick = async (e) => {
+        e.preventDefault();
+        const rawUrl = f.download_url;
+        const resp = await fetch(rawUrl);
+        const text = await resp.text();
+        contentDiv.innerHTML = `<h2>${f.name}</h2><article>${render(text, f.name)}</article>`;
+      };
+      li.appendChild(a);
+      fileList.appendChild(li);
+    });
+  })
+  .catch(err => {
+    console.error(err);
+    fileList.innerHTML = "<li>Error loading file list.</li>";
+  });
 
-    async function loadFile(fileName) {
-      content.innerHTML = `<p class="loading">Loading <code>${fileName}</code> …</p>`;
-      try {
-        const res = await fetch(folder + fileName);
-        if (!res.ok) throw new Error(res.status);
-        const text = await res.text();
-        if (fileName.endsWith(".json")) {
-          const obj = JSON.parse(text);
-          content.innerHTML =
-            "<pre>" + JSON.stringify(obj, null, 2) + "</pre>";
-        } else if (fileName.endsWith(".md")) {
-          // Render markdown lightly
-          const html = text
-            .replace(/^###### (.*)$/gm, "<h6>$1</h6>")
-            .replace(/^##### (.*)$/gm, "<h5>$1</h5>")
-            .replace(/^#### (.*)$/gm, "<h4>$1</h4>")
-            .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-            .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-            .replace(/^# (.*)$/gm, "<h1>$1</h1>")
-            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-            .replace(/\*(.*?)\*/g, "<em>$1</em>")
-            .replace(/`(.*?)`/g, "<code>$1</code>")
-            .replace(/\n/g, "<br>");
-          content.innerHTML = `<article>${html}</article>`;
-        } else {
-          content.innerHTML = `<pre>${text}</pre>`;
-        }
-      } catch (err) {
-        content.innerHTML = `<p>⚠️ Failed to load <code>${fileName}</code>.</p>`;
-        console.error(err);
-      }
-    }
-
-    loadFileList();
-  </script>
+function render(text, filename) {
+  if (filename.endsWith(".json")) {
+    try { return "<pre>" + JSON.stringify(JSON.parse(text), null, 2) + "</pre>"; }
+    catch { return "<pre>" + text + "</pre>"; }
+  }
+  if (filename.endsWith(".md")) {
+    // Simple Markdown render (minimal)
+    return text
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/gim, '<b>$1</b>')
+      .replace(/\*(.*?)\*/gim, '<i>$1</i>')
+      .replace(/\n/g, '<br>');
+  }
+  return "<pre>" + text + "</pre>";
+}
+</script>
 </body>
 </html>
