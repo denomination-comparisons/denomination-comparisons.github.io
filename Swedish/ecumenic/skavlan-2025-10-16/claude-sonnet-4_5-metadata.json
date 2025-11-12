@@ -1,0 +1,193 @@
+{
+  "episode": {
+    "title": "Sveriges lataste buddhist",
+    "show": "Skavlan & Sverige",
+    "air_date": "2025-10-16",
+    "segment": {
+      "start_time": "37:50",
+      "end_time": "43:00",
+      "duration_minutes": 5.17
+    }
+  },
+  "participants": [
+    {
+      "name": "Fredrik Skavlan",
+      "role": "Host",
+      "nationality": "Norwegian/Swedish"
+    },
+    {
+      "name": "Claes Malmberg",
+      "role": "Guest - Comedian/Actor",
+      "perspective": "Buddhist-identified (humorously)"
+    },
+    {
+      "name": "Faysa Idle",
+      "role": "Guest - Comedian",
+      "perspective": "Cautious commentator"
+    },
+    {
+      "name": "Birgitta Ed",
+      "role": "Guest - Church Representative",
+      "perspective": "Pro-church, defends ceremonial participation"
+    },
+    {
+      "name": "Christer Sturmark",
+      "role": "Guest - Humanist/Secular Representative",
+      "perspective": "Secular humanist, promotes non-religious alternatives"
+    }
+  ],
+  "poll_results": {
+    "alternative_religion_preference": {
+      "timestamp": "38:10",
+      "image": "image1.png",
+      "question_swedish": "Om du var tvungen att välja en annan trosriktning än din egen - vilken skulle du välja?",
+      "question_english": "If you had to choose another faith than your own - which would you choose?",
+      "results": {
+        "Buddhism": 41,
+        "Non-believer (agnostic/atheist)": 31,
+        "Christianity": 16,
+        "Judaism": 8,
+        "Hinduism": 3,
+        "Islam": 2
+      },
+      "units": "percent",
+      "discussion_notes": "High Buddhist preference jokingly attributed to 'Malmberg-effekten'"
+    },
+    "church_usage_overall": {
+      "timestamp": "39:00",
+      "image": "image2.png",
+      "question_swedish": "Använder du kyrkan?",
+      "question_english": "Do you use the church?",
+      "results": {
+        "Yes": 78,
+        "No": 22
+      },
+      "units": "percent"
+    },
+    "church_usage_breakdown": {
+      "timestamp": "39:20",
+      "image": "image3.png",
+      "question_swedish": "Hur använder du kyrkan?",
+      "question_english": "How do you use the church?",
+      "results": {
+        "Life ceremonies (baptism, wedding, funeral)": 82,
+        "Prayer/worship services": 18
+      },
+      "units": "percent",
+      "discussion_notes": "Birgitta Ed argues that ceremonies ARE church services"
+    },
+    "jesus_belief_by_age": {
+      "timestamp": "41:30",
+      "image": "image4.png",
+      "question_swedish": "Anser du att Jesus är Guds son?",
+      "question_english": "Do you think Jesus is God's son?",
+      "results": {
+        "Under 30 years": 44,
+        "30-49 years": 30,
+        "50+ years": 34
+      },
+      "units": "percent",
+      "response_type": "Yes",
+      "discussion_notes": "Surprisingly high among youth; Sturmark questions if they understood the question"
+    },
+    "supernatural_beliefs_by_gender": {
+      "timestamp": "42:45",
+      "image": "image5.png",
+      "question_swedish": "Hur många tror på följande:",
+      "question_english": "How many believe in the following:",
+      "results": {
+        "Supernatural abilities": {
+          "women": 37,
+          "men": 18
+        },
+        "Ghosts/spirits": {
+          "women": 35,
+          "men": 17
+        },
+        "Hell": {
+          "women": 8,
+          "men": 8
+        }
+      },
+      "units": "percent",
+      "discussion_notes": "Jesus faces 'tough competition'; 'no upside to hell'"
+    }
+  },
+  "key_statistics_mentioned": {
+    "swedish_church_attrition": {
+      "description": "People leaving vs joining Swedish Church per month",
+      "ratio": "5:1",
+      "detail": "Five times more people leave than join",
+      "speaker": "Christer Sturmark"
+    }
+  },
+  "themes": [
+    "Secularization of Swedish society",
+    "Ceremonial vs. devotional religious practice",
+    "Alternative spirituality (Buddhism, supernatural beliefs)",
+    "Generational differences in belief",
+    "Gender differences in supernatural beliefs",
+    "Secular alternatives to religious traditions",
+    "The role of ethical education separate from religion"
+  ],
+  "dialogue_highlights": [
+    {
+      "speaker": "Claes Malmberg",
+      "quote_swedish": "Det är Malmberg-effekten. Det är självklart. Jag tar ofta åt mig äran för saker som jag inte har inblandning i.",
+      "quote_english": "It's the Malmberg effect. Obviously. I often take credit for things I have nothing to do with.",
+      "context": "Responding to Buddhism being most popular alternative religion"
+    },
+    {
+      "speaker": "Faysa Idle",
+      "quote_swedish": "Alltså... Jag vet inte vad jag vill säga. Jag kanske inte får nåt jobb mer.",
+      "quote_english": "Well... I don't know what I want to say. Maybe I won't get any more work.",
+      "context": "Asked if Swedes pray enough - diplomatically avoiding controversy"
+    },
+    {
+      "speaker": "Christer Sturmark",
+      "quote_swedish": "Det är superviktigt att unga och gamla förstår. Den växande generationen förstår att man måste ha en reflekterad, existentiell och etisk hållning. Det har inget med religion att göra.",
+      "quote_english": "It's super important that young and old understand. The growing generation understands that one must have a reflected, existential and ethical stance. It has nothing to do with religion.",
+      "context": "Arguing for secular humanist education"
+    },
+    {
+      "speaker": "Christer Sturmark",
+      "quote_swedish": "Det är bäst att gå på ett humanistiskt konfirmationsläger – men bättre att gå på ett kristet konfirmationsläger än inget alls.",
+      "quote_english": "It's best to go to a humanist confirmation camp - but better to go to a Christian confirmation camp than none at all.",
+      "context": "Discussing youth ethical education options"
+    },
+    {
+      "speaker": "Birgitta Ed",
+      "quote_swedish": "Det är det fina med det här. Jag tycker att det är fantastiskt att 82 % av dem som säger att man använder en kyrka, svarar dop, bröllop och begravning.",
+      "quote_english": "That's what's nice about this. I think it's fantastic that 82% of those who say they use a church answer baptism, wedding and funeral.",
+      "context": "Defending ceremonial church participation as legitimate engagement"
+    }
+  ],
+  "visual_presentation": {
+    "style": "Hand-drawn bar graphs with cartoon elements",
+    "tone": "Humorous, accessible",
+    "elements": [
+      "Arrows",
+      "Church icons",
+      "Buddha figure",
+      "Gender symbols (♀/♂)",
+      "Cartoon character illustrations"
+    ],
+    "purpose": "Make statistical data engaging for television audience"
+  },
+  "metadata": {
+    "source_url": "https://denomination-comparisons.github.io/Swedish/ecumenic/skavlan-2025-10-16/",
+    "files_available": [
+      "transcript.html",
+      "transcript.json",
+      "image1.png",
+      "image2.png",
+      "image3.png",
+      "image4.png",
+      "image5.png"
+    ],
+    "language": "Swedish",
+    "content_type": "Religious/spiritual discussion with poll results",
+    "parsing_date": "2025-11-12",
+    "parsed_by": "Claude (Anthropic)"
+  }
+}
