@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Timeline - Interactive Gospel Comparisons</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #95a5a6;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .versions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .version-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border: 3px solid transparent;
+        }
+
+        .version-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .version-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .version-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .version-desc {
+            color: #7f8c8d;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 15px;
+        }
+
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            color: #95a5a6;
+            font-size: 0.9em;
+            padding-top: 30px;
+            border-top: 2px solid #ecf0f1;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #7f8c8d;
+        }
+
+        .feature-icon {
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            .versions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Bible Timeline Project 📖</h1>
+            <p class="subtitle">Interactive Parallel Gospel Comparisons</p>
+            <p class="description">
+                Explore the life and ministry of Jesus Christ through parallel timelines of the four Gospels. 
+                Compare different implementations and visualization approaches created by various AI assistants.
+            </p>
+        </header>
+
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">⏱️</span>
+                <span>Chronological Views</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔗</span>
+                <span>Parallel Accounts</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📱</span>
+                <span>Interactive Design</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🎨</span>
+                <span>Multiple Versions</span>
+            </div>
+        </div>
+
+        <div class="versions-grid">
+            <a href="chatgpt-5/Gospels-timelines.html" class="version-card">
+                <div class="version-icon">🤖</div>
+                <div class="version-title">ChatGPT-5 Version</div>
+                <div class="version-desc">
+                    Implementation created by ChatGPT-5 with unique design and interaction patterns
+                </div>
+                <span class="badge">View Timeline</span>
+            </a>
+
+            <a href="claude/Parallel-Gospel-Timelines.html" class="version-card">
+                <div class="version-icon">🧠</div>
+                <div class="version-title">Claude Version</div>
+                <div class="version-desc">
+                    Anthropic Claude's approach with parallel horizontal timelines and modal event details
+                </div>
+                <span class="badge">View Timeline</span>
+            </a>
+
+            <a href="gemini/gospel_timeline.html" class="version-card">
+                <div class="version-icon">✨</div>
+                <div class="version-title">Gemini Version</div>
+                <div class="version-desc">
+                    Google Gemini's interpretation featuring its unique visualization style
+                </div>
+                <span class="badge">View Timeline</span>
+            </a>
+
+            <a href="gr/index.html" class="version-card">
+                <div class="version-icon">🌟</div>
+                <div class="version-title">GR Version</div>
+                <div class="version-desc">
+                    Alternative implementation with distinct design philosophy and features
+                </div>
+                <span class="badge">View Timeline</span>
+            </a>
+        </div>
+
+        <footer>
+            <p><strong>About This Project</strong></p>
+            <p style="margin-top: 10px;">
+                This project compares different AI approaches to visualizing Gospel timelines. 
+                Each version offers unique perspectives on presenting biblical narratives.
+            </p>
+            <p style="margin-top: 20px;">
+                <a href="https://github.com/denomination-comparisons/Bible-timeline" 
+                   style="color: #667eea; text-decoration: none;">
+                    View on GitHub →
+                </a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
