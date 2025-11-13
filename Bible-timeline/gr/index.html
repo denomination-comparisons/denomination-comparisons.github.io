@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Timelines of the Four Gospels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .container {
+            width: 1920px;
+            max-width: 100%;
+            height: 1080px;
+            overflow-y: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timelines {
+            display: flex;
+            height: 100%;
+            position: relative;
+        }
+
+        .timeline {
+            flex: 1;
+            border-left: 2px solid #333;
+            padding: 10px;
+            position: relative;
+        }
+
+        .timeline h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .event {
+            position: absolute;
+            left: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 80%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        .event h3 {
+            margin: 0 0 5px;
+        }
+
+        .event p {
+            margin: 0 0 5px;
+            font-size: 0.9em;
+        }
+
+        .media {
+            margin-top: 10px;
+        }
+
+        .media img, .media video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .media audio {
+            width: 100%;
+        }
+
+        /* Buttons for different viewpoints */
+        .viewpoints {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .viewpoints button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* Hide events initially, show based on viewpoint */
+        .event {
+            display: none;
+        }
+
+        .event.view1 {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="viewpoints">
+            <button onclick="switchView('view1')">Harmony View 1 (Standard Chronology)</button>
+            <button onclick="switchView('view2')">Harmony View 2 (Alternative Order)</button>
+            <!-- Add more buttons for additional viewpoints as needed -->
+        </div>
+        <div class="timelines">
+            <div class="timeline" id="matthew">
+                <h2>Matthew</h2>
+                <!-- Events will be positioned relatively from 0% to 100% top -->
+            </div>
+            <div class="timeline" id="mark">
+                <h2>Mark</h2>
+            </div>
+            <div class="timeline" id="luke">
+                <h2>Luke</h2>
+            </div>
+            <div class="timeline" id="john">
+                <h2>John</h2>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure: array of events, each with description, gospels references, relative position (0-100), media, and viewpoints
+        const events = [
+            {
+                id: 1,
+                description: "Genealogies of Jesus",
+                matthew: "1:1-17",
+                mark: "",
+                luke: "3:23b-38",
+                john: "",
+                position: { view1: 5, view2: 5 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 2,
+                description: "Angel Appears to Zechariah",
+                matthew: "",
+                mark: "",
+                luke: "1:5-25",
+                john: "",
+                position: { view1: 10, view2: 10 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 3,
+                description: "Angel Appears to Mary",
+                matthew: "",
+                mark: "",
+                luke: "1:26-38",
+                john: "",
+                position: { view1: 12, view2: 12 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 4,
+                description: "Birth of John the Baptist",
+                matthew: "",
+                mark: "",
+                luke: "1:57-80",
+                john: "",
+                position: { view1: 15, view2: 15 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 5,
+                description: "Birth of Jesus",
+                matthew: "1:18-25",
+                mark: "",
+                luke: "2:1-20",
+                john: "",
+                position: { view1: 20, view2: 20 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 6,
+                description: "Visit of the Wise Men",
+                matthew: "2:1-12",
+                mark: "",
+                luke: "",
+                john: "",
+                position: { view1: 25, view2: 25 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 7,
+                description: "Flight to Egypt and Return",
+                matthew: "2:13-23",
+                mark: "",
+                luke: "",
+                john: "",
+                position: { view1: 28, view2: 28 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 8,
+                description: "Jesus at the Temple (Age 12)",
+                matthew: "",
+                mark: "",
+                luke: "2:41-51",
+                john: "",
+                position: { view1: 30, view2: 30 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 9,
+                description: "Ministry of John the Baptist",
+                matthew: "3:1-12",
+                mark: "1:2-8",
+                luke: "3:1-18",
+                john: "",
+                position: { view1: 35, view2: 35 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 10,
+                description: "Baptism of Jesus",
+                matthew: "3:13-17",
+                mark: "1:9-11",
+                luke: "3:21-23a",
+                john: "1:32-34",
+                position: { view1: 40, view2: 40 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 11,
+                description: "Temptation of Jesus",
+                matthew: "4:1-11",
+                mark: "1:12-13",
+                luke: "4:1-13",
+                john: "",
+                position: { view1: 42, view2: 42 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 12,
+                description: "First Disciples Called",
+                matthew: "4:18-22",
+                mark: "1:16-20",
+                luke: "5:1-11",
+                john: "1:35-51",
+                position: { view1: 45, view2: 50 }, // Alternative position in view2
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 13,
+                description: "Wedding at Cana (Water to Wine)",
+                matthew: "",
+                mark: "",
+                luke: "",
+                john: "2:1-11",
+                position: { view1: 48, view2: 45 }, // Switched order in view2
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 14,
+                description: "Cleansing the Temple (First Time)",
+                matthew: "",
+                mark: "",
+                luke: "",
+                john: "2:13-25",
+                position: { view1: 50, view2: 48 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 15,
+                description: "Jesus and Nicodemus",
+                matthew: "",
+                mark: "",
+                luke: "",
+                john: "3:1-21",
+                position: { view1: 52, view2: 52 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 16,
+                description: "Woman at the Well",
+                matthew: "",
+                mark: "",
+                luke: "",
+                john: "4:4-42",
+                position: { view1: 55, view2: 55 },
+                media: { img: "", audio: "", video: "" }
+            },
+            {
+                id: 17,
+                description: "Sermon on the Mount",
+                matthew: "5-7",
+                mark: "",
+                luke: "6:20-49",
+                john: "",
+                position: { view1: 60, view2: 60 },
+                media: { img: "", audio: "", video: "" }
+            },
+            // Add more events here as needed for scalability
+            // Example additional event outside Gospels (for future expansion):
+            // {
+            //     id: 18,
+            //     description: "Acts of the Apostles Start (Example Extension)",
+            //     matthew: "",
+            //     mark: "",
+            //     luke: "Acts 1",
+            //     john: "",
+            //     position: { view1: 100, view2: 100 },
+            //     media: { img: "", audio: "", video: "" }
+            // },
+        ];
+
+        // Function to render events for a specific view
+        function renderEvents(view) {
+            // Clear existing events
+            document.querySelectorAll('.timeline').forEach(tl => {
+                tl.querySelectorAll('.event').forEach(e => e.remove());
+            });
+
+            events.forEach(event => {
+                const pos = event.position[view] || 0;
+                ['matthew', 'mark', 'luke', 'john'].forEach(gospel => {
+                    if (event[gospel]) {
+                        const timeline = document.getElementById(gospel);
+                        const eventDiv = document.createElement('div');
+                        eventDiv.className = `event ${view}`;
+                        eventDiv.style.top = `${pos}%`;
+                        eventDiv.innerHTML = `
+                            <h3>${event.description}</h3>
+                            <p>Verses: ${event[gospel]}</p>
+                            <div class="media">
+                                ${event.media.img ? `<img src="${event.media.img}" alt="Image for ${event.description}">` : ''}
+                                ${event.media.audio ? `<audio controls><source src="${event.media.audio}" type="audio/mpeg"></audio>` : ''}
+                                ${event.media.video ? `<video controls><source src="${event.media.video}" type="video/mp4"></video>` : ''}
+                            </div>
+                        `;
+                        timeline.appendChild(eventDiv);
+                    }
+                });
+            });
+        }
+
+        // Function to switch views
+        function switchView(view) {
+            document.querySelectorAll('.event').forEach(e => {
+                e.style.display = 'none';
+            });
+            renderEvents(view);
+        }
+
+        // Initial render
+        renderEvents('view1');
+    </script>
+</body>
+</html>
