@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostolic Era Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .btn {
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85em;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background: rgba(255,255,255,0.6);
+        }
+
+        .timeline-wrapper {
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: auto;
+            background: white;
+            margin: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .timeline-container {
+            min-width: 3500px;
+            padding: 30px 20px;
+        }
+
+        .apostle-row {
+            display: flex;
+            margin-bottom: 35px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .apostle-label {
+            width: 100px;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            color: white;
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .peter { background: #e67e22; }
+        .paul { background: #8e44ad; }
+        .john { background: #16a085; }
+        .early-church { background: #c0392b; }
+
+        .timeline {
+            flex: 1;
+            position: relative;
+            margin-left: 20px;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #ddd, #999, #ddd);
+        }
+
+        .events {
+            position: relative;
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            min-height: 80px;
+        }
+
+        .event {
+            position: relative;
+            background: white;
+            border: 3px solid;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            min-width: 160px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .event:hover {
+            transform: scale(1.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 15;
+        }
+
+        .event.has-video::before {
+            content: '🎬';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #e74c3c;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .event.has-audio::before {
+            content: '🔊';
+            background: #f39c12;
+        }
+
+        .event.has-image::before {
+            content: '🖼️';
+            background: #3498db;
+        }
+
+        .event.has-multiple::after {
+            content: '📎';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: gold;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+
+        .event-ref {
+            font-size: 0.75em;
+            color: #666;
+        }
+
+        .event-year {
+            font-size: 0.7em;
+            color: #999;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .close {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            line-height: 0.8;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .media-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .media-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .media-item {
+            margin-bottom: 15px;
+        }
+
+        .media-item video,
+        .media-item audio,
+        .media-item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 10px;
+            color: white;
+            background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-box {
+            width: 25px;
+            height: 18px;
+            border-radius: 3px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 2em;
+            animation: slideRight 1.5s infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { opacity: 0.3; transform: translateY(-50%) translateX(0); }
+            50% { opacity: 1; transform: translateY(-50%) translateX(10px); }
+        }
+
+        .timeline-wrapper::-webkit-scrollbar {
+            height: 10px;
+            width: 10px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+            font-size: 1.2em;
+        }
+
+        .parallel-note {
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+
+        .parallel-note strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⛪ Apostolic Era Timeline ⛪</h1>
+            <p>The ministries of Peter, Paul, and John - Building the Early Church (AD 30-100)</p>
+            <div class="controls">
+                <button class="btn active" onclick="setView('chronological')">Chronological View</button>
+                <button class="btn" onclick="setView('thematic')">Thematic Grouping</button>
+                <button class="btn" onclick="setView('geographical')">Geographical Journey</button>
+            </div>
+        </header>
+
+        <div class="timeline-wrapper">
+            <div class="timeline-container" id="timelineContainer">
+                <div class="loading">Loading apostolic timeline...</div>
+            </div>
+            <div class="scroll-hint">→</div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box peter"></div>
+                <span>Peter</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box paul"></div>
+                <span>Paul</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box john"></div>
+                <span>John</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box early-church"></div>
+                <span>Early Church</span>
+            </div>
+            <span style="margin-left: 20px; opacity: 0.7;">← Scroll to explore →</span>
+            <span style="opacity: 0.7;">🎬 Video | 🔊 Audio | 🖼️ Image</span>
+        </div>
+    </div>
+
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        let timelineData = {};
+        let currentView = 'chronological';
+        const MEDIA_BASE_PATH = '../media/apostolic/';
+
+        async function loadTimelineData() {
+            try {
+                timelineData = {
+                    peter: [
+                        {title: "Pentecost", ref: "Acts 2:1-41", year: "AD 30", description: "Holy Spirit descends, Peter preaches, 3000 saved", media: {video: "pentecost_sermon.mp4", image: "pentecost_flames.jpg"}},
+                        {title: "Lame Man Healed", ref: "Acts 3:1-26", year: "AD 30", description: "Healing at Beautiful Gate, second sermon in temple", media: {image: "beautiful_gate_healing.jpg"}},
+                        {title: "Before Sanhedrin", ref: "Acts 4:1-22", year: "AD 30", description: "Bold testimony: 'We cannot but speak'", media: {audio: "peter_defense.mp3"}},
+                        {title: "Ananias & Sapphira", ref: "Acts 5:1-11", year: "AD 31", description: "Judgment on deception in the church", media: {image: "ananias_sapphira.jpg"}},
+                        {title: "Prison Angel", ref: "Acts 5:17-42", year: "AD 31", description: "Miraculous release, 'Obey God rather than men'", media: {video: "angel_prison_release.mp4"}},
+                        {title: "Cornelius Vision", ref: "Acts 10", year: "AD 40", description: "Gospel opens to Gentiles, rooftop vision", media: {video: "peters_vision.mp4", image: "cornelius_household.jpg"}},
+                        {title: "Jerusalem Council", ref: "Acts 15:1-21", year: "AD 49", description: "Defense of Gentile believers, no circumcision required", media: {audio: "jerusalem_council.mp3"}},
+                        {title: "Letters Written", ref: "1 Peter, 2 Peter", year: "AD 62-64", description: "Epistles to scattered believers, warning against false teachers", media: {image: "peter_writing.jpg"}},
+                        {title: "Martyrdom", ref: "Church Tradition", year: "AD 64-67", description: "Crucified upside down in Rome under Nero", media: {image: "peter_crucifixion.jpg"}}
+                    ],
+                    paul: [
+                        {title: "Conversion", ref: "Acts 9:1-19", year: "AD 34", description: "Damascus Road encounter with risen Christ", media: {video: "damascus_road.mp4", audio: "saul_testimony.mp3"}},
+                        {title: "Arabia & Damascus", ref: "Gal 1:17-18", year: "AD 34-37", description: "Three years in preparation, early preaching", media: {image: "arabia_desert.jpg"}},
+                        {title: "First Jerusalem Visit", ref: "Acts 9:26-30, Gal 1:18", year: "AD 37", description: "Meets Peter, faces opposition, sent to Tarsus", media: {image: "paul_peter_meet.jpg"}},
+                        {title: "Antioch Ministry", ref: "Acts 11:25-26", year: "AD 43-46", description: "Barnabas brings Saul, church taught for a year", media: {image: "antioch_teaching.jpg"}},
+                        {title: "First Missionary Journey", ref: "Acts 13-14", year: "AD 46-48", description: "Cyprus, Galatia - Barnabas and John Mark", media: {video: "first_journey_map.mp4", image: "lystra_healing.jpg"}},
+                        {title: "Jerusalem Council", ref: "Acts 15", year: "AD 49", description: "Presents Gentile mission success", media: {audio: "paul_at_council.mp3"}},
+                        {title: "Second Journey", ref: "Acts 15:36-18:22", year: "AD 49-52", description: "Macedonia call, Philippi, Athens, Corinth - Timothy and Silas", media: {video: "macedonian_call.mp4", image: "philippi_prison.jpg"}},
+                        {title: "Galatians Written", ref: "Galatians", year: "AD 48-49", description: "Defense of gospel of grace, justification by faith", media: {image: "galatians_letter.jpg"}},
+                        {title: "1 & 2 Thessalonians", ref: "1-2 Thess", year: "AD 50-51", description: "From Corinth, teaching on Christ's return", media: {audio: "thessalonian_reading.mp3"}},
+                        {title: "Third Journey", ref: "Acts 18:23-21:16", year: "AD 53-57", description: "Ephesus ministry, Macedonia, Greece", media: {video: "ephesus_riot.mp4", image: "ephesus_teaching.jpg"}},
+                        {title: "Corinthian Letters", ref: "1-2 Cor", year: "AD 55-57", description: "Addressing divisions, immorality, spiritual gifts", media: {image: "corinth_port.jpg"}},
+                        {title: "Romans Written", ref: "Romans", year: "AD 57", description: "From Corinth, systematic theology, gospel explained", media: {audio: "romans_reading.mp3", image: "romans_scroll.jpg"}},
+                        {title: "Jerusalem Arrest", ref: "Acts 21:17-23:30", year: "AD 57", description: "Temple accusation, Roman custody begins", media: {video: "temple_arrest.mp4"}},
+                        {title: "Caesarea Imprisonment", ref: "Acts 23:31-26:32", year: "AD 57-59", description: "Before Felix and Festus, appeals to Caesar", media: {image: "caesarea_prison.jpg", audio: "paul_defense_festus.mp3"}},
+                        {title: "Shipwreck to Rome", ref: "Acts 27-28", year: "AD 59-60", description: "Malta shipwreck, snake bite, arrives Rome", media: {video: "shipwreck_malta.mp4", image: "malta_coast.jpg"}},
+                        {title: "Prison Epistles", ref: "Eph, Phil, Col, Phlm", year: "AD 60-62", description: "From Rome house arrest, church doctrine refined", media: {image: "paul_chains_writing.jpg", audio: "philippians_reading.mp3"}},
+                        {title: "Pastoral Letters", ref: "1 Tim, Titus", year: "AD 62-64", description: "Church order, leadership qualifications", media: {image: "timothy_titus.jpg"}},
+                        {title: "2 Timothy", ref: "2 Timothy", year: "AD 67", description: "Final letter, facing execution, 'I have fought the good fight'", media: {audio: "2tim_4_reading.mp3", image: "paul_final_letter.jpg"}},
+                        {title: "Martyrdom", ref: "Church Tradition", year: "AD 67", description: "Beheaded in Rome under Nero", media: {image: "paul_execution.jpg"}}
+                    ],
+                    john: [
+                        {title: "Pentecost Present", ref: "Acts 1-2", year: "AD 30", description: "Among the 120 in upper room", media: {image: "upper_room_120.jpg"}},
+                        {title: "With Peter", ref: "Acts 3-4", year: "AD 30", description: "Temple healing, arrested together", media: {image: "peter_john_temple.jpg"}},
+                        {title: "Samaria Mission", ref: "Acts 8:14-25", year: "AD 35", description: "Sent with Peter to confirm Samaritan believers", media: {image: "samaria_believers.jpg"}},
+                        {title: "Jerusalem Pillar", ref: "Gal 2:9", year: "AD 49", description: "Recognized as pillar apostle with Peter and James", media: {audio: "galatians_pillars.mp3"}},
+                        {title: "Ephesus Ministry", ref: "Church Tradition", year: "AD 70-90", description: "Leading Asian churches, training disciples", media: {image: "ephesus_john.jpg"}},
+                        {title: "Gospel Written", ref: "John", year: "AD 85-90", description: "Fourth Gospel, 'that you may believe'", media: {video: "john_prologue.mp4", audio: "john_gospel_reading.mp3"}},
+                        {title: "Three Epistles", ref: "1-3 John", year: "AD 90-95", description: "Love, truth, warnings against antichrist", media: {image: "john_letters.jpg", audio: "1john_reading.mp3"}},
+                        {title: "Patmos Exile", ref: "Rev 1:9", year: "AD 95-96", description: "Exiled by Domitian for testimony", media: {image: "patmos_island.jpg", video: "patmos_vision.mp4"}},
+                        {title: "Revelation Given", ref: "Revelation", year: "AD 95-96", description: "Apocalyptic vision, messages to seven churches", media: {video: "throne_room_vision.mp4", audio: "revelation_reading.mp3", image: "new_jerusalem.jpg"}},
+                        {title: "Return to Ephesus", ref: "Church Tradition", year: "AD 96-100", description: "Last surviving apostle, natural death", media: {image: "aged_john.jpg"}}
+                    ],
+                    early_church: [
+                        {title: "Pentecost Birth", ref: "Acts 2", year: "AD 30", description: "Church founded, 3000 baptized", media: {video: "pentecost_crowd.mp4"}},
+                        {title: "Stephen Martyred", ref: "Acts 6-7", year: "AD 34", description: "First martyr, Saul consents to death", media: {video: "stephen_stoning.mp4", image: "stephen_sermon.jpg"}},
+                        {title: "Philip in Samaria", ref: "Acts 8:4-25", year: "AD 35", description: "Gospel spreads beyond Jerusalem", media: {image: "philip_samaria.jpg"}},
+                        {title: "James Martyred", ref: "Acts 12:1-2", year: "AD 44", description: "James son of Zebedee killed by Herod", media: {image: "james_martyrdom.jpg"}},
+                        {title: "Herod's Death", ref: "Acts 12:20-23", year: "AD 44", description: "Struck down by angel for blasphemy", media: {audio: "herod_account.mp3"}},
+                        {title: "Jerusalem Council", ref: "Acts 15", year: "AD 49", description: "Gentile inclusion affirmed, unity maintained", media: {image: "council_gathering.jpg"}},
+                        {title: "James Letter", ref: "James", year: "AD 45-50", description: "Faith and works, practical Christian living", media: {audio: "james_reading.mp3"}},
+                        {title: "Jude Written", ref: "Jude", year: "AD 65-80", description: "Contend for the faith, false teachers warned", media: {image: "jude_scroll.jpg"}},
+                        {title: "Temple Destroyed", ref: "Historical", year: "AD 70", description: "Jesus' prophecy fulfilled, Jerusalem falls", media: {video: "temple_destruction.mp4", image: "temple_ruins.jpg"}},
+                        {title: "Hebrews Written", ref: "Hebrews", year: "AD 65-70", description: "Christ's supremacy, new covenant explained", media: {audio: "hebrews_reading.mp3"}}
+                    ]
+                };
+                
+                renderTimelines();
+            } catch (error) {
+                console.error('Error loading timeline data:', error);
+                document.getElementById('timelineContainer').innerHTML = 
+                    '<div class="loading">Error loading timeline data. Please refresh the page.</div>';
+            }
+        }
+
+        function hasMedia(event) {
+            return event.media && (event.media.video || event.media.audio || event.media.image);
+        }
+
+        function getMediaType(event) {
+            if (!event.media) return null;
+            if (event.media.video) return 'video';
+            if (event.media.audio) return 'audio';
+            if (event.media.image) return 'image';
+            return null;
+        }
+
+        function hasMultipleMedia(event) {
+            if (!event.media) return false;
+            let count = 0;
+            if (event.media.video) count++;
+            if (event.media.audio) count++;
+            if (event.media.image) count++;
+            return count > 1;
+        }
+
+        function renderTimelines() {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '';
+            
+            ['peter', 'paul', 'john', 'early_church'].forEach(category => {
+                const row = document.createElement('div');
+                row.className = 'apostle-row';
+                
+                const label = document.createElement('div');
+                const labelMap = {
+                    peter: 'Peter',
+                    paul: 'Paul', 
+                    john: 'John',
+                    early_church: 'Early Church'
+                };
+                label.className = `apostle-label ${category.replace('_', '-')}`;
+                label.textContent = labelMap[category];
+                
+                const timeline = document.createElement('div');
+                timeline.className = 'timeline';
+                
+                const line = document.createElement('div');
+                line.className = 'timeline-line';
+                
+                const events = document.createElement('div');
+                events.className = 'events';
+                events.id = `${category}-events`;
+                
+                timelineData[category].forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    let classes = ['event'];
+                    
+                    const mediaType = getMediaType(event);
+                    if (mediaType) classes.push(`has-${mediaType}`);
+                    if (hasMultipleMedia(event)) classes.push('has-multiple');
+                    
+                    eventDiv.className = classes.join(' ');
+                    eventDiv.style.borderColor = getCategoryColor(category);
+                    
+                    eventDiv.innerHTML = `
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-ref">${event.ref}</div>
+                        <div class="event-year">${event.year}</div>
+                    `;
+                    
+                    eventDiv.onclick = () => openModal(category, event);
+                    events.appendChild(eventDiv);
+                });
+                
+                timeline.appendChild(line);
+                timeline.appendChild(events);
+                row.appendChild(label);
+                row.appendChild(timeline);
+                container.appendChild(row);
+            });
+        }
+
+        function getCategoryColor(category) {
+            const colors = {
+                peter: '#e67e22',
+                paul: '#8e44ad',
+                john: '#16a085',
+                early_church: '#c0392b'
+            };
+            return colors[category];
+        }
+
+        function openModal(category, event) {
+            const modal = document.getElementById('eventModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            let mediaHTML = '';
+            if (event.media) {
+                if (event.media.video) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🎬 Video:</strong>
+                            <video controls width="640" height="360">
+                                <source src="${MEDIA_BASE_PATH}${event.media.video}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    `;
+                }
+                if (event.media.audio) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🔊 Audio:</strong>
+                            <audio controls>
+                                <source src="${MEDIA_BASE_PATH}${event.media.audio}">
+                                Your browser does not support the audio tag.
+                            </audio>
+                        </div>
+                    `;
+                }
+                if (event.media.image) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🖼️ Image:</strong>
+                            <img src="${MEDIA_BASE_PATH}${event.media.image}" alt="${event.title}">
+                        </div>
+                    `;
+                }
+            }
+
+            const categoryMap = {
+                peter: 'Peter',
+                paul: 'Paul',
+                john: 'John',
+                early_church: 'Early Church'
+            };
+            
+            modalBody.innerHTML = `
+                <h2>${event.title}</h2>
+                <p><strong>Reference:</strong> ${event.ref}</p>
+                <p><strong>Category:</strong> ${categoryMap[category]}</p>
+                <p><strong>Approximate Date:</strong> ${event.year}</p>
+                <p style="margin-top: 15px;">${event.description}</p>
+                
+                ${mediaHTML ? `<div class="media-section"><h3>Media Resources</h3>${mediaHTML}</div>` : ''}
+                
+                <div class="parallel-note">
+                    <strong>📖 Historical Context</strong>
+                    <p><em>This event occurred during the formative years of the early church, when the apostles were establishing Christian communities throughout the Roman Empire. The book of Acts and the epistles provide our primary sources for this period.</em></p>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            console.log(`Switched to ${view} view`);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        const wrapper = document.querySelector('.timeline-wrapper');
+        const scrollHint = document.querySelector('.scroll-hint');
+        wrapper.addEventListener('scroll', function() {
+            scrollHint.style.display = 'none';
+        }, { once: true });
+
+        loadTimelineData();
+    </script>
+</body>
+</html>
