@@ -1,0 +1,294 @@
+{
+"name": "Markus Isaksson",
+"total_theology_hp": 197.5,
+"degrees": {
+"completed": "Högskoleexamen i teologi (Associate's Degree in Theology, 120 hp)",
+"pending": "Teologie kandidatexamen (Bachelor's Degree in Theology, 180 hp - missing 15 hp essay)"
+},
+"language_proficiencies": {
+"biblical_hebrew": {
+"hp": 15,
+"courses": [
+"EG 206: Introduktion i bibelhebreiska I (7.5 hp)",
+"EG 207: Introduktion i bibelhebreiska II (7.5 hp)"
+],
+"note": "Meets the 15 hp requirement in one Biblical language for ordination as präst in Svenska kyrkan"
+},
+"biblical_greek": {
+"hp": 30,
+"courses": [
+"EN 205: Introduktion till nytestamentlig grekiska (15 hp)",
+"EN 306: Markusevangeliets exegetik med grekiska (7.5 hp)",
+"EN 317: Första Korinthierbrevet med grekiska (7.5 hp)"
+],
+"note": "Exceeds the 15 hp requirement; includes exegesis with original texts, considered particularly challenging"
+}
+},
+"categories": [
+{
+"name": "Exegetisk teologi (Exegetical Theology)",
+"hp": 100,
+"university": "Johannelunds teologiska högskola",
+"courses": [
+{
+"code": "EG 201",
+"name": "Introduktion till Gamla testamentet",
+"hp": 7.5,
+"level": "G1N",
+"grade": "Godkänd",
+"date": "2016-01-08"
+},
+{
+"code": "EG 202",
+"name": "Fördjupningskurs i GT exegetik utan grundspråk",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2016-06-13"
+},
+{
+"code": "EG 206",
+"name": "Introduktion i bibelhebreiska I",
+"hp": 7.5,
+"level": "G2F",
+"grade": "Godkänd",
+"date": "2018-04-10"
+},
+{
+"code": "EG 207",
+"name": "Introduktion i bibelhebreiska II",
+"hp": 7.5,
+"level": null,
+"grade": "Godkänd",
+"date": "2018-06-21"
+},
+{
+"code": "EG 353",
+"name": "Gamla testamentet – särskilt profeterna",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2019-04-23"
+},
+{
+"code": "EN 201",
+"name": "Introduktion till Nya testamentet",
+"hp": 7.5,
+"level": "G1N",
+"grade": "Väl godkänd",
+"date": "2015-12-27"
+},
+{
+"code": "EN 202",
+"name": "Fördjupningskurs i Nya testamentets exegetik",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2019-11-05"
+},
+{
+"code": "EN 205",
+"name": "Introduktion till nytestamentlig grekiska",
+"hp": 15,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2017-01-12"
+},
+{
+"code": "EN 306",
+"name": "Markusevangeliets exegetik med grekiska",
+"hp": 7.5,
+"level": "G2F",
+"grade": "Godkänd",
+"date": "2017-04-27"
+},
+{
+"code": "EN 317",
+"name": "Första Korinthierbrevet med grekiska",
+"hp": 7.5,
+"level": "G2F",
+"grade": "Godkänd",
+"date": "2017-06-21"
+},
+{
+"code": "EN 319",
+"name": "Galaterbrevets exegetik",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2019-06-17"
+},
+{
+"code": "ET 101",
+"name": "Datorstödd bibelvetenskap",
+"hp": 2.5,
+"level": "G1N",
+"grade": "Godkänd*",
+"date": "2017-11-23"
+},
+{
+"code": "ET 204",
+"name": "Bibelteologi",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2016-05-20"
+}
+]
+},
+{
+"name": "Historisk praktisk teologi (Historical-Practical Theology)",
+"hp": 30,
+"university": "Johannelunds teologiska högskola",
+"courses": [
+{
+"code": "HK 210",
+"name": "Svensk kyrko- och väckelsehistoria ca 1700-2000",
+"hp": 7.5,
+"level": null,
+"grade": "Väl godkänd",
+"date": "2017-01-25"
+},
+{
+"code": "HP 201",
+"name": "Uppsats",
+"hp": 7.5,
+"level": null,
+"grade": "Godkänd",
+"date": "2017-05-23"
+},
+{
+"code": "HS 201",
+"name": "Grundkurs i pastoral teologi och pastoral psykologi",
+"hp": 7.5,
+"level": null,
+"grade": "Godkänd",
+"date": "2016-05-31"
+},
+{
+"code": "HT 201",
+"name": "Retorik och homiletik",
+"hp": 7.5,
+"level": "G1N",
+"grade": "Godkänd*",
+"date": "2016-01-29"
+}
+]
+},
+{
+"name": "Systematisk teologi (Systematic Theology)",
+"hp": 22.5,
+"university": "Johannelunds teologiska högskola",
+"courses": [
+{
+"code": "SD 201",
+"name": "Dogmatik",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2016-01-29"
+},
+{
+"code": "SD 353",
+"name": "Postmodern teologi",
+"hp": 7.5,
+"level": null,
+"grade": "Godkänd",
+"date": "2017-06-12"
+},
+{
+"code": "SR 201",
+"name": "Religionsfilosofi",
+"hp": 7.5,
+"level": "G1F",
+"grade": "Godkänd",
+"date": "2016-10-04"
+}
+]
+},
+{
+"name": "Ämnesövergripande kurs (Interdisciplinary Course)",
+"hp": 30,
+"university": "Johannelunds teologiska högskola",
+"courses": [
+{
+"code": "RT 100",
+"name": "Religionsvetenskap och teologi: grundkurs",
+"hp": 30,
+"level": "G1N",
+"grade": "Väl godkänd",
+"date": "2015-06-11"
+}
+]
+},
+{
+"name": "Pastorala profilkurser (Pastoral Profile Courses)",
+"hp": 0,
+"university": "Johannelunds teologiska högskola",
+"courses": [
+{
+"code": "PK 102",
+"name": "Retreat 1",
+"hp": 0,
+"level": null,
+"grade": "Fullgjort",
+"date": "2016-05-25"
+},
+{
+"code": "PK 104",
+"name": "Introduktion till liturgik",
+"hp": 0,
+"level": null,
+"grade": "Fullgjort",
+"date": "2016-03-09"
+},
+{
+"code": "PK 108",
+"name": "Homiletik A",
+"hp": 0,
+"level": null,
+"grade": "Fullgjort",
+"date": "2016-01-29"
+},
+{
+"code": "PK 204",
+"name": "Homiletik 1",
+"hp": 0,
+"level": null,
+"grade": "Fullgjort",
+"date": "2016-05-12"
+},
+{
+"code": "PK 205",
+"name": "Röst och gestaltning 1",
+"hp": 0,
+"level": null,
+"grade": "Fullgjort",
+"date": "2016-03-01"
+}
+]
+},
+{
+"name": "Additional Theology-Related Courses",
+"hp": 15,
+"university": "Uppsala universitet",
+"courses": [
+{
+"code": "5RT605",
+"name": "Svenska kyrkans tro och liv",
+"hp": 15,
+"level": null,
+"grade": "G",
+"date": "2020-01-17"
+}
+]
+}
+],
+"notes": [
+"Total theology hp from Johannelunds: 182.5 hp",
+"Additional from Uppsala: 15 hp",
+"Non-theology courses (e.g., medicine, biology) excluded",
+"Grades: Godkänd = Pass, Väl godkänd = Pass with Distinction, Fullgjort = Completed",
+"Biblical languages meet/exceed ordination requirements for Svenska kyrkan"
+]
+}
