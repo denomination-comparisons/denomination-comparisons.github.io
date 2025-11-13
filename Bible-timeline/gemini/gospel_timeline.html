@@ -1,0 +1,543 @@
+Here is a single HTML file that provides the complete structure, styling, and functionality you requested.
+
+This solution is built to be **scalable** and **self-contained**. You can save this code as a single `gospel_timeline.html` file and open it in your browser to see it work.
+
+I've included:
+
+1.  **HTML:** The core structure, using CSS Grid for the parallel columns.
+2.  **CSS:** Styling to make it look like a clean, 1920px-wide timeline, with clear visual separation.
+3.  **JavaScript:** The functionality to make event blocks "clickable," opening a modal window that is pre-structured to hold images, audio, video, and text.
+
+-----
+
+### Parallel Gospel Timeline HTML File
+
+Save the following code as `gospel_timeline.html`:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Gospel Timeline</title>
+    
+    <style>
+        /* --- Base Setup --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* --- Main Container --- */
+        /* This wrapper fits the 1920px screen requirement */
+        .timeline-wrapper {
+            width: 100%;
+            max-width: 1920px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- Header & View Switcher --- */
+        header.timeline-main-header {
+            padding: 20px;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        header.timeline-main-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Placeholder for the "change viewpoint" feature */
+        .view-switcher {
+            padding: 15px;
+            background-color: #ecf0f1;
+            text-align: center;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        .view-switcher button {
+            padding: 8px 15px;
+            font-size: 0.9em;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            background-color: #95a5a6;
+            color: white;
+            transition: background-color 0.2s;
+        }
+
+        .view-switcher button.active {
+            background-color: #3498db;
+        }
+
+        .view-switcher button:hover {
+            background-color: #7f8c8d;
+        }
+
+        /* --- Timeline Grid --- */
+        .timeline-container {
+            display: grid;
+            /* This creates 4 equal columns. */
+            /* TO SCALE: Change this. e.g., for 5 columns: repeat(5, 1fr) */
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+        }
+
+        /* --- Column Headers --- */
+        .gospel-header {
+            padding: 15px;
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            background-color: #34495e;
+            color: white;
+            position: sticky; /* Sticks to the top on scroll */
+            top: 0;
+            z-index: 10;
+            border-left: 1px solid #576b80;
+        }
+        .gospel-header:first-child {
+            border-left: none;
+        }
+
+        /* --- Period Dividers --- */
+        /* This spans all columns */
+        .period-divider {
+            grid-column: 1 / -1; /* Span all 4 columns */
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            border-top: 2px solid #bdc3c7;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        /* --- Gospel Content Cells --- */
+        .gospel-cell {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            /* min-height ensures cells align even if empty */
+            min-height: 80px; 
+            background-color: #fff;
+        }
+        .gospel-cell:first-child {
+            border-left: none;
+        }
+
+        /* --- Event Blocks --- */
+        .event {
+            background-color: #e9f5ff;
+            border: 1px solid #b3d9ff;
+            border-left: 5px solid #3498db;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .event:hover {
+            background-color: #d4ebff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Specific Gospel colors for variety (optional) */
+        .event.g-mark { border-left-color: #2ecc71; background-color: #eaf9eb; border-color: #b5eab8; }
+        .event.g-mark:hover { background-color: #d8f5d9; }
+        
+        .event.g-luke { border-left-color: #e74c3c; background-color: #fdeeee; border-color: #f7c3be; }
+        .event.g-luke:hover { background-color: #fbdcda; }
+
+        .event.g-john { border-left-color: #f39c12; background-color: #fef8e7; border-color: #fbe3a9; }
+        .event.g-john:hover { background-color: #fdedd0; }
+
+        /* Style for when an event is NOT in a gospel */
+        /* This shows the "occurrence" as requested */
+        .event-absent {
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            color: #aaa;
+            background-color: #f9f9f9;
+            border: 2px dashed #eee;
+            border-radius: 4px;
+        }
+
+        /* --- Modal for Media --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px; /* Max width of the modal */
+            max-height: 90vh; /* Max height */
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: #333;
+        }
+
+        #modal-title {
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        #modal-body {
+            margin-top: 20px;
+        }
+
+        /* Styles for media in the modal */
+        #modal-body img,
+        #modal-body video,
+        #modal-body iframe {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        #modal-body audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="timeline-wrapper">
+
+        <header class="timeline-main-header">
+            <h1>Parallel Gospel Timeline</h1>
+        </header>
+
+        <div class="view-switcher">
+            <strong>Chronology View:</strong>
+            <button class="active">Standard Harmony</button>
+            <button>Alternative Chronology 1</button>
+            <button>Alternative Chronology 2</button>
+        </div>
+
+        <div class="timeline-container">
+
+            <div class="gospel-header">Matthew</div>
+            <div class="gospel-header">Mark</div>
+            <div class="gospel-header">Luke</div>
+            <div class="gospel-header">John</div>
+
+            <div class="period-divider">Introduction, Birth & Childhood</div>
+
+            <div class="gospel-cell">
+                <div class="event" data-event-id="matt-genealogy">
+                    <strong>Genealogy of Jesus</strong>
+                    <p>Traces lineage from Abraham.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(Starts with Baptism)</div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-luke" data-event-id="luke-intro">
+                    <strong>Introduction & Purpose</strong>
+                    <p>Dedication to Theophilus.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-john" data-event-id="john-intro">
+                    <strong>The Pre-existent Word</strong>
+                    <p>"In the beginning was the Word..."</p>
+                </div>
+            </div>
+
+            <div class="gospel-cell">
+                <div class="event" data-event-id="matt-birth">
+                    <strong>Birth of Jesus</strong>
+                    <p>Joseph's perspective. Visit of the Magi.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(No birth narrative)</div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-luke" data-event-id="luke-birth">
+                    <strong>Birth of Jesus</strong>
+                    <p>Mary's perspective. Shepherds. Census.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(No birth narrative)</div>
+            </div>
+
+            <div class="period-divider">Beginning of Ministry</div>
+
+            <div class="gospel-cell">
+                <div class="event" data-event-id="matt-baptism">
+                    <strong>Baptism of Jesus</strong>
+                    <p>By John the Baptist. Dove descends.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-mark" data-event-id="mark-baptism">
+                    <strong>Baptism of Jesus</strong>
+                    <p>Heavens opening. Voice from Heaven.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-luke" data-event-id="luke-baptism">
+                    <strong>Baptism of Jesus</strong>
+                    <p>Jesus was praying. Dove descends.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-john" data-event-id="john-testimony">
+                    <strong>John's Testimony</strong>
+                    <p>John sees the Spirit descend. "Behold, the Lamb of God."</p>
+                </div>
+            </div>
+
+            <div class="gospel-cell">
+                <div class="event" data-event-id="matt-temptation">
+                    <strong>Temptation in Wilderness</strong>
+                    <p>Tempted by the devil for 40 days.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-mark" data-event-id="mark-temptation">
+                    <strong>Temptation in Wilderness</strong>
+                    <p>With wild beasts. Angels ministered.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-luke" data-event-id="luke-temptation">
+                    <strong>Temptation in Wilderness</strong>
+                    <p>Led by the Spirit. 40 days.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(No temptation narrative)</div>
+            </div>
+
+            <div class="period-divider">Galilean Ministry</div>
+
+            <div class="gospel-cell">
+                <div class="event" data-event-id="matt-sermon">
+                    <strong>Sermon on the Mount</strong>
+                    <p>Beatitudes. Lord's Prayer. An extensive discourse.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(Teaching covered elsewhere)</div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event g-luke" data-event-id="luke-sermon">
+                    <strong>Sermon on the Plain</strong>
+                    <p>Similar teachings to Matthew, but in a different setting.</p>
+                </div>
+            </div>
+            <div class="gospel-cell">
+                <div class="event-absent">(Focuses on other discourses)</div>
+            </div>
+
+            <div class="period-divider">Passion Week</div>
+            <div class="period-divider">Resurrection</div>
+            </div> </div> <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="modal-title">Event Title</h2>
+            <div id="modal-body">
+                <p>Event details will load here.</p>
+                </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- 1. DEFINE EVENT DATA ---
+        // This is the "database" for your timeline.
+        // To add content, just create a new entry with the
+        // same ID as the `data-event-id` in the HTML.
+        const eventData = {
+            "matt-genealogy": {
+                title: "Matthew's Genealogy (Matthew 1)",
+                text: "Matthew opens his gospel by tracing Jesus's lineage from Abraham, through David, to establish his Jewish and royal credentials as the Messiah.",
+                image: "https://via.placeholder.com/600x300.png?text=Image+of+a+Family+Tree",
+                notes: "This genealogy is structured in three sets of fourteen generations."
+            },
+            "john-intro": {
+                title: "The Word Became Flesh (John 1)",
+                text: "John's introduction is a theological prologue, describing Jesus as the pre-existent 'Logos' (Word) who was with God and was God. This sets a very different tone from the other gospels.",
+                video: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Example video
+                notes: "This high-level 'Christology' is a key theme of John's gospel."
+            },
+            "luke-birth": {
+                title: "The Birth of Jesus (Luke 2)",
+                text: "Luke's narrative includes the census of Augustus, the journey to Bethlehem, the manger, and the visit of the shepherds. It emphasizes Mary's perspective.",
+                image: "https://via.placeholder.com/600x300.png?text=Image+of+a+Nativity+Scene",
+                audio: "https://via.placeholder.com/audio.mp3", // Example audio file
+                notes: "This is the most traditionally-read Christmas story."
+            },
+            "matt-sermon": {
+                title: "Sermon on the Mount (Matthew 5-7)",
+                text: "A collection of Jesus's core ethical teachings, including the Beatitudes, the Lord's Prayer, and the 'Golden Rule'.",
+                notes: "This is the longest single discourse of Jesus in the New Testament."
+            }
+            // --- Add more event data here ---
+            // "matt-birth": { ... },
+            // "mark-baptism": { ... },
+        };
+
+        // --- 2. GET MODAL ELEMENTS ---
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeModal = document.querySelector('.modal-close');
+
+        // --- 3. ATTACH EVENT LISTENERS ---
+        
+        // Listen for clicks on any element with the class "event"
+        document.querySelectorAll('.event').forEach(eventElement => {
+            eventElement.addEventListener('click', () => {
+                const eventId = eventElement.dataset.eventId;
+                if (eventId && eventData[eventId]) {
+                    // We have data! Populate and show the modal.
+                    const data = eventData[eventId];
+                    openModal(data);
+                } else {
+                    // No data found, just log a message (or open with default)
+                    console.log('No data found for event ID:', eventId);
+                    // Optionally, open with a generic message:
+                    openModal({
+                        title: eventElement.querySelector('strong')?.innerText || "Event Details",
+                        text: eventElement.querySelector('p')?.innerText || "More details for this event will be added soon.",
+                    });
+                }
+            });
+        });
+
+        // Close the modal when clicking the 'x'
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Close the modal when clicking outside the content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) { // Clicked on the overlay itself
+                modal.style.display = 'none';
+            }
+        });
+
+        // --- 4. HELPER FUNCTIONS ---
+        function openModal(data) {
+            // Reset the modal body
+            modalBody.innerHTML = '';
+            
+            // Set the title
+            modalTitle.innerText = data.title;
+
+            // Add text content
+            if (data.text) {
+                const p = document.createElement('p');
+                p.innerText = data.text;
+                modalBody.appendChild(p);
+            }
+            
+            // Add notes
+            if (data.notes) {
+                const note = document.createElement('p');
+                note.innerHTML = `<strong>Notes:</strong> <em>${data.notes}</em>`;
+                note.style.backgroundColor = '#f5f5f5';
+                note.style.padding = '10px';
+                note.style.borderRadius = '4px';
+                modalBody.appendChild(note);
+            }
+
+            // Add Image
+            if (data.image) {
+                const img = document.createElement('img');
+                img.src = data.image;
+                img.alt = data.title;
+                modalBody.appendChild(img);
+            }
+
+            // Add Audio
+            if (data.audio) {
+                const audio = document.createElement('audio');
+                audio.controls = true;
+                audio.src = data.audio;
+                modalBody.appendChild(audio);
+            }
+
+            // Add Video (handling YouTube embeds)
+            if (data.video) {
+                if (data.video.includes('youtube.com') || data.video.includes('youtu.be')) {
+                    const iframe = document.createElement('iframe');
+                    iframe.width = '560';
+                    iframe.height = '315';
+                    // Convert to embed URL if necessary
+                    const videoId = data.video.split('v=')[1] || data.video.split('/').pop();
+                    iframe.src = `https://www.youtube.com/embed/${videoId.split('?')[0]}`;
+                    iframe.frameBorder = '0';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                    iframe.allowFullscreen = true;
+                    iframe.style.width = '100%'; // Make responsive
+                    iframe.style.aspectRatio = '16 / 9'; // Maintain 16:9
+                    iframe.style.height = 'auto';
+                    modalBody.appendChild(iframe);
+                } else {
+                    // Standard HTML5 video
+                    const video = document.createElement('video');
+                    video.controls = true;
+                    video.src = data.video;
+                    modalBody.appendChild(video);
+                }
+            }
+
+            // Show the modal
+            modal.style.display = 'flex';
+        }
+    </script>
+
+</body>
+</html>
+```
