@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mary Magdalene in the Gospels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #8B4789 0%, #C06C84 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .subtitle {
+            font-size: 0.8em;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .timeline-wrapper {
+            flex: 1;
+            overflow-x: auto;
+            overflow-y: auto;
+            background: white;
+            margin: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .timeline-container {
+            min-width: 3500px;
+            padding: 30px 20px;
+        }
+
+        .gospel-row {
+            display: flex;
+            margin-bottom: 35px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .gospel-label {
+            width: 100px;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            color: white;
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .matthew { background: #e74c3c; }
+        .mark { background: #3498db; }
+        .luke { background: #2ecc71; }
+        .john { background: #9b59b6; }
+
+        .timeline {
+            flex: 1;
+            position: relative;
+            margin-left: 20px;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #ddd, #999, #ddd);
+        }
+
+        .events {
+            position: relative;
+            display: flex;
+            gap: 80px;
+            align-items: center;
+            min-height: 80px;
+        }
+
+        .event {
+            position: relative;
+            background: white;
+            border: 3px solid;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            min-width: 180px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .event:hover {
+            transform: scale(1.12);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 15;
+        }
+
+        .event.debated {
+            border-style: dashed;
+            opacity: 0.85;
+        }
+
+        .event.debated::after {
+            content: '?';
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            background: #f39c12;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .event.has-video::before {
+            content: '🎬';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #e74c3c;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .event.has-audio::before {
+            content: '🔊';
+            background: #f39c12;
+        }
+
+        .event.has-image::before {
+            content: '🖼️';
+            background: #3498db;
+        }
+
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+            font-size: 0.9em;
+        }
+
+        .event-ref {
+            font-size: 0.75em;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+            color: #8B4789;
+        }
+
+        .close {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            line-height: 0.8;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .debated-notice {
+            background: #fff3cd;
+            border-left: 4px solid #f39c12;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .debated-notice strong {
+            color: #856404;
+        }
+
+        .media-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .media-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .media-item {
+            margin-bottom: 15px;
+        }
+
+        .media-item video,
+        .media-item audio,
+        .media-item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            padding: 10px;
+            color: white;
+            background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-box {
+            width: 25px;
+            height: 18px;
+            border-radius: 3px;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 2em;
+            animation: slideRight 1.5s infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { opacity: 0.3; transform: translateY(-50%) translateX(0); }
+            50% { opacity: 1; transform: translateY(-50%) translateX(10px); }
+        }
+
+        .timeline-wrapper::-webkit-scrollbar {
+            height: 10px;
+            width: 10px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ Mary Magdalene in the Gospels ✨</h1>
+            <p>Tracing the appearances of Mary Magdalene across the four Gospels</p>
+            <p class="subtitle">Includes debated passages where she may be present</p>
+        </header>
+
+        <div class="timeline-wrapper">
+            <div class="timeline-container" id="timelineContainer"></div>
+            <div class="scroll-hint">→</div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box matthew"></div>
+                <span>Matthew</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box mark"></div>
+                <span>Mark</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box luke"></div>
+                <span>Luke</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box john"></div>
+                <span>John</span>
+            </div>
+            <span style="margin-left: 20px; opacity: 0.7;">? = Debated identification</span>
+            <span style="opacity: 0.7;">🎬 Video | 🔊 Audio | 🖼️ Image</span>
+        </div>
+    </div>
+
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const timelineData = {
+            matthew: [
+                {
+                    title: "At the Crucifixion",
+                    ref: "Mt 27:55-56",
+                    description: "Mary Magdalene watches from a distance as Jesus is crucified, along with other women who had followed Jesus from Galilee and ministered to him.",
+                    debated: false,
+                    media: {image: "images/crucifixion-women.jpg", audio: "audio/matthew-27-55-56.mp3"}
+                },
+                {
+                    title: "At the Burial",
+                    ref: "Mt 27:61",
+                    description: "Mary Magdalene and 'the other Mary' sit opposite the tomb, watching where Jesus's body is laid by Joseph of Arimathea.",
+                    debated: false,
+                    media: {image: "images/watching-tomb.jpg"}
+                },
+                {
+                    title: "At the Empty Tomb",
+                    ref: "Mt 28:1-10",
+                    description: "Mary Magdalene and the other Mary come to see the tomb at dawn. They encounter an angel who announces the resurrection, then meet the risen Jesus who says 'Do not be afraid; go and tell my brothers.'",
+                    debated: false,
+                    media: {video: "video/matthew-28-1-10-empty-tomb.mp4", image: "images/empty-tomb-matthew.jpg"}
+                }
+            ],
+            mark: [
+                {
+                    title: "Seven Demons Cast Out",
+                    ref: "Mk 16:9",
+                    description: "Mark explicitly identifies Mary Magdalene as the one from whom Jesus had cast out seven demons. This is her defining introduction in Mark's Gospel.",
+                    debated: false,
+                    media: {image: "images/seven-demons.jpg", audio: "audio/mark-16-9.mp3"}
+                },
+                {
+                    title: "At the Crucifixion",
+                    ref: "Mk 15:40-41",
+                    description: "Mary Magdalene watches the crucifixion from a distance with other women. Mark notes these women had followed Jesus in Galilee and provided for him.",
+                    debated: false,
+                    media: {image: "images/crucifixion-mark.jpg"}
+                },
+                {
+                    title: "At the Burial",
+                    ref: "Mk 15:47",
+                    description: "Mary Magdalene and Mary the mother of Joses observe where Jesus's body is laid in the tomb.",
+                    debated: false,
+                    media: {image: "images/burial-mark.jpg"}
+                },
+                {
+                    title: "At the Empty Tomb",
+                    ref: "Mk 16:1-8",
+                    description: "Mary Magdalene, Mary the mother of James, and Salome bring spices to anoint Jesus's body. They find the tomb empty and encounter a young man in white who announces the resurrection.",
+                    debated: false,
+                    media: {video: "video/mark-16-1-8-empty-tomb.mp4", image: "images/empty-tomb-mark.jpg"}
+                },
+                {
+                    title: "First Appearance",
+                    ref: "Mk 16:9-11",
+                    description: "Jesus appears first to Mary Magdalene after his resurrection. She goes and tells his disciples, but they do not believe her.",
+                    debated: false,
+                    media: {image: "images/first-appearance-mark.jpg", video: "video/mark-16-9-11-appearance.mp4"}
+                }
+            ],
+            luke: [
+                {
+                    title: "Sinful Woman Anoints Jesus",
+                    ref: "Lk 7:36-50",
+                    description: "An unnamed sinful woman anoints Jesus's feet with tears and perfume at a Pharisee's house. Traditionally identified with Mary Magdalene in Western Christianity, though debated by modern scholars.",
+                    debated: true,
+                    media: {image: "images/anointing-feet.jpg", video: "video/luke-7-36-50-anointing.mp4"}
+                },
+                {
+                    title: "Traveling with Jesus",
+                    ref: "Lk 8:1-3",
+                    description: "Mary Magdalene is named as one of several women who traveled with Jesus and the Twelve. Luke notes that seven demons had been cast out of her, and she provided for them out of her resources.",
+                    debated: false,
+                    media: {image: "images/traveling-with-jesus.jpg", audio: "audio/luke-8-1-3.mp3"}
+                },
+                {
+                    title: "Mary and Martha",
+                    ref: "Lk 10:38-42",
+                    description: "Mary of Bethany sits at Jesus's feet while Martha serves. Some traditions identify this Mary with Mary Magdalene, though most modern scholars distinguish them.",
+                    debated: true,
+                    media: {image: "images/mary-martha.jpg", video: "video/luke-10-38-42-mary-martha.mp4"}
+                },
+                {
+                    title: "At the Crucifixion",
+                    ref: "Lk 23:49",
+                    description: "Women who had followed Jesus from Galilee watch the crucifixion from a distance. Mary Magdalene is not named here but is likely among them based on Luke 8:2-3 and 24:10.",
+                    debated: false,
+                    media: {image: "images/crucifixion-luke.jpg"}
+                },
+                {
+                    title: "At the Empty Tomb",
+                    ref: "Lk 24:1-10",
+                    description: "Women, including Mary Magdalene, Joanna, and Mary the mother of James, find the tomb empty and encounter two angels. They report to the apostles but are not believed.",
+                    debated: false,
+                    media: {video: "video/luke-24-1-10-empty-tomb.mp4", image: "images/empty-tomb-luke.jpg"}
+                }
+            ],
+            john: [
+                {
+                    title: "Anointing at Bethany",
+                    ref: "Jn 12:1-8",
+                    description: "Mary of Bethany (sister of Martha and Lazarus) anoints Jesus's feet with expensive perfume. Some traditions merge this Mary with Mary Magdalene, though the text distinguishes them.",
+                    debated: true,
+                    media: {image: "images/bethany-anointing.jpg", video: "video/john-12-1-8-anointing.mp4"}
+                },
+                {
+                    title: "At the Crucifixion",
+                    ref: "Jn 19:25",
+                    description: "Mary Magdalene stands by the cross with Jesus's mother Mary, Mary the wife of Clopas, and the beloved disciple. Unlike the Synoptics, John places the women close to the cross.",
+                    debated: false,
+                    media: {image: "images/at-the-cross-john.jpg", audio: "audio/john-19-25.mp3"}
+                },
+                {
+                    title: "At the Empty Tomb",
+                    ref: "Jn 20:1-2",
+                    description: "Mary Magdalene comes to the tomb while it is still dark and finds the stone removed. She runs to tell Peter and the beloved disciple.",
+                    debated: false,
+                    media: {image: "images/running-to-tell.jpg"}
+                },
+                {
+                    title: "Weeping at the Tomb",
+                    ref: "Jn 20:11-13",
+                    description: "Mary Magdalene weeps outside the empty tomb. She looks inside and sees two angels in white who ask her why she is weeping.",
+                    debated: false,
+                    media: {image: "images/weeping-at-tomb.jpg", video: "video/john-20-11-13-weeping.mp4"}
+                },
+                {
+                    title: "Encounter with Risen Jesus",
+                    ref: "Jn 20:14-17",
+                    description: "Mary Magdalene encounters the risen Jesus but mistakes him for the gardener. When he says 'Mary,' she recognizes him. Jesus says 'Do not hold on to me' (Noli me tangere) and sends her to tell the disciples.",
+                    debated: false,
+                    media: {video: "video/john-20-14-17-noli-me-tangere.mp4", image: "images/noli-me-tangere.jpg", audio: "audio/john-20-14-17.mp3"}
+                },
+                {
+                    title: "Announcing the Resurrection",
+                    ref: "Jn 20:18",
+                    description: "Mary Magdalene goes to the disciples and announces, 'I have seen the Lord!' She reports what Jesus said to her, becoming the first witness and apostle to the apostles.",
+                    debated: false,
+                    media: {image: "images/announcing-resurrection.jpg", audio: "audio/john-20-18.mp3"}
+                }
+            ]
+        };
+
+        function renderTimelines() {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '';
+            
+            ['matthew', 'mark', 'luke', 'john'].forEach(gospel => {
+                const row = document.createElement('div');
+                row.className = 'gospel-row';
+                
+                const label = document.createElement('div');
+                label.className = `gospel-label ${gospel}`;
+                label.textContent = gospel.charAt(0).toUpperCase() + gospel.slice(1);
+                
+                const timeline = document.createElement('div');
+                timeline.className = 'timeline';
+                
+                const line = document.createElement('div');
+                line.className = 'timeline-line';
+                
+                const events = document.createElement('div');
+                events.className = 'events';
+                
+                timelineData[gospel].forEach(event => {
+                    const eventDiv = document.createElement('div');
+                    let classes = ['event'];
+                    
+                    if (event.debated) classes.push('debated');
+                    
+                    const mediaType = getMediaType(event);
+                    if (mediaType) classes.push(`has-${mediaType}`);
+                    
+                    eventDiv.className = classes.join(' ');
+                    eventDiv.style.borderColor = getGospelColor(gospel);
+                    
+                    eventDiv.innerHTML = `
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-ref">${event.ref}</div>
+                    `;
+                    
+                    eventDiv.onclick = () => openModal(gospel, event);
+                    events.appendChild(eventDiv);
+                });
+                
+                timeline.appendChild(line);
+                timeline.appendChild(events);
+                row.appendChild(label);
+                row.appendChild(timeline);
+                container.appendChild(row);
+            });
+        }
+
+        function getGospelColor(gospel) {
+            const colors = {matthew: '#e74c3c', mark: '#3498db', luke: '#2ecc71', john: '#9b59b6'};
+            return colors[gospel];
+        }
+
+        function getMediaType(event) {
+            if (!event.media) return null;
+            if (event.media.video) return 'video';
+            if (event.media.audio) return 'audio';
+            if (event.media.image) return 'image';
+            return null;
+        }
+
+        function openModal(gospel, event) {
+            const modal = document.getElementById('eventModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            let debatedHTML = '';
+            if (event.debated) {
+                debatedHTML = `
+                    <div class="debated-notice">
+                        <strong>⚠️ Debated Identification:</strong> Biblical scholars debate whether this passage refers to Mary Magdalene. 
+                        Traditional Western Christianity often identified her with this figure, while many modern scholars distinguish them as separate individuals.
+                    </div>
+                `;
+            }
+            
+            let mediaHTML = '';
+            if (event.media) {
+                mediaHTML = '<div class="media-section"><h3>Media Resources</h3>';
+                
+                if (event.media.video) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🎬 Video:</strong>
+                            <video controls width="640">
+                                <source src="${event.media.video}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    `;
+                }
+                if (event.media.audio) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🔊 Audio Reading:</strong>
+                            <audio controls>
+                                <source src="${event.media.audio}" type="audio/mpeg">
+                                Your browser does not support the audio tag.
+                            </audio>
+                        </div>
+                    `;
+                }
+                if (event.media.image) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🖼️ Artistic Depiction:</strong>
+                            <img src="${event.media.image}" alt="${event.title}">
+                        </div>
+                    `;
+                }
+                
+                mediaHTML += '</div>';
+            }
+            
+            modalBody.innerHTML = `
+                <h2>${event.title}</h2>
+                <p><strong>Reference:</strong> ${event.ref}</p>
+                <p><strong>Gospel:</strong> ${gospel.charAt(0).toUpperCase() + gospel.slice(1)}</p>
+                
+                ${debatedHTML}
+                
+                <p style="margin-top: 15px;">${event.description}</p>
+                
+                ${mediaHTML}
+                
+                <div style="margin-top: 20px; padding: 15px; background: #f3e5f5; border-radius: 5px; border-left: 4px solid #8B4789;">
+                    <h4>About Mary Magdalene</h4>
+                    <p>Mary Magdalene appears in all four Gospels as a devoted follower of Jesus. She is present at his crucifixion, burial, and resurrection—making her one of the most important witnesses to the core events of Christian faith. In the Gospel of John, she is the first person to see the risen Christ and is sent to announce the resurrection to the disciples, earning her the title "Apostle to the Apostles."</p>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        const wrapper = document.querySelector('.timeline-wrapper');
+        const scrollHint = document.querySelector('.scroll-hint');
+        wrapper.addEventListener('scroll', function() {
+            scrollHint.style.display = 'none';
+        }, { once: true });
+
+        // Initialize
+        renderTimelines();
+    </script>
+</body>
+</html>
