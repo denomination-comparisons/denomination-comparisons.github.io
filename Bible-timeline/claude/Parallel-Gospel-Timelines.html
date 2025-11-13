@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallel Gospel Timelines</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 1920px;
+            height: 1080px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background: rgba(255,255,255,0.6);
+        }
+
+        .timeline-container {
+            flex: 1;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .gospel-row {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .gospel-label {
+            width: 120px;
+            font-weight: bold;
+            font-size: 1.2em;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .matthew { background: #e74c3c; }
+        .mark { background: #3498db; }
+        .luke { background: #2ecc71; }
+        .john { background: #9b59b6; }
+
+        .timeline {
+            flex: 1;
+            position: relative;
+            margin-left: 20px;
+            padding: 20px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #ddd, #999, #ddd);
+        }
+
+        .events {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event {
+            position: relative;
+            background: white;
+            border: 3px solid;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .event:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .event.has-media::after {
+            content: '📎';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: gold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .event-ref {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .close {
+            float: right;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .media-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 20px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Parallel Gospel Timelines 📖</h1>
+            <p>Explore the life and ministry of Jesus across the four Gospels</p>
+        </header>
+
+        <div class="controls">
+            <button class="btn active" onclick="setView('chronological')">Chronological View</button>
+            <button class="btn" onclick="setView('synoptic')">Synoptic Harmony</button>
+            <button class="btn" onclick="setView('thematic')">Thematic Grouping</button>
+        </div>
+
+        <div class="timeline-container">
+            <!-- Matthew -->
+            <div class="gospel-row">
+                <div class="gospel-label matthew">Matthew</div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="events" id="matthew-events"></div>
+                </div>
+            </div>
+
+            <!-- Mark -->
+            <div class="gospel-row">
+                <div class="gospel-label mark">Mark</div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="events" id="mark-events"></div>
+                </div>
+            </div>
+
+            <!-- Luke -->
+            <div class="gospel-row">
+                <div class="gospel-label luke">Luke</div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="events" id="luke-events"></div>
+                </div>
+            </div>
+
+            <!-- John -->
+            <div class="gospel-row">
+                <div class="gospel-label john">John</div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="events" id="john-events"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box matthew"></div>
+                <span>Matthew</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box mark"></div>
+                <span>Mark</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box luke"></div>
+                <span>Luke</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box john"></div>
+                <span>John</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure for events
+        const timelineData = {
+            matthew: [
+                {title: "Birth Narrative", ref: "Mt 1-2", description: "Genealogy, birth, magi, flight to Egypt", media: {image: "", audio: "", video: ""}},
+                {title: "Baptism", ref: "Mt 3:13-17", description: "Jesus baptized by John", media: {}},
+                {title: "Temptation", ref: "Mt 4:1-11", description: "40 days in wilderness", media: {}},
+                {title: "Sermon on Mount", ref: "Mt 5-7", description: "Beatitudes and teachings", media: {}},
+                {title: "Miracles", ref: "Mt 8-9", description: "Healing and nature miracles", media: {}},
+                {title: "Transfiguration", ref: "Mt 17:1-13", description: "On the mountain", media: {}},
+                {title: "Passion Week", ref: "Mt 21-27", description: "Entry, crucifixion", media: {}},
+                {title: "Resurrection", ref: "Mt 28", description: "Empty tomb, Great Commission", media: {}}
+            ],
+            mark: [
+                {title: "Ministry Begins", ref: "Mk 1:1-13", description: "John, baptism, temptation", media: {}},
+                {title: "Galilee Ministry", ref: "Mk 1:14-3:35", description: "Early preaching and healing", media: {}},
+                {title: "Parables", ref: "Mk 4", description: "Sower, mustard seed", media: {}},
+                {title: "Miracles", ref: "Mk 5-6", description: "Legion, Jairus, feeding 5000", media: {}},
+                {title: "Journey to Jerusalem", ref: "Mk 10", description: "Teachings on the way", media: {}},
+                {title: "Passion Week", ref: "Mk 11-15", description: "Entry, trials, crucifixion", media: {}},
+                {title: "Resurrection", ref: "Mk 16", description: "Empty tomb announcement", media: {}}
+            ],
+            luke: [
+                {title: "Birth Narratives", ref: "Lk 1-2", description: "John & Jesus births, childhood", media: {}},
+                {title: "Baptism & Genealogy", ref: "Lk 3", description: "Lineage through Adam", media: {}},
+                {title: "Nazareth Rejection", ref: "Lk 4:16-30", description: "Reading Isaiah scroll", media: {}},
+                {title: "Galilean Ministry", ref: "Lk 5-9", description: "Teaching and healing", media: {}},
+                {title: "Journey to Jerusalem", ref: "Lk 9:51-19:27", description: "Parables and teachings", media: {}},
+                {title: "Passion Week", ref: "Lk 19:28-23:56", description: "Entry, crucifixion", media: {}},
+                {title: "Resurrection & Ascension", ref: "Lk 24", description: "Emmaus road, ascension", media: {}}
+            ],
+            john: [
+                {title: "Prologue", ref: "Jn 1:1-18", description: "The Word became flesh", media: {}},
+                {title: "Early Ministry", ref: "Jn 1:19-4:54", description: "First disciples, Cana, Nicodemus", media: {}},
+                {title: "Festivals", ref: "Jn 5-10", description: "Signs and 'I AM' statements", media: {}},
+                {title: "Lazarus Raised", ref: "Jn 11", description: "Sign of resurrection power", media: {}},
+                {title: "Upper Room", ref: "Jn 13-17", description: "Last discourse, prayer", media: {}},
+                {title: "Passion", ref: "Jn 18-19", description: "Arrest, trials, crucifixion", media: {}},
+                {title: "Resurrection", ref: "Jn 20-21", description: "Appearances, restoration", media: {}}
+            ]
+        };
+
+        let currentView = 'chronological';
+
+        function renderTimelines() {
+            ['matthew', 'mark', 'luke', 'john'].forEach(gospel => {
+                const container = document.getElementById(`${gospel}-events`);
+                container.innerHTML = '';
+                
+                timelineData[gospel].forEach((event, idx) => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.className = `event ${Object.keys(event.media).length > 0 ? 'has-media' : ''}`;
+                    eventDiv.style.borderColor = getGospelColor(gospel);
+                    
+                    eventDiv.innerHTML = `
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-ref">${event.ref}</div>
+                    `;
+                    
+                    eventDiv.onclick = () => openModal(gospel, event);
+                    container.appendChild(eventDiv);
+                });
+            });
+        }
+
+        function getGospelColor(gospel) {
+            const colors = {matthew: '#e74c3c', mark: '#3498db', luke: '#2ecc71', john: '#9b59b6'};
+            return colors[gospel];
+        }
+
+        function openModal(gospel, event) {
+            const modal = document.getElementById('eventModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalBody.innerHTML = `
+                <h2>${event.title}</h2>
+                <p><strong>Reference:</strong> ${event.ref}</p>
+                <p><strong>Gospel:</strong> ${gospel.charAt(0).toUpperCase() + gospel.slice(1)}</p>
+                <p>${event.description}</p>
+                
+                <div class="media-section">
+                    <h3>Media Attachments</h3>
+                    <p><strong>Image:</strong> ${event.media.image || 'None (can be added)'}</p>
+                    <p><strong>Audio:</strong> ${event.media.audio || 'None (can be added)'}</p>
+                    <p><strong>Video:</strong> ${event.media.video || 'None (can be added)'}</p>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 5px;">
+                    <h4>Parallel Accounts</h4>
+                    <p><em>This section will show where this event appears in other Gospels</em></p>
+                </div>
+            `;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // In future versions, this would rearrange events based on view type
+            console.log(`Switched to ${view} view`);
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('eventModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        renderTimelines();
+    </script>
+</body>
+</html>
