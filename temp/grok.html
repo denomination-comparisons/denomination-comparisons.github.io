@@ -8,20 +8,16 @@
         body { font-family: Arial, sans-serif; margin: 20px; }
         button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
         button:hover { background-color: #0056b3; }
-        textarea { width: 100%; height: 300px; margin-top: 20px; }
+        pre { background-color: #f8f9fa; padding: 15px; border: 1px solid #ddd; white-space: pre-wrap; word-wrap: break-word; margin-top: 20px; }
     </style>
 </head>
 <body>
     <h1>Grok Prompt Generator</h1>
-    <p>Click the button to generate an optimized prompt for Grok about visiting the Saint Georgios Greek-Orthodox Church in Stockholm and comparing the 1993 episode to current expectations.</p>
-    <button onclick="generatePrompt()">Generate Prompt</button>
-    <textarea id="promptArea" readonly></textarea>
+    <p>Here is the generated prompt (displayed by default for reference). Click the button to copy it to your clipboard.</p>
+    <button onclick="copyPrompt()">Copy Prompt to Clipboard</button>
+    <pre id="promptText">I am planning to visit Saint Georgios Greek-Orthodox Metropolitan Cathedral in Stockholm (not to be confused with the other local Orthodox Church branch have have their homepage at https://www.ortodoxakyrkan.se) with a friend.
 
-    <script>
-        function generatePrompt() {
-            const prompt = `I am planning to visit Saint Georgios Greek-Orthodox Metropolitan Cathedral in Stockholm (not to be confused with the Finnish Orthodox Church at https://www.ortodoxakyrkan.se) with a friend.
-
-My friend possesses the following theological background and merits: [Insert or link to https://denomination-comparisons.github.io/temp/markus_isaksson_theology_merits.json]. Tailor explanations to his advanced level, including knowledge of Biblical Greek and Hebrew.
+My friend possesses the following theological background and merits: [Insert or link to https://denomination-comparisons.github.io/temp/markus_isaksson_theology_merits.json]. Tailor explanations to a very basic level, but mention can I could ask him, including his knowledge of Biblical Greek and Hebrew.
 
 He has prepared these resources from a 1993 public broadcasting of a Swedish-language Divine Liturgy at the church:
 - HTML transcript: https://denomination-comparisons.github.io/temp/liturgy_transcript.html
@@ -36,8 +32,16 @@ The original airing is at: https://www.svtplay.se/video/jV3NNmK/gudstjanst-ortod
 - Published: 2 apr 2017
 - Availability: Tills vidare (indefinitely), but only in Sweden.
 
-Comparing this 1993 episode to what we might encounter during a typical visit to the church today (as of November 2025), what differences should we anticipate? Consider aspects like language, leadership, liturgy structure, duration, congregation, recent church developments (e.g., renovations), and any other relevant changes. Use available tools to verify current information if needed, such as browsing the Metropolis website at https://gomos.se/en/ or searching for recent updates. Provide a detailed, structured response with citations where appropriate.`;
-            document.getElementById('promptArea').value = prompt;
+Comparing this 1993 episode to what we might encounter during a typical visit to the church today (as of November 2025), what differences should we anticipate? Consider aspects like language, leadership, liturgy structure, duration, congregation, recent church developments (e.g., renovations), and any other relevant changes. Use available tools to verify current information if needed, such as browsing the Metropolis website at https://gomos.se/en/ or searching for recent updates. Provide a detailed, structured response with citations where appropriate. Output your answer in Swedish.</pre>
+
+    <script>
+        function copyPrompt() {
+            const prompt = document.getElementById('promptText').innerText;
+            navigator.clipboard.writeText(prompt).then(() => {
+                alert('Prompt copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy: ' + err);
+            });
         }
     </script>
 </body>
