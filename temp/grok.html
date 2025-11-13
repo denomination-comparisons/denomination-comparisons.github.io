@@ -3,82 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theology Merits Comparison</title>
+    <title>Grok Prompt Generator</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        #prompt { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
-        #followup { margin-top: 20px; }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        textarea { width: 100%; height: 300px; margin-top: 20px; }
     </style>
 </head>
 <body>
-    <h1>Theology Merits for Markus Isaksson</h1>
-    <div id="data-table"></div>
-    <button onclick="generatePrompt()">Generate Grok 4 Prompt</button>
-    <div id="prompt"></div>
-    <div id="followup">
-        <h2>Follow-up Questions</h2>
-        <textarea id="followup-text" rows="4" cols="50" placeholder="Enter your follow-up question..."></textarea><br>
-        <button onclick="appendToPrompt()">Append to Prompt</button>
-    </div>
+    <h1>Grok Prompt Generator</h1>
+    <p>Click the button to generate an optimized prompt for Grok about visiting the Saint Georgios Greek-Orthodox Church in Stockholm and comparing the 1993 episode to current expectations.</p>
+    <button onclick="generatePrompt()">Generate Prompt</button>
+    <textarea id="promptArea" readonly></textarea>
 
     <script>
-        const jsonUrl = 'temp/markus_isaksson_theology_merits.json';  // Relative path in the repo
-
-        async function loadData() {
-            const response = await fetch(jsonUrl);
-            const data = await response.json();
-            const table = document.createElement('table');
-            const header = table.insertRow();
-            ['Category', 'HP', 'Courses'].forEach(col => {
-                const th = document.createElement('th');
-                th.textContent = col;
-                header.appendChild(th);
-            });
-
-            data.categories.forEach(cat => {
-                const row = table.insertRow();
-                row.insertCell().textContent = cat.name + ' (' + cat.university + ')';
-                row.insertCell().textContent = cat.hp;
-                const coursesList = cat.courses.map(c => `${c.code}: ${c.name} (${c.hp} hp, Grade: ${c.grade}, Date: ${c.date})`).join('<br>');
-                row.insertCell().innerHTML = coursesList;
-            });
-
-            document.getElementById('data-table').appendChild(table);
-
-            // Display languages and notes
-            const langDiv = document.createElement('div');
-            langDiv.innerHTML = '<h2>Biblical Languages</h2><p>Hebrew: ' + data.language_proficiencies.biblical_hebrew.hp + ' hp</p><p>Greek: ' + data.language_proficiencies.biblical_greek.hp + ' hp</p>';
-            document.getElementById('data-table').appendChild(langDiv);
-
-            const notesDiv = document.createElement('div');
-            notesDiv.innerHTML = '<h2>Notes</h2><ul>' + data.notes.map(n => '<li>' + n + '</li>').join('') + '</ul>';
-            document.getElementById('data-table').appendChild(notesDiv);
-        }
-
-        loadData();
-
-        let basePrompt = '';
-
         function generatePrompt() {
-            fetch(jsonUrl)
-                .then(response => response.json())
-                .then(data => {
-                    basePrompt = `You are Grok 4. Analyze this theology academic background for Markus Isaksson (total ${data.total_theology_hp} hp, degrees: ${data.degrees.completed}, pending ${data.degrees.pending}). Categories and courses: ${JSON.stringify(data.categories, null, 2)}. Language proficiencies: ${JSON.stringify(data.language_proficiencies, null, 2)}. Notes: ${data.notes.join(', ')}.
+            const prompt = `I am planning to visit Saint Georgios Greek-Orthodox Metropolitan Cathedral in Stockholm (not to be confused with the Finnish Orthodox Church at https://www.ortodoxakyrkan.se) with a friend.
 
-Compare this to ordination requirements in major Christian denominations (e.g., Svenska kyrkan, Catholic Church, Lutheran, Baptist, Pentecostal). Use tables for comparisons. Highlight strengths like Biblical Greek/Hebrew (challenging courses). Suggest next steps for completing Bachelor's or ordination. Be factual, use current knowledge (as of November 13, 2025), and do not moralize.`;
-                    document.getElementById('prompt').textContent = basePrompt;
-                });
-        }
+My friend possesses the following theological background and merits: [Insert or link to https://denomination-comparisons.github.io/temp/markus_isaksson_theology_merits.json]. Tailor explanations to his advanced level, including knowledge of Biblical Greek and Hebrew.
 
-        function appendToPrompt() {
-            const followup = document.getElementById('followup-text').value;
-            if (followup && basePrompt) {
-                const updatedPrompt = basePrompt + `\n\nFollow-up: ${followup}`;
-                document.getElementById('prompt').textContent = updatedPrompt;
-            }
+He has prepared these resources from a 1993 public broadcasting of a Swedish-language Divine Liturgy at the church:
+- HTML transcript: https://denomination-comparisons.github.io/temp/liturgy_transcript.html
+- JSON transcript: https://denomination-comparisons.github.io/temp/liturgy_transcript.json
+
+The original airing is at: https://www.svtplay.se/video/jV3NNmK/gudstjanst-ortodox-liturgi (may not be accessible outside Sweden). Metadata:
+- Title: Gudstjänst - Ortodox Liturgi
+- Description: Gudstjänst i grekisk-ortodox kyrka i Stockholm • 57 min
+- Details: Gudstjänst i St Georgios, grekisk-ortodox kyrka i Stockholm, där liturgin denna dag firas på svenska. Ciceron är Torsten Kälvemark, tidigare kulturattaché i London. Fader Markku Salminen, från den finska ortodoxa församlingen är liturg och kantor Paula Löfgren leder kören.
+- Categories: Religiös ceremoni, Religion & livsåskådning, 1990-tal, Öppet arkiv, Tydligare tal
+- Production Year: 1993
+- Published: 2 apr 2017
+- Availability: Tills vidare (indefinitely), but only in Sweden.
+
+Comparing this 1993 episode to what we might encounter during a typical visit to the church today (as of November 2025), what differences should we anticipate? Consider aspects like language, leadership, liturgy structure, duration, congregation, recent church developments (e.g., renovations), and any other relevant changes. Use available tools to verify current information if needed, such as browsing the Metropolis website at https://gomos.se/en/ or searching for recent updates. Provide a detailed, structured response with citations where appropriate.`;
+            document.getElementById('promptArea').value = prompt;
         }
     </script>
 </body>
