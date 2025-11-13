@@ -15,14 +15,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: #333;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         .container {
-            width: 1920px;
-            height: 1080px;
-            margin: 0 auto;
-            padding: 20px;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -30,12 +28,13 @@
         header {
             text-align: center;
             color: white;
-            margin-bottom: 20px;
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
         }
 
         h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 2em;
+            margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
@@ -43,17 +42,18 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-top: 10px;
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 8px 16px;
             background: rgba(255,255,255,0.2);
             border: 2px solid white;
             color: white;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
+            font-size: 0.9em;
         }
 
         .btn:hover {
@@ -65,19 +65,30 @@
             background: rgba(255,255,255,0.6);
         }
 
-        .timeline-container {
+        .timeline-wrapper {
             flex: 1;
+            overflow-x: auto;
+            overflow-y: hidden;
             background: white;
+            margin: 20px;
             border-radius: 10px;
-            padding: 20px;
-            overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .timeline-container {
+            min-width: 3000px;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
         }
 
         .gospel-row {
             display: flex;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
+            height: 120px;
         }
 
         .gospel-label {
@@ -90,6 +101,10 @@
             justify-content: center;
             border-radius: 5px;
             color: white;
+            position: sticky;
+            left: 0;
+            z-index: 20;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
         }
 
         .matthew { background: #e74c3c; }
@@ -116,8 +131,9 @@
         .events {
             position: relative;
             display: flex;
-            justify-content: space-between;
+            gap: 100px;
             align-items: center;
+            height: 100%;
         }
 
         .event {
@@ -125,17 +141,19 @@
             background: white;
             border: 3px solid;
             border-radius: 8px;
-            padding: 10px 15px;
+            padding: 12px 18px;
             cursor: pointer;
             transition: all 0.3s;
             z-index: 10;
-            min-width: 150px;
+            min-width: 180px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .event:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: scale(1.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 15;
         }
 
         .event.has-media::after {
@@ -156,10 +174,11 @@
         .event-title {
             font-weight: bold;
             margin-bottom: 5px;
+            font-size: 0.95em;
         }
 
         .event-ref {
-            font-size: 0.85em;
+            font-size: 0.8em;
             color: #666;
         }
 
@@ -212,8 +231,9 @@
             display: flex;
             justify-content: center;
             gap: 30px;
-            margin-top: 20px;
+            padding: 15px;
             color: white;
+            background: rgba(0,0,0,0.2);
         }
 
         .legend-item {
@@ -227,6 +247,41 @@
             height: 20px;
             border-radius: 3px;
         }
+
+        .scroll-hint {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 2em;
+            animation: slideRight 1.5s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { opacity: 0.3; transform: translateY(-50%) translateX(0); }
+            50% { opacity: 1; transform: translateY(-50%) translateX(10px); }
+        }
+
+        /* Custom scrollbar */
+        .timeline-wrapper::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .timeline-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
 <body>
@@ -234,50 +289,52 @@
         <header>
             <h1>📖 Parallel Gospel Timelines 📖</h1>
             <p>Explore the life and ministry of Jesus across the four Gospels</p>
+            <div class="controls">
+                <button class="btn active" onclick="setView('chronological')">Chronological View</button>
+                <button class="btn" onclick="setView('synoptic')">Synoptic Harmony</button>
+                <button class="btn" onclick="setView('thematic')">Thematic Grouping</button>
+            </div>
         </header>
 
-        <div class="controls">
-            <button class="btn active" onclick="setView('chronological')">Chronological View</button>
-            <button class="btn" onclick="setView('synoptic')">Synoptic Harmony</button>
-            <button class="btn" onclick="setView('thematic')">Thematic Grouping</button>
-        </div>
+        <div class="timeline-wrapper">
+            <div class="timeline-container">
+                <!-- Matthew -->
+                <div class="gospel-row">
+                    <div class="gospel-label matthew">Matthew</div>
+                    <div class="timeline">
+                        <div class="timeline-line"></div>
+                        <div class="events" id="matthew-events"></div>
+                    </div>
+                </div>
 
-        <div class="timeline-container">
-            <!-- Matthew -->
-            <div class="gospel-row">
-                <div class="gospel-label matthew">Matthew</div>
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="events" id="matthew-events"></div>
+                <!-- Mark -->
+                <div class="gospel-row">
+                    <div class="gospel-label mark">Mark</div>
+                    <div class="timeline">
+                        <div class="timeline-line"></div>
+                        <div class="events" id="mark-events"></div>
+                    </div>
+                </div>
+
+                <!-- Luke -->
+                <div class="gospel-row">
+                    <div class="gospel-label luke">Luke</div>
+                    <div class="timeline">
+                        <div class="timeline-line"></div>
+                        <div class="events" id="luke-events"></div>
+                    </div>
+                </div>
+
+                <!-- John -->
+                <div class="gospel-row">
+                    <div class="gospel-label john">John</div>
+                    <div class="timeline">
+                        <div class="timeline-line"></div>
+                        <div class="events" id="john-events"></div>
+                    </div>
                 </div>
             </div>
-
-            <!-- Mark -->
-            <div class="gospel-row">
-                <div class="gospel-label mark">Mark</div>
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="events" id="mark-events"></div>
-                </div>
-            </div>
-
-            <!-- Luke -->
-            <div class="gospel-row">
-                <div class="gospel-label luke">Luke</div>
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="events" id="luke-events"></div>
-                </div>
-            </div>
-
-            <!-- John -->
-            <div class="gospel-row">
-                <div class="gospel-label john">John</div>
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="events" id="john-events"></div>
-                </div>
-            </div>
+            <div class="scroll-hint">→</div>
         </div>
 
         <div class="legend">
@@ -297,6 +354,7 @@
                 <div class="legend-box john"></div>
                 <span>John</span>
             </div>
+            <div style="margin-left: 30px; opacity: 0.7;">← Scroll horizontally to explore →</div>
         </div>
     </div>
 
@@ -316,35 +374,60 @@
                 {title: "Temptation", ref: "Mt 4:1-11", description: "40 days in wilderness", media: {}},
                 {title: "Sermon on Mount", ref: "Mt 5-7", description: "Beatitudes and teachings", media: {}},
                 {title: "Miracles", ref: "Mt 8-9", description: "Healing and nature miracles", media: {}},
+                {title: "Feeding 5000", ref: "Mt 14:13-21", description: "Multiplication of loaves and fish", media: {}},
+                {title: "Peter's Confession", ref: "Mt 16:13-20", description: "You are the Christ", media: {}},
                 {title: "Transfiguration", ref: "Mt 17:1-13", description: "On the mountain", media: {}},
-                {title: "Passion Week", ref: "Mt 21-27", description: "Entry, crucifixion", media: {}},
+                {title: "Triumphal Entry", ref: "Mt 21:1-11", description: "Entry into Jerusalem", media: {}},
+                {title: "Last Supper", ref: "Mt 26:17-30", description: "Passover meal", media: {}},
+                {title: "Gethsemane", ref: "Mt 26:36-46", description: "Prayer and arrest", media: {}},
+                {title: "Crucifixion", ref: "Mt 27:32-56", description: "Death on the cross", media: {}},
                 {title: "Resurrection", ref: "Mt 28", description: "Empty tomb, Great Commission", media: {}}
             ],
             mark: [
-                {title: "Ministry Begins", ref: "Mk 1:1-13", description: "John, baptism, temptation", media: {}},
-                {title: "Galilee Ministry", ref: "Mk 1:14-3:35", description: "Early preaching and healing", media: {}},
+                {title: "John the Baptist", ref: "Mk 1:1-8", description: "Prepare the way", media: {}},
+                {title: "Baptism", ref: "Mk 1:9-11", description: "Spirit descends", media: {}},
+                {title: "Calling Disciples", ref: "Mk 1:16-20", description: "Fishers of men", media: {}},
+                {title: "Early Miracles", ref: "Mk 1:21-45", description: "Authority over evil", media: {}},
                 {title: "Parables", ref: "Mk 4", description: "Sower, mustard seed", media: {}},
-                {title: "Miracles", ref: "Mk 5-6", description: "Legion, Jairus, feeding 5000", media: {}},
-                {title: "Journey to Jerusalem", ref: "Mk 10", description: "Teachings on the way", media: {}},
+                {title: "Calming Storm", ref: "Mk 4:35-41", description: "Who is this?", media: {}},
+                {title: "Jairus' Daughter", ref: "Mk 5:21-43", description: "Raised from death", media: {}},
+                {title: "Feeding 5000", ref: "Mk 6:30-44", description: "Compassion on crowds", media: {}},
+                {title: "Walking on Water", ref: "Mk 6:45-52", description: "Take courage", media: {}},
+                {title: "Transfiguration", ref: "Mk 9:2-13", description: "This is my Son", media: {}},
                 {title: "Passion Week", ref: "Mk 11-15", description: "Entry, trials, crucifixion", media: {}},
                 {title: "Resurrection", ref: "Mk 16", description: "Empty tomb announcement", media: {}}
             ],
             luke: [
-                {title: "Birth Narratives", ref: "Lk 1-2", description: "John & Jesus births, childhood", media: {}},
-                {title: "Baptism & Genealogy", ref: "Lk 3", description: "Lineage through Adam", media: {}},
+                {title: "Annunciation", ref: "Lk 1:26-38", description: "Angel visits Mary", media: {}},
+                {title: "Birth of Jesus", ref: "Lk 2:1-20", description: "Shepherds and angels", media: {}},
+                {title: "Boy Jesus", ref: "Lk 2:41-52", description: "In the temple", media: {}},
+                {title: "Baptism", ref: "Lk 3:21-22", description: "Heaven opened", media: {}},
+                {title: "Temptation", ref: "Lk 4:1-13", description: "Testing in wilderness", media: {}},
                 {title: "Nazareth Rejection", ref: "Lk 4:16-30", description: "Reading Isaiah scroll", media: {}},
-                {title: "Galilean Ministry", ref: "Lk 5-9", description: "Teaching and healing", media: {}},
-                {title: "Journey to Jerusalem", ref: "Lk 9:51-19:27", description: "Parables and teachings", media: {}},
-                {title: "Passion Week", ref: "Lk 19:28-23:56", description: "Entry, crucifixion", media: {}},
-                {title: "Resurrection & Ascension", ref: "Lk 24", description: "Emmaus road, ascension", media: {}}
+                {title: "Great Catch", ref: "Lk 5:1-11", description: "Calling fishermen", media: {}},
+                {title: "Sermon on Plain", ref: "Lk 6:17-49", description: "Blessings and woes", media: {}},
+                {title: "Good Samaritan", ref: "Lk 10:25-37", description: "Parable of mercy", media: {}},
+                {title: "Prodigal Son", ref: "Lk 15:11-32", description: "Father's love", media: {}},
+                {title: "Zacchaeus", ref: "Lk 19:1-10", description: "Salvation comes", media: {}},
+                {title: "Last Supper", ref: "Lk 22:7-38", description: "New covenant", media: {}},
+                {title: "Crucifixion", ref: "Lk 23:26-49", description: "Father, forgive them", media: {}},
+                {title: "Emmaus Road", ref: "Lk 24:13-35", description: "Hearts burning", media: {}},
+                {title: "Ascension", ref: "Lk 24:50-53", description: "Blessing and departure", media: {}}
             ],
             john: [
                 {title: "Prologue", ref: "Jn 1:1-18", description: "The Word became flesh", media: {}},
-                {title: "Early Ministry", ref: "Jn 1:19-4:54", description: "First disciples, Cana, Nicodemus", media: {}},
-                {title: "Festivals", ref: "Jn 5-10", description: "Signs and 'I AM' statements", media: {}},
-                {title: "Lazarus Raised", ref: "Jn 11", description: "Sign of resurrection power", media: {}},
-                {title: "Upper Room", ref: "Jn 13-17", description: "Last discourse, prayer", media: {}},
-                {title: "Passion", ref: "Jn 18-19", description: "Arrest, trials, crucifixion", media: {}},
+                {title: "First Disciples", ref: "Jn 1:35-51", description: "Come and see", media: {}},
+                {title: "Wedding at Cana", ref: "Jn 2:1-12", description: "First sign", media: {}},
+                {title: "Nicodemus", ref: "Jn 3:1-21", description: "Born again", media: {}},
+                {title: "Woman at Well", ref: "Jn 4:1-42", description: "Living water", media: {}},
+                {title: "Pool of Bethesda", ref: "Jn 5:1-15", description: "Healing on Sabbath", media: {}},
+                {title: "Bread of Life", ref: "Jn 6:22-59", description: "I AM the bread", media: {}},
+                {title: "Light of World", ref: "Jn 8:12-30", description: "I AM the light", media: {}},
+                {title: "Good Shepherd", ref: "Jn 10:1-21", description: "I AM the shepherd", media: {}},
+                {title: "Lazarus Raised", ref: "Jn 11", description: "I AM resurrection", media: {}},
+                {title: "Washing Feet", ref: "Jn 13:1-17", description: "Example of service", media: {}},
+                {title: "Upper Room", ref: "Jn 14-17", description: "Last discourse, prayer", media: {}},
+                {title: "Crucifixion", ref: "Jn 19:16-37", description: "It is finished", media: {}},
                 {title: "Resurrection", ref: "Jn 20-21", description: "Appearances, restoration", media: {}}
             ]
         };
@@ -423,6 +506,13 @@
                 closeModal();
             }
         }
+
+        // Hide scroll hint after first scroll
+        const wrapper = document.querySelector('.timeline-wrapper');
+        const scrollHint = document.querySelector('.scroll-hint');
+        wrapper.addEventListener('scroll', function() {
+            scrollHint.style.display = 'none';
+        }, { once: true });
 
         // Initialize
         renderTimelines();
