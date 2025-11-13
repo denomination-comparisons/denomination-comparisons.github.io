@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1920, height=1080, initial-scale=1" />
+<title>Parallel Gospels Timelines (Provisional)</title>
+<style>
+  :root{
+    --width:1920px;
+    --height:1080px;
+    --timeline-height:180px;
+    --gap:20px;
+    --left-padding:140px;
+    --right-padding:80px;
+    --bar-color:#e7eef8;
+    --gospel-colors: #6c8cff, #7bd389, #ffb86c, #c97bff; /* Matt, Mark, Luke, John */
+  }
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:#fafafa;color:#111}
+  .stage{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:stretch;box-sizing:border-box;padding:12px}
+  header{display:flex;align-items:center;gap:18px;padding:8px 12px}
+  header h1{margin:0;font-size:18px}
+  .controls{margin-left:auto;display:flex;gap:8px;align-items:center}
+  button{padding:8px 12px;border-radius:6px;border:1px solid #ddd;background:white;cursor:pointer}
+  .timeline-wrap{flex:1;overflow:auto;padding:8px 12px}
+  .canvas{width:calc(1000px); /* will be scaled with JS to fit 1920x1080 target */ margin:0 auto; background:linear-gradient(#fff,#fbfdff); border:1px solid #eee; box-shadow:0 6px 24px rgba(20,30,60,0.05); padding:20px; box-sizing:border-box}
+
+  .grid{display:grid;grid-template-rows:repeat(4, var(--timeline-height));gap:var(--gap)}
+  .timeline{position:relative;border-radius:8px;padding:12px 12px 48px 12px;background:linear-gradient(180deg,var(--bar-color),#fff)}
+  .timeline .label{position:absolute;left:8px;top:12px;font-weight:600}
+  .bar{position:absolute;left:var(--left-padding);right:var(--right-padding);top:56px;height:8px;border-radius:4px;background:#d9e7ff}
+  .ticks{position:absolute;left:var(--left-padding);right:var(--right-padding);top:76px;height:18px;display:flex;align-items:flex-start;gap:0}
+  .tick{flex:0 0 auto;width:1px;height:10px;background:#c8d7f7;margin-right:calc((100% - 0px) / 39)}
+
+  .event{position:absolute;top:28px;transform:translateX(-50%);cursor:grab}
+  .event .dot{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:11px}
+  .event .title{position:absolute;top:26px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.95);border:1px solid #eee;font-size:12px;box-shadow:0 6px 14px rgba(20,30,50,0.04)}
+
+  .connector{position:absolute;height:2px;background:rgba(120,120,140,0.15);top:90px}
+
+  .legend{display:flex;gap:12px;align-items:center;padding:8px 12px}
+  .legend .item{display:flex;gap:6px;align-items:center}
+  .legend .sw{width:14px;height:14px;border-radius:3px}
+
+  /* modal */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45)}
+  .modal .card{background:white;padding:18px;border-radius:10px;max-width:900px;width:90%;max-height:80vh;overflow:auto}
+  .media-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+  .media-row a{display:inline-block;padding:6px 8px;border-radius:6px;border:1px solid #eee}
+
+  /* responsiveness and scaling helper */
+  @media (max-width:1400px){ .canvas{transform:scale(0.9);} }
+</style>
+</head>
+<body>
+  <div class="stage">
+    <header>
+      <h1>Parallel Gospels Timelines — provisional</h1>
+      <div class="controls">
+        <label>View: <select id="viewMode"><option value="parallel">Independent (parallel)</option><option value="harmonize">Harmonized (group align)</option></select></label>
+        <button id="addEvent">+ Add event</button>
+        <button id="importJSON">Import JSON</button>
+        <button id="exportJSON">Export JSON</button>
+      </div>
+    </header>
+
+    <div class="timeline-wrap">
+      <div id="canvas" class="canvas" style="--scale:1">
+        <div class="legend" aria-hidden="true">
+          <div class="item"><div class="sw" style="background:var(--gospel-colors).split?0"></div><strong>Gospels:</strong></div>
+          <div class="item"><div class="sw" style="background:#6c8cff"></div>Matthew</div>
+          <div class="item"><div class="sw" style="background:#7bd389"></div>Mark</div>
+          <div class="item"><div class="sw" style="background:#ffb86c"></div>Luke</div>
+          <div class="item"><div class="sw" style="background:#c97bff"></div>John</div>
+        </div>
+
+        <div class="grid" id="grid">
+          <!-- four timelines -->
+          <div class="timeline" data-gospel="Matthew">
+            <div class="label">Matthew</div>
+            <div class="bar"></div>
+            <div class="ticks" aria-hidden="true"></div>
+          </div>
+          <div class="timeline" data-gospel="Mark">
+            <div class="label">Mark</div>
+            <div class="bar"></div>
+            <div class="ticks"></div>
+          </div>
+          <div class="timeline" data-gospel="Luke">
+            <div class="label">Luke</div>
+            <div class="bar"></div>
+            <div class="ticks"></div>
+          </div>
+          <div class="timeline" data-gospel="John">
+            <div class="label">John</div>
+            <div class="bar"></div>
+            <div class="ticks"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer style="padding:8px 12px;font-size:13px;color:#666">Tip: events are stored as JSON objects; use Import/Export to edit. Click any event to open media and details. "Harmonize" mode will align items that share a <code>group</code> value.</footer>
+  </div>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="card">
+      <button id="closeModal" style="float:right">Close</button>
+      <h3 id="modalTitle">Event</h3>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+<script>
+(() => {
+  // Basic data model for events. Each event can exist on one or more gospel timelines.
+  // - id: string
+  // - title: string
+  // - group: optional string used to harmonize same event across gospels
+  // - placements: array of {gospel: 'Matthew'|'Mark'|'Luke'|'John', pos: number} pos in percent (0..100)
+  // - media: {image: url, audio: url, video: url}
+
+  const sampleEvents = [
+    {id:'e1', title:'Birth / Infancy', group:'birth', placements:[{gospel:'Matthew',pos:6},{gospel:'Luke',pos:8}], media:{image:'',audio:'',video:''}},
+    {id:'e2', title:'Baptism of Jesus', group:'baptism', placements:[{gospel:'Matthew',pos:18},{gospel:'Mark',pos:17},{gospel:'Luke',pos:19},{gospel:'John',pos:20}], media:{image:'',audio:'',video:''}},
+    {id:'e3', title:'Sermon on the Mount', group:'sermon', placements:[{gospel:'Matthew',pos:28},{gospel:'Luke',pos:29}], media:{}},
+    {id:'e4', title:'Last Supper', group:'passion', placements:[{gospel:'Matthew',pos:88},{gospel:'Mark',pos:86},{gospel:'Luke',pos:87},{gospel:'John',pos:84}], media:{}},
+    {id:'e5', title:'Resurrection', group:'resurrection', placements:[{gospel:'Matthew',pos:98},{gospel:'Mark',pos:97},{gospel:'Luke',pos:96},{gospel:'John',pos:99}], media:{}}
+  ];
+
+  const canvas = document.getElementById('canvas');
+  const grid = document.getElementById('grid');
+  const viewMode = document.getElementById('viewMode');
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalBody = document.getElementById('modalBody');
+  const closeModal = document.getElementById('closeModal');
+
+  let events = JSON.parse(JSON.stringify(sampleEvents));
+
+  function gospelColor(g){
+    switch(g){case 'Matthew': return '#6c8cff';case 'Mark': return '#7bd389';case 'Luke': return '#ffb86c';case 'John': return '#c97bff';}
+  }
+
+  function render(){
+    // clear existing event nodes
+    document.querySelectorAll('.event').forEach(n=>n.remove());
+
+    // If harmonize: compute mapping of groups to x positions
+    const mode = viewMode.value;
+    const groupMap = new Map();
+    if(mode === 'harmonize'){
+      // collect groups in appearance order
+      const groups = [...new Set(events.filter(e=>e.group).map(e=>e.group))];
+      groups.forEach((g,i)=> groupMap.set(g, 5 + i*20)); // spaced percent positions across the bar
+    }
+
+    events.forEach(ev=>{
+      ev.placements.forEach(place=>{
+        // determine position: if harmonize and group exists -> use groupMap
+        const pos = (mode === 'harmonize' && ev.group && groupMap.has(ev.group)) ? groupMap.get(ev.group) : place.pos;
+        const timeline = [...grid.querySelectorAll('.timeline')].find(t=>t.dataset.gospel===place.gospel);
+        if(!timeline) return;
+        const bar = timeline.querySelector('.bar');
+        // compute left in pixels relative to bar element
+        const barRect = {left:0,right:0}; // we will position with percent using CSS left
+
+        const evEl = document.createElement('div');
+        evEl.className = 'event';
+        evEl.dataset.eventId = ev.id;
+        evEl.dataset.gospel = place.gospel;
+        evEl.style.left = `calc(var(--left-padding) + ((100% - (var(--left-padding) + var(--right-padding))) * ${pos/100}))`;
+
+        // dot and title
+        const dot = document.createElement('div'); dot.className='dot'; dot.style.background=gospelColor(place.gospel); dot.textContent=place.gospel[0];
+        const title = document.createElement('div'); title.className='title'; title.textContent=ev.title + (ev.group?(' — '+ev.group):'');
+        evEl.appendChild(dot); evEl.appendChild(title);
+
+        // click opens modal showing details and media links
+        evEl.addEventListener('click', (e)=>{
+          e.stopPropagation(); openModal(ev, place);
+        });
+
+        timeline.appendChild(evEl);
+      });
+    });
+  }
+
+  function openModal(ev, place){
+    modalTitle.textContent = ev.title + ' — ' + place.gospel;
+    modalBody.innerHTML = '';
+    const p = document.createElement('p'); p.textContent = 'Group: ' + (ev.group||'[none]'); modalBody.appendChild(p);
+    const placements = document.createElement('div'); placements.innerHTML = '<strong>Placements:</strong>';
+    ev.placements.forEach(pl=>{const d = document.createElement('div'); d.textContent = pl.gospel + ': ' + pl.pos + '%'; placements.appendChild(d)});
+    modalBody.appendChild(placements);
+    // media
+    if(ev.media){
+      const mediaRow = document.createElement('div'); mediaRow.className='media-row';
+      if(ev.media.image) { const a=document.createElement('a'); a.href=ev.media.image; a.textContent='Image'; a.target='_blank'; mediaRow.appendChild(a); }
+      if(ev.media.audio) { const a=document.createElement('a'); a.href=ev.media.audio; a.textContent='Audio'; a.target='_blank'; mediaRow.appendChild(a); }
+      if(ev.media.video) { const a=document.createElement('a'); a.href=ev.media.video; a.textContent='Video'; a.target='_blank'; mediaRow.appendChild(a); }
+      modalBody.appendChild(mediaRow);
+    }
+    modal.style.display='flex';
+  }
+
+  closeModal.addEventListener('click', ()=> modal.style.display='none');
+  modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.style.display='none'; });
+
+  // Controls
+  document.getElementById('addEvent').addEventListener('click', ()=>{
+    const id = 'e'+(Date.now());
+    const title = prompt('Title for the new event','New event'); if(!title) return;
+    // quick add on Matthew at 50% by default
+    const newEv = {id, title, group:'', placements:[{gospel:'Matthew',pos:50}], media:{}};
+    events.push(newEv); render();
+  });
+
+  document.getElementById('exportJSON').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify(events,null,2)],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'gospels-timelines.json'; a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById('importJSON').addEventListener('click', ()=>{
+    const input = document.createElement('input'); input.type='file'; input.accept='application/json';
+    input.onchange = e=>{
+      const file = e.target.files[0]; if(!file) return;
+      const reader = new FileReader(); reader.onload = ev=>{
+        try{ const data = JSON.parse(ev.target.result); if(Array.isArray(data)){ events = data; render(); alert('Imported '+data.length+' events.'); } else alert('JSON must be an array of events.'); }
+        catch(err){ alert('Invalid JSON: '+err.message); }
+      }; reader.readAsText(file);
+    };
+    input.click();
+  });
+
+  viewMode.addEventListener('change', ()=> render());
+
+  // initial render
+  render();
+
+  // Allow keyboard: H to toggle harmonize
+  window.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='h'){ viewMode.value = (viewMode.value==='parallel'?'harmonize':'parallel'); render(); } });
+
+  // Expose a global helper for scripting: addEvent and updateEvent
+  window.GospelTimelineAPI = {
+    addEvent(obj){ events.push(obj); render(); },
+    updateEvent(id, patch){ const ev = events.find(x=>x.id===id); if(ev) Object.assign(ev,patch); render(); },
+    getEvents(){ return events; }
+  };
+})();
+</script>
+</body>
+</html>
