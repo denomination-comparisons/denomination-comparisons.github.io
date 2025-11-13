@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theology Merits Comparison</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        #prompt { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+        #followup { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Theology Merits for Markus Isaksson</h1>
+    <div id="data-table"></div>
+    <button onclick="generatePrompt()">Generate Grok 4 Prompt</button>
+    <div id="prompt"></div>
+    <div id="followup">
+        <h2>Follow-up Questions</h2>
+        <textarea id="followup-text" rows="4" cols="50" placeholder="Enter your follow-up question..."></textarea><br>
+        <button onclick="appendToPrompt()">Append to Prompt</button>
+    </div>
+
+    <script>
+        const jsonUrl = 'temp/markus_isaksson_theology_merits.json';  // Relative path in the repo
+
+        async function loadData() {
+            const response = await fetch(jsonUrl);
+            const data = await response.json();
+            const table = document.createElement('table');
+            const header = table.insertRow();
+            ['Category', 'HP', 'Courses'].forEach(col => {
+                const th = document.createElement('th');
+                th.textContent = col;
+                header.appendChild(th);
+            });
+
+            data.categories.forEach(cat => {
+                const row = table.insertRow();
+                row.insertCell().textContent = cat.name + ' (' + cat.university + ')';
+                row.insertCell().textContent = cat.hp;
+                const coursesList = cat.courses.map(c => `${c.code}: ${c.name} (${c.hp} hp, Grade: ${c.grade}, Date: ${c.date})`).join('<br>');
+                row.insertCell().innerHTML = coursesList;
+            });
+
+            document.getElementById('data-table').appendChild(table);
+
+            // Display languages and notes
+            const langDiv = document.createElement('div');
+            langDiv.innerHTML = '<h2>Biblical Languages</h2><p>Hebrew: ' + data.language_proficiencies.biblical_hebrew.hp + ' hp</p><p>Greek: ' + data.language_proficiencies.biblical_greek.hp + ' hp</p>';
+            document.getElementById('data-table').appendChild(langDiv);
+
+            const notesDiv = document.createElement('div');
+            notesDiv.innerHTML = '<h2>Notes</h2><ul>' + data.notes.map(n => '<li>' + n + '</li>').join('') + '</ul>';
+            document.getElementById('data-table').appendChild(notesDiv);
+        }
+
+        loadData();
+
+        let basePrompt = '';
+
+        function generatePrompt() {
+            fetch(jsonUrl)
+                .then(response => response.json())
+                .then(data => {
+                    basePrompt = `You are Grok 4. Analyze this theology academic background for Markus Isaksson (total ${data.total_theology_hp} hp, degrees: ${data.degrees.completed}, pending ${data.degrees.pending}). Categories and courses: ${JSON.stringify(data.categories, null, 2)}. Language proficiencies: ${JSON.stringify(data.language_proficiencies, null, 2)}. Notes: ${data.notes.join(', ')}.
+
+Compare this to ordination requirements in major Christian denominations (e.g., Svenska kyrkan, Catholic Church, Lutheran, Baptist, Pentecostal). Use tables for comparisons. Highlight strengths like Biblical Greek/Hebrew (challenging courses). Suggest next steps for completing Bachelor's or ordination. Be factual, use current knowledge (as of November 13, 2025), and do not moralize.`;
+                    document.getElementById('prompt').textContent = basePrompt;
+                });
+        }
+
+        function appendToPrompt() {
+            const followup = document.getElementById('followup-text').value;
+            if (followup && basePrompt) {
+                const updatedPrompt = basePrompt + `\n\nFollow-up: ${followup}`;
+                document.getElementById('prompt').textContent = updatedPrompt;
+            }
+        }
+    </script>
+</body>
+</html>
