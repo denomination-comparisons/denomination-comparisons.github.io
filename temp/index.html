@@ -1,1 +1,133 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theology Merits Prompt Generator (for GPT-5)</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 40px; background-color: #fdfdfd; color: #222; }
+        h1 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        #prompt-container { margin-top: 30px; background: #f9f9f9; border: 1px solid #ccc; padding: 15px; border-radius: 8px; }
+        #prompt { white-space: pre-wrap; font-family: Consolas, monospace; font-size: 0.95em; }
+        button { margin-top: 10px; padding: 8px 14px; border: none; background: #0078d7; color: white; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #005fa3; }
+    </style>
+</head>
+<body>
+
+<h1>Theology Merits for Markus Isaksson — GPT-5 Optimized Prompt</h1>
+
+<div id="data-table"></div>
+<div id="prompt-container">
+    <h2>Generated Prompt</h2>
+    <pre id="prompt"></pre>
+    <button onclick="copyPrompt()">Kopiera prompt</button>
+</div>
+
+<script>
+const data = {
+    "total_theology_hp": 180,
+    "degrees": { "completed": "Teologie kandidat (pågående)", "pending": "Examen under slutförande" },
+    "categories": [
+        {
+            "name": "Biblical Studies",
+            "university": "Uppsala Universitet",
+            "hp": 60,
+            "courses": [
+                {"code": "GREK101", "name": "Biblical Greek I", "hp": 15, "grade": "B", "date": "2022-01-15"},
+                {"code": "HEBR101", "name": "Biblical Hebrew I", "hp": 15, "grade": "B", "date": "2022-06-10"},
+                {"code": "NTEX201", "name": "Exegesis in the New Testament", "hp": 15, "grade": "A", "date": "2023-01-15"},
+                {"code": "OTEX202", "name": "Old Testament Exegesis", "hp": 15, "grade": "B", "date": "2023-06-10"}
+            ]
+        },
+        {
+            "name": "Systematic Theology",
+            "university": "Uppsala Universitet",
+            "hp": 45,
+            "courses": [
+                {"code": "STH101", "name": "Dogmatics I", "hp": 15, "grade": "B", "date": "2022-09-01"},
+                {"code": "ETH201", "name": "Theological Ethics", "hp": 15, "grade": "A", "date": "2023-03-10"},
+                {"code": "HST302", "name": "Contemporary Theology", "hp": 15, "grade": "B", "date": "2023-10-01"}
+            ]
+        },
+        {
+            "name": "Church History and Practical Theology",
+            "university": "Uppsala Universitet",
+            "hp": 45,
+            "courses": [
+                {"code": "CHH101", "name": "Church History I", "hp": 15, "grade": "B", "date": "2022-09-01"},
+                {"code": "PRT201", "name": "Pastoral Theology", "hp": 15, "grade": "A", "date": "2023-03-10"},
+                {"code": "MIS301", "name": "Missiology", "hp": 15, "grade": "B", "date": "2023-10-01"}
+            ]
+        }
+    ],
+    "language_proficiencies": {
+        "biblical_hebrew": {"hp": 15},
+        "biblical_greek": {"hp": 30}
+    },
+    "notes": [
+        "Har läst hela Septuaginta och Nestle-Aland NT i grekiska.",
+        "Studier med fokus på ekumenik och teologisk hermeneutik.",
+        "Aktiv i gudstjänstliv och tvärkonfessionell dialog."
+    ]
+};
+
+function renderTable() {
+    const table = document.createElement('table');
+    const header = table.insertRow();
+    ['Kategori', 'HP', 'Kurser'].forEach(col => {
+        const th = document.createElement('th');
+        th.textContent = col;
+        header.appendChild(th);
+    });
+
+    data.categories.forEach(cat => {
+        const row = table.insertRow();
+        row.insertCell().textContent = `${cat.name} (${cat.university})`;
+        row.insertCell().textContent = cat.hp;
+        const coursesList = cat.courses.map(c => 
+            `${c.code}: ${c.name} (${c.hp} hp, Betyg: ${c.grade}, Datum: ${c.date})`
+        ).join('\n');
+        const cell = row.insertCell();
+        cell.innerHTML = `<pre>${coursesList}</pre>`;
+    });
+
+    document.getElementById('data-table').appendChild(table);
+}
+
+function generatePrompt() {
+    const prompt = `Du är GPT-5. Analysera denna teologiska bakgrund för Markus Isaksson (totalt ${data.total_theology_hp} hp, examen: ${data.degrees.completed}, under slutförande: ${data.degrees.pending}).
+
+Kategorier och kurser: ${JSON.stringify(data.categories, null, 2)}.
+Språkkunskaper: ${JSON.stringify(data.language_proficiencies, null, 2)}.
+Anteckningar: ${data.notes.join('; ')}.
+
+Jag planerar att besöka denna grekisk-ortodoxa kyrka tillsammans med min kristne vän som har den teologiska bakgrunden ifrån JSON-innehållet i denna prompt: https://www.ortodoxakyrkan.se/
+
+Han är medlem i Svenska kyrkan, går regelbundet till mässa och deltar i den apostoliska och nicenska trosbekännelsen. Han är också engagerad i en lokal karismatisk församling, och beskriver sig som ekumeniskt sinnad. Han har, utöver sina akademiska meriter, läst hela Nestle-Aland-texten av Nya testamentet och hela Septuaginta på grekiska. I ekumeniska sammanhang har han inga problem med att läsa trosbekännelsen med Filioque-tillägget, kalla Maria Guds moder, vörda ikoner, och när han exempelvis deltar i katolska mässor brukar han knäböja inför sakramentet och lägga handen på axeln för välsignelse.
+
+Med detta i åtanke:
+Hur skulle vi kunna förväntas bli mottagna i den grekisk-ortodoxa kyrkan när jag kommer i sällskap med honom, och vad bör vi tänka på inför ett sådant besök?
+
+Svara på svenska, och bjud in mig att ställa följdfrågor på ett sätt som passar en person som kan mycket lite teologi.`;
+
+    document.getElementById('prompt').textContent = prompt;
+}
+
+function copyPrompt() {
+    const text = document.getElementById('prompt').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+        alert('Prompt kopierad till urklipp!');
+    });
+}
+
+renderTable();
+generatePrompt();
+</script>
+
+</body>
+</html>
 
