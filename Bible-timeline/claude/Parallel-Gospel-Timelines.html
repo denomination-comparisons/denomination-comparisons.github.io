@@ -28,32 +28,38 @@
         header {
             text-align: center;
             color: white;
-            padding: 20px;
+            padding: 15px 20px;
             background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
         }
 
         h1 {
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 5px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 0.9em;
+            opacity: 0.9;
         }
 
         .controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 8px;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 6px 14px;
             background: rgba(255,255,255,0.2);
             border: 2px solid white;
             color: white;
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
 
         .btn:hover {
@@ -68,33 +74,29 @@
         .timeline-wrapper {
             flex: 1;
             overflow-x: auto;
-            overflow-y: hidden;
+            overflow-y: auto;
             background: white;
-            margin: 20px;
+            margin: 15px 20px;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .timeline-container {
             min-width: 3000px;
-            height: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+            padding: 30px 20px;
         }
 
         .gospel-row {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 35px;
             position: relative;
-            height: 120px;
+            min-height: 100px;
         }
 
         .gospel-label {
-            width: 120px;
+            width: 100px;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.1em;
             padding: 10px;
             display: flex;
             align-items: center;
@@ -105,6 +107,7 @@
             left: 0;
             z-index: 20;
             box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
 
         .matthew { background: #e74c3c; }
@@ -124,16 +127,16 @@
             top: 50%;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: linear-gradient(to right, #ddd, #999, #ddd);
         }
 
         .events {
             position: relative;
             display: flex;
-            gap: 100px;
+            gap: 80px;
             align-items: center;
-            height: 100%;
+            min-height: 80px;
         }
 
         .event {
@@ -141,44 +144,71 @@
             background: white;
             border: 3px solid;
             border-radius: 8px;
-            padding: 12px 18px;
+            padding: 10px 15px;
             cursor: pointer;
             transition: all 0.3s;
             z-index: 10;
-            min-width: 180px;
+            min-width: 160px;
             text-align: center;
             flex-shrink: 0;
         }
 
         .event:hover {
-            transform: scale(1.15);
+            transform: scale(1.12);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             z-index: 15;
         }
 
-        .event.has-media::after {
-            content: '📎';
+        .event.has-video::before {
+            content: '🎬';
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: gold;
+            top: -10px;
+            left: -10px;
+            background: #e74c3c;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .event.has-audio::before {
+            content: '🔊';
+            background: #f39c12;
+        }
+
+        .event.has-image::before {
+            content: '🖼️';
+            background: #3498db;
+        }
+
+        .event.has-multiple::after {
+            content: '📎';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: gold;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .event-title {
             font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 0.95em;
+            margin-bottom: 4px;
+            font-size: 0.9em;
         }
 
         .event-ref {
-            font-size: 0.8em;
+            font-size: 0.75em;
             color: #666;
         }
 
@@ -189,19 +219,21 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .modal-content {
             background: white;
             padding: 30px;
             border-radius: 10px;
-            max-width: 800px;
-            max-height: 80vh;
+            max-width: 900px;
+            max-height: 90vh;
             overflow-y: auto;
+            width: 100%;
         }
 
         .modal h2 {
@@ -214,6 +246,7 @@
             font-size: 2em;
             cursor: pointer;
             color: #999;
+            line-height: 0.8;
         }
 
         .close:hover {
@@ -227,24 +260,48 @@
             border-radius: 5px;
         }
 
+        .media-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .media-item {
+            margin-bottom: 15px;
+        }
+
+        .media-item video,
+        .media-item audio,
+        .media-item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .media-item video {
+            background: #000;
+        }
+
         .legend {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            padding: 15px;
+            align-items: center;
+            gap: 25px;
+            padding: 10px;
             color: white;
             background: rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            font-size: 0.9em;
         }
 
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .legend-box {
-            width: 30px;
-            height: 20px;
+            width: 25px;
+            height: 18px;
             border-radius: 3px;
         }
 
@@ -257,6 +314,7 @@
             font-size: 2em;
             animation: slideRight 1.5s infinite;
             pointer-events: none;
+            z-index: 5;
         }
 
         @keyframes slideRight {
@@ -264,23 +322,29 @@
             50% { opacity: 1; transform: translateY(-50%) translateX(10px); }
         }
 
-        /* Custom scrollbar */
         .timeline-wrapper::-webkit-scrollbar {
-            height: 12px;
+            height: 10px;
+            width: 10px;
         }
 
         .timeline-wrapper::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 10px;
         }
 
         .timeline-wrapper::-webkit-scrollbar-thumb {
             background: #888;
-            border-radius: 10px;
+            border-radius: 5px;
         }
 
         .timeline-wrapper::-webkit-scrollbar-thumb:hover {
             background: #555;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -297,42 +361,8 @@
         </header>
 
         <div class="timeline-wrapper">
-            <div class="timeline-container">
-                <!-- Matthew -->
-                <div class="gospel-row">
-                    <div class="gospel-label matthew">Matthew</div>
-                    <div class="timeline">
-                        <div class="timeline-line"></div>
-                        <div class="events" id="matthew-events"></div>
-                    </div>
-                </div>
-
-                <!-- Mark -->
-                <div class="gospel-row">
-                    <div class="gospel-label mark">Mark</div>
-                    <div class="timeline">
-                        <div class="timeline-line"></div>
-                        <div class="events" id="mark-events"></div>
-                    </div>
-                </div>
-
-                <!-- Luke -->
-                <div class="gospel-row">
-                    <div class="gospel-label luke">Luke</div>
-                    <div class="timeline">
-                        <div class="timeline-line"></div>
-                        <div class="events" id="luke-events"></div>
-                    </div>
-                </div>
-
-                <!-- John -->
-                <div class="gospel-row">
-                    <div class="gospel-label john">John</div>
-                    <div class="timeline">
-                        <div class="timeline-line"></div>
-                        <div class="events" id="john-events"></div>
-                    </div>
-                </div>
+            <div class="timeline-container" id="timelineContainer">
+                <div class="loading">Loading timeline data...</div>
             </div>
             <div class="scroll-hint">→</div>
         </div>
@@ -354,7 +384,8 @@
                 <div class="legend-box john"></div>
                 <span>John</span>
             </div>
-            <div style="margin-left: 30px; opacity: 0.7;">← Scroll horizontally to explore →</div>
+            <span style="margin-left: 20px; opacity: 0.7;">← Scroll to explore →</span>
+            <span style="opacity: 0.7;">🎬 Video | 🔊 Audio | 🖼️ Image</span>
         </div>
     </div>
 
@@ -366,82 +397,140 @@
     </div>
 
     <script>
-        // Data structure for events
-        const timelineData = {
-            matthew: [
-                {title: "Birth Narrative", ref: "Mt 1-2", description: "Genealogy, birth, magi, flight to Egypt", media: {image: "", audio: "", video: ""}},
-                {title: "Baptism", ref: "Mt 3:13-17", description: "Jesus baptized by John", media: {}},
-                {title: "Temptation", ref: "Mt 4:1-11", description: "40 days in wilderness", media: {}},
-                {title: "Sermon on Mount", ref: "Mt 5-7", description: "Beatitudes and teachings", media: {}},
-                {title: "Miracles", ref: "Mt 8-9", description: "Healing and nature miracles", media: {}},
-                {title: "Feeding 5000", ref: "Mt 14:13-21", description: "Multiplication of loaves and fish", media: {}},
-                {title: "Peter's Confession", ref: "Mt 16:13-20", description: "You are the Christ", media: {}},
-                {title: "Transfiguration", ref: "Mt 17:1-13", description: "On the mountain", media: {}},
-                {title: "Triumphal Entry", ref: "Mt 21:1-11", description: "Entry into Jerusalem", media: {}},
-                {title: "Last Supper", ref: "Mt 26:17-30", description: "Passover meal", media: {}},
-                {title: "Gethsemane", ref: "Mt 26:36-46", description: "Prayer and arrest", media: {}},
-                {title: "Crucifixion", ref: "Mt 27:32-56", description: "Death on the cross", media: {}},
-                {title: "Resurrection", ref: "Mt 28", description: "Empty tomb, Great Commission", media: {}}
-            ],
-            mark: [
-                {title: "John the Baptist", ref: "Mk 1:1-8", description: "Prepare the way", media: {}},
-                {title: "Baptism", ref: "Mk 1:9-11", description: "Spirit descends", media: {}},
-                {title: "Calling Disciples", ref: "Mk 1:16-20", description: "Fishers of men", media: {}},
-                {title: "Early Miracles", ref: "Mk 1:21-45", description: "Authority over evil", media: {}},
-                {title: "Parables", ref: "Mk 4", description: "Sower, mustard seed", media: {}},
-                {title: "Calming Storm", ref: "Mk 4:35-41", description: "Who is this?", media: {}},
-                {title: "Jairus' Daughter", ref: "Mk 5:21-43", description: "Raised from death", media: {}},
-                {title: "Feeding 5000", ref: "Mk 6:30-44", description: "Compassion on crowds", media: {}},
-                {title: "Walking on Water", ref: "Mk 6:45-52", description: "Take courage", media: {}},
-                {title: "Transfiguration", ref: "Mk 9:2-13", description: "This is my Son", media: {}},
-                {title: "Passion Week", ref: "Mk 11-15", description: "Entry, trials, crucifixion", media: {}},
-                {title: "Resurrection", ref: "Mk 16", description: "Empty tomb announcement", media: {}}
-            ],
-            luke: [
-                {title: "Annunciation", ref: "Lk 1:26-38", description: "Angel visits Mary", media: {}},
-                {title: "Birth of Jesus", ref: "Lk 2:1-20", description: "Shepherds and angels", media: {}},
-                {title: "Boy Jesus", ref: "Lk 2:41-52", description: "In the temple", media: {}},
-                {title: "Baptism", ref: "Lk 3:21-22", description: "Heaven opened", media: {}},
-                {title: "Temptation", ref: "Lk 4:1-13", description: "Testing in wilderness", media: {}},
-                {title: "Nazareth Rejection", ref: "Lk 4:16-30", description: "Reading Isaiah scroll", media: {}},
-                {title: "Great Catch", ref: "Lk 5:1-11", description: "Calling fishermen", media: {}},
-                {title: "Sermon on Plain", ref: "Lk 6:17-49", description: "Blessings and woes", media: {}},
-                {title: "Good Samaritan", ref: "Lk 10:25-37", description: "Parable of mercy", media: {}},
-                {title: "Prodigal Son", ref: "Lk 15:11-32", description: "Father's love", media: {}},
-                {title: "Zacchaeus", ref: "Lk 19:1-10", description: "Salvation comes", media: {}},
-                {title: "Last Supper", ref: "Lk 22:7-38", description: "New covenant", media: {}},
-                {title: "Crucifixion", ref: "Lk 23:26-49", description: "Father, forgive them", media: {}},
-                {title: "Emmaus Road", ref: "Lk 24:13-35", description: "Hearts burning", media: {}},
-                {title: "Ascension", ref: "Lk 24:50-53", description: "Blessing and departure", media: {}}
-            ],
-            john: [
-                {title: "Prologue", ref: "Jn 1:1-18", description: "The Word became flesh", media: {}},
-                {title: "First Disciples", ref: "Jn 1:35-51", description: "Come and see", media: {}},
-                {title: "Wedding at Cana", ref: "Jn 2:1-12", description: "First sign", media: {}},
-                {title: "Nicodemus", ref: "Jn 3:1-21", description: "Born again", media: {}},
-                {title: "Woman at Well", ref: "Jn 4:1-42", description: "Living water", media: {}},
-                {title: "Pool of Bethesda", ref: "Jn 5:1-15", description: "Healing on Sabbath", media: {}},
-                {title: "Bread of Life", ref: "Jn 6:22-59", description: "I AM the bread", media: {}},
-                {title: "Light of World", ref: "Jn 8:12-30", description: "I AM the light", media: {}},
-                {title: "Good Shepherd", ref: "Jn 10:1-21", description: "I AM the shepherd", media: {}},
-                {title: "Lazarus Raised", ref: "Jn 11", description: "I AM resurrection", media: {}},
-                {title: "Washing Feet", ref: "Jn 13:1-17", description: "Example of service", media: {}},
-                {title: "Upper Room", ref: "Jn 14-17", description: "Last discourse, prayer", media: {}},
-                {title: "Crucifixion", ref: "Jn 19:16-37", description: "It is finished", media: {}},
-                {title: "Resurrection", ref: "Jn 20-21", description: "Appearances, restoration", media: {}}
-            ]
-        };
-
+        let timelineData = {};
         let currentView = 'chronological';
+        const MEDIA_BASE_PATH = '../media/';
+
+        // Load timeline data from JSON
+        async function loadTimelineData() {
+            try {
+                // For now, using inline data structure
+                // In production, this would be: const response = await fetch('timeline-data.json');
+                timelineData = {
+                    matthew: [
+                        {title: "Birth Narrative", ref: "Mt 1-2", description: "Genealogy, birth, magi, flight to Egypt", media: {}},
+                        {title: "Baptism", ref: "Mt 3:13-17", description: "Jesus baptized by John", media: {}},
+                        {title: "Temptation", ref: "Mt 4:1-11", description: "40 days in wilderness", media: {}},
+                        {title: "Sermon on Mount", ref: "Mt 5-7", description: "Beatitudes and teachings", media: {}},
+                        {title: "Miracles", ref: "Mt 8-9", description: "Healing and nature miracles", media: {}},
+                        {title: "Feeding 5000", ref: "Mt 14:13-21", description: "Multiplication of loaves and fish", media: {}},
+                        {title: "Peter's Confession", ref: "Mt 16:13-20", description: "You are the Christ", media: {}},
+                        {title: "Transfiguration", ref: "Mt 17:1-13", description: "On the mountain", media: {}},
+                        {title: "Triumphal Entry", ref: "Mt 21:1-11", description: "Entry into Jerusalem", media: {}},
+                        {title: "Last Supper", ref: "Mt 26:17-30", description: "Passover meal, institution of communion", media: {video: "video/matthew_26-17-30_last-supper.mkv"}},
+                        {title: "Gethsemane", ref: "Mt 26:36-46", description: "Prayer and arrest", media: {}},
+                        {title: "Crucifixion", ref: "Mt 27:32-56", description: "Death on the cross", media: {}},
+                        {title: "Resurrection", ref: "Mt 28", description: "Empty tomb, Great Commission", media: {}}
+                    ],
+                    mark: [
+                        {title: "John the Baptist", ref: "Mk 1:1-8", description: "Prepare the way", media: {}},
+                        {title: "Baptism", ref: "Mk 1:9-11", description: "Spirit descends", media: {}},
+                        {title: "Calling Disciples", ref: "Mk 1:16-20", description: "Fishers of men", media: {}},
+                        {title: "Early Miracles", ref: "Mk 1:21-45", description: "Authority over evil", media: {}},
+                        {title: "Parables", ref: "Mk 4", description: "Sower, mustard seed", media: {}},
+                        {title: "Calming Storm", ref: "Mk 4:35-41", description: "Who is this?", media: {}},
+                        {title: "Jairus' Daughter", ref: "Mk 5:21-43", description: "Raised from death", media: {}},
+                        {title: "Feeding 5000", ref: "Mk 6:30-44", description: "Compassion on crowds", media: {}},
+                        {title: "Walking on Water", ref: "Mk 6:45-52", description: "Take courage", media: {}},
+                        {title: "Transfiguration", ref: "Mk 9:2-13", description: "This is my Son", media: {}},
+                        {title: "Passion Week", ref: "Mk 11-15", description: "Entry, trials, crucifixion", media: {}},
+                        {title: "Resurrection", ref: "Mk 16", description: "Empty tomb announcement", media: {}}
+                    ],
+                    luke: [
+                        {title: "Annunciation", ref: "Lk 1:26-38", description: "Angel visits Mary", media: {}},
+                        {title: "Birth of Jesus", ref: "Lk 2:1-20", description: "Shepherds and angels", media: {}},
+                        {title: "Boy Jesus", ref: "Lk 2:41-52", description: "In the temple", media: {}},
+                        {title: "Baptism", ref: "Lk 3:21-22", description: "Heaven opened", media: {}},
+                        {title: "Temptation", ref: "Lk 4:1-13", description: "Testing in wilderness", media: {}},
+                        {title: "Nazareth Rejection", ref: "Lk 4:16-30", description: "Reading Isaiah scroll", media: {}},
+                        {title: "Great Catch", ref: "Lk 5:1-11", description: "Calling fishermen", media: {}},
+                        {title: "Sermon on Plain", ref: "Lk 6:17-49", description: "Blessings and woes", media: {}},
+                        {title: "Good Samaritan", ref: "Lk 10:25-37", description: "Parable of mercy", media: {}},
+                        {title: "Prodigal Son", ref: "Lk 15:11-32", description: "Father's love", media: {}},
+                        {title: "Zacchaeus", ref: "Lk 19:1-10", description: "Salvation comes", media: {}},
+                        {title: "Last Supper", ref: "Lk 22:7-38", description: "New covenant in my blood", media: {video: "video/luke_22-7-38_last-supper.mkv"}},
+                        {title: "Crucifixion", ref: "Lk 23:26-49", description: "Father, forgive them", media: {}},
+                        {title: "Emmaus Road", ref: "Lk 24:13-35", description: "Hearts burning", media: {}},
+                        {title: "Ascension", ref: "Lk 24:50-53", description: "Blessing and departure", media: {}}
+                    ],
+                    john: [
+                        {title: "Prologue", ref: "Jn 1:1-18", description: "The Word became flesh", media: {}},
+                        {title: "First Disciples", ref: "Jn 1:35-51", description: "Come and see", media: {}},
+                        {title: "Wedding at Cana", ref: "Jn 2:1-12", description: "First sign", media: {}},
+                        {title: "Nicodemus", ref: "Jn 3:1-21", description: "Born again", media: {}},
+                        {title: "Woman at Well", ref: "Jn 4:1-42", description: "Living water", media: {}},
+                        {title: "Pool of Bethesda", ref: "Jn 5:1-15", description: "Healing on Sabbath", media: {}},
+                        {title: "Bread of Life", ref: "Jn 6:22-59", description: "I AM the bread", media: {}},
+                        {title: "Light of World", ref: "Jn 8:12-30", description: "I AM the light", media: {}},
+                        {title: "Good Shepherd", ref: "Jn 10:1-21", description: "I AM the shepherd", media: {}},
+                        {title: "Lazarus Raised", ref: "Jn 11", description: "I AM resurrection", media: {}},
+                        {title: "Washing Feet", ref: "Jn 13:1-17", description: "Example of humble service", media: {video: "video/john_13-1-17_washing-feet.mkv"}},
+                        {title: "Upper Room", ref: "Jn 14-17", description: "Last discourse, high priestly prayer", media: {}},
+                        {title: "Crucifixion", ref: "Jn 19:16-37", description: "It is finished", media: {}},
+                        {title: "Resurrection", ref: "Jn 20-21", description: "Appearances, restoration of Peter", media: {}}
+                    ]
+                };
+                
+                renderTimelines();
+            } catch (error) {
+                console.error('Error loading timeline data:', error);
+                document.getElementById('timelineContainer').innerHTML = 
+                    '<div class="loading">Error loading timeline data. Please refresh the page.</div>';
+            }
+        }
+
+        function hasMedia(event) {
+            return event.media && (event.media.video || event.media.audio || event.media.image);
+        }
+
+        function getMediaType(event) {
+            if (!event.media) return null;
+            if (event.media.video) return 'video';
+            if (event.media.audio) return 'audio';
+            if (event.media.image) return 'image';
+            return null;
+        }
+
+        function hasMultipleMedia(event) {
+            if (!event.media) return false;
+            let count = 0;
+            if (event.media.video) count++;
+            if (event.media.audio) count++;
+            if (event.media.image) count++;
+            return count > 1;
+        }
 
         function renderTimelines() {
+            const container = document.getElementById('timelineContainer');
+            container.innerHTML = '';
+            
             ['matthew', 'mark', 'luke', 'john'].forEach(gospel => {
-                const container = document.getElementById(`${gospel}-events`);
-                container.innerHTML = '';
+                const row = document.createElement('div');
+                row.className = 'gospel-row';
                 
-                timelineData[gospel].forEach((event, idx) => {
+                const label = document.createElement('div');
+                label.className = `gospel-label ${gospel}`;
+                label.textContent = gospel.charAt(0).toUpperCase() + gospel.slice(1);
+                
+                const timeline = document.createElement('div');
+                timeline.className = 'timeline';
+                
+                const line = document.createElement('div');
+                line.className = 'timeline-line';
+                
+                const events = document.createElement('div');
+                events.className = 'events';
+                events.id = `${gospel}-events`;
+                
+                timelineData[gospel].forEach(event => {
                     const eventDiv = document.createElement('div');
-                    eventDiv.className = `event ${Object.keys(event.media).length > 0 ? 'has-media' : ''}`;
+                    let classes = ['event'];
+                    
+                    const mediaType = getMediaType(event);
+                    if (mediaType) classes.push(`has-${mediaType}`);
+                    if (hasMultipleMedia(event)) classes.push('has-multiple');
+                    
+                    eventDiv.className = classes.join(' ');
                     eventDiv.style.borderColor = getGospelColor(gospel);
                     
                     eventDiv.innerHTML = `
@@ -450,8 +539,14 @@
                     `;
                     
                     eventDiv.onclick = () => openModal(gospel, event);
-                    container.appendChild(eventDiv);
+                    events.appendChild(eventDiv);
                 });
+                
+                timeline.appendChild(line);
+                timeline.appendChild(events);
+                row.appendChild(label);
+                row.appendChild(timeline);
+                container.appendChild(row);
             });
         }
 
@@ -464,22 +559,51 @@
             const modal = document.getElementById('eventModal');
             const modalBody = document.getElementById('modalBody');
             
+            let mediaHTML = '';
+            if (event.media) {
+                if (event.media.video) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🎬 Video:</strong>
+                            <video controls width="640" height="480">
+                                <source src="${MEDIA_BASE_PATH}${event.media.video}" type="video/x-matroska">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    `;
+                }
+                if (event.media.audio) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🔊 Audio:</strong>
+                            <audio controls>
+                                <source src="${MEDIA_BASE_PATH}${event.media.audio}">
+                                Your browser does not support the audio tag.
+                            </audio>
+                        </div>
+                    `;
+                }
+                if (event.media.image) {
+                    mediaHTML += `
+                        <div class="media-item">
+                            <strong>🖼️ Image:</strong>
+                            <img src="${MEDIA_BASE_PATH}${event.media.image}" alt="${event.title}">
+                        </div>
+                    `;
+                }
+            }
+            
             modalBody.innerHTML = `
                 <h2>${event.title}</h2>
                 <p><strong>Reference:</strong> ${event.ref}</p>
                 <p><strong>Gospel:</strong> ${gospel.charAt(0).toUpperCase() + gospel.slice(1)}</p>
-                <p>${event.description}</p>
+                <p style="margin-top: 15px;">${event.description}</p>
                 
-                <div class="media-section">
-                    <h3>Media Attachments</h3>
-                    <p><strong>Image:</strong> ${event.media.image || 'None (can be added)'}</p>
-                    <p><strong>Audio:</strong> ${event.media.audio || 'None (can be added)'}</p>
-                    <p><strong>Video:</strong> ${event.media.video || 'None (can be added)'}</p>
-                </div>
+                ${mediaHTML ? `<div class="media-section"><h3>Media</h3>${mediaHTML}</div>` : ''}
                 
                 <div style="margin-top: 20px; padding: 15px; background: #e8f5e9; border-radius: 5px;">
                     <h4>Parallel Accounts</h4>
-                    <p><em>This section will show where this event appears in other Gospels</em></p>
+                    <p><em>Future feature: This will show where this event appears in other Gospels</em></p>
                 </div>
             `;
             
@@ -494,12 +618,9 @@
             currentView = view;
             document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            // In future versions, this would rearrange events based on view type
             console.log(`Switched to ${view} view`);
         }
 
-        // Close modal when clicking outside
         window.onclick = function(event) {
             const modal = document.getElementById('eventModal');
             if (event.target == modal) {
@@ -507,7 +628,6 @@
             }
         }
 
-        // Hide scroll hint after first scroll
         const wrapper = document.querySelector('.timeline-wrapper');
         const scrollHint = document.querySelector('.scroll-hint');
         wrapper.addEventListener('scroll', function() {
@@ -515,7 +635,7 @@
         }, { once: true });
 
         // Initialize
-        renderTimelines();
+        loadTimelineData();
     </script>
 </body>
 </html>
