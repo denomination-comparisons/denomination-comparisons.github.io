@@ -1,106 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wisdom Wayfarer - Consent Demo Prototype</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .consent { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
-        button { margin-right: 10px; }
-        .tier-preview { margin-top: 20px; color: green; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wisdom Wayfarer - Consent Demo (Refactor)</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- shared core (WWCommon) -->
+  <script type="text/babel" src="https://denomination-comparisons.github.io/agora-portal/core/common.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; margin:20px; }
+    .container { max-width:900px; margin:auto; }
+    .consent { border:1px solid #e8e8ef; padding:16px; border-radius:8px; background:#fff; }
+    input[type="number"], input[type="email"] { padding:8px; width:250px; border-radius:6px; border:1px solid #ddd; }
+    .tier { margin-top:12px; padding:10px; border-radius:6px; background:#f7fbf7; }
+    .muted { color:#666; font-size:13px; }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-        const { useState } = React;
+  <div id="root"></div>
 
-        // Mock User data (aligns with schemas from Claude/ChatGPT)
-        const initialUser = { ageCategory: null, consentStatus: { parentalConsent: false } };
+  <script type="text/babel">
+  const { useState } = React;
+  const { createMockUser, UserContext } = WWCommon;
 
-        // Consent Demo component: Simulates registration and tier access
-        function ConsentDemo() {
-            const [user, setUser] = useState(initialUser);
-            const [age, setAge] = useState('');
-            const [guardianEmail, setGuardianEmail] = useState('');
-            const [consentSent, setConsentSent] = useState(false);
-            const [revoked, setRevoked] = useState(false);
+  function TierPreview({ ageCategory }) {
+    const tiers = {
+      "13-15": {
+        label: "Disciple (13-15)",
+        allowed: ["Guided quests", "Private reflections", "Pre-moderated forums"],
+        restricted: ["Direct messaging", "Mentoring roles", "Mature debates"]
+      },
+      "16-17": {
+        label: "Scribe (16-17)",
+        allowed: ["Post-moderated discussions", "Voting on community content", "Junior mentoring (limited)"],
+        restricted: ["Full moderation rights"]
+      },
+      "18+": {
+        label: "Steward (18+)",
+        allowed: ["Full features", "Mentoring", "Content creation"],
+        restricted: []
+      }
+    };
+    const t = tiers[ageCategory] || tiers["13-15"];
+    return (
+      <div className="tier">
+        <h3>{t.label}</h3>
+        <div><strong>Allowed:</strong><ul>{t.allowed.map(a => <li key={a}>{a}</li>)}</ul></div>
+        {t.restricted.length>0 && <div><strong>Restricted until older:</strong><ul>{t.restricted.map(r => <li key={r}>{r}</li>)}</ul></div>}
+      </div>
+    );
+  }
 
-            const handleAgeSubmit = () => {
-                const category = age < 16 ? 13 : age < 18 ? 16 : 18;
-                setUser({ ...user, ageCategory: category });
-                if (category < 18) alert('Parental consent required for minors.');
-            };
+  function ConsentDemoInner() {
+    const [birthYear, setBirthYear] = useState('');
+    const [ageCategory, setAgeCategory] = useState(null);
+    const [guardianEmail, setGuardianEmail] = useState('');
+    const [consentSent, setConsentSent] = useState(false);
+    const [consentApproved, setConsentApproved] = useState(false);
+    const [revoked, setRevoked] = useState(false);
 
-            const handleConsent = () => {
-                if (guardianEmail) {
-                    setConsentSent(true);
-                    // Simulate consent approval after "verification"
-                    setTimeout(() => setUser({ ...user, consentStatus: { parentalConsent: true } }), 2000);
-                }
-            };
+    function verifyAge() {
+      const year = parseInt(birthYear,10);
+      if (!year || year < 1900) { alert('Enter valid birth year'); return; }
+      const thisYear = new Date().getFullYear();
+      const age = thisYear - year;
+      const cat = age < 16 ? "13-15" : (age < 18 ? "16-17" : "18+");
+      setAgeCategory(cat);
+      if (cat === "18+") {
+        // adults don't need guardian consent
+        setConsentApproved(true);
+      } else {
+        alert('Parental/guardian consent required for minors.');
+      }
+    }
 
-            const handleRevoke = () => {
-                setRevoked(true);
-                setUser(initialUser);
-            };
+    function sendConsentLink() {
+      if (!guardianEmail) { alert('Enter guardian email'); return; }
+      setConsentSent(true);
+      // simulate async approval (in production: BankID / SMS / Email link + backend)
+      setTimeout(() => {
+        setConsentApproved(true);
+        alert('Consent approved (simulated).');
+      }, 2000);
+    }
 
-            if (revoked) return <div>Consent revoked. Account suspended.</div>;
+    function handleRevoke() {
+      setRevoked(true);
+      setConsentApproved(false);
+      setConsentSent(false);
+      setAgeCategory(null);
+      setBirthYear('');
+      setGuardianEmail('');
+    }
 
-            if (!user.ageCategory) {
-                return (
-                    <div className="consent">
-                        <h2>Age Verification</h2>
-                        <input type="number" value={age} onChange={e => setAge(parseInt(e.target.value))} placeholder="Enter age" />
-                        <button onClick={handleAgeSubmit}>Submit Age</button>
-                    </div>
-                );
-            }
+    if (revoked) {
+      return <div className="consent"><h3>Consent revoked — account suspended</h3><p className="muted">Guardian revoked consent in this demo. In production this would suspend access until consent is re-granted.</p></div>;
+    }
 
-            if (user.ageCategory < 18 && !user.consentStatus.parentalConsent) {
-                return (
-                    <div className="consent">
-                        <h2>Parental Consent Required</h2>
-                        <input type="email" value={guardianEmail} onChange={e => setGuardianEmail(e.target.value)} placeholder="Guardian email/SMS" />
-                        <button onClick={handleConsent}>Send Consent Link (Mock)</button>
-                        {consentSent && <p>Consent link sent (simulated). Waiting for approval...</p>}
-                    </div>
-                );
-            }
+    if (!ageCategory) {
+      return (
+        <div className="consent">
+          <h2>Age Verification</h2>
+          <p className="muted">Enter birth year (demo). In production we use BankID / secure verification for guardians where available.</p>
+          <input type="number" placeholder="Birth year (e.g. 2012)" value={birthYear} onChange={e => setBirthYear(e.target.value)} />
+          <div style={{marginTop:10}}>
+            <button onClick={verifyAge}>Submit</button>
+          </div>
+        </div>
+      );
+    }
 
-            return (
-                <div className="consent">
-                    <h2>Consent Approved - Tier Preview</h2>
-                    <p>Age Category: {user.ageCategory}+</p>
-                    <div className="tier-preview">
-                        {user.ageCategory === 13 && <p>Access: Guided quests, pre-moderated forums.</p>}
-                        {user.ageCategory === 16 && <p>Access: Voting, junior mentoring.</p>}
-                        {user.ageCategory === 18 && <p>Access: Full features, mature debates.</p>}
-                    </div>
-                    <button onClick={handleRevoke}>Revoke Consent</button>
-                </div>
-            );
-        }
+    if (ageCategory !== "18+" && !consentApproved) {
+      return (
+        <div className="consent">
+          <h2>Parental Consent Required</h2>
+          <p className="muted">Provide a guardian email or phone. We'll send a verification link (mock).</p>
+          <input type="email" placeholder="Guardian email" value={guardianEmail} onChange={e => setGuardianEmail(e.target.value)} />
+          <div style={{marginTop:10}}>
+            <button onClick={sendConsentLink}>{consentSent ? "Consent link sent (waiting)" : "Send Consent Link (mock)"}</button>
+            <button onClick={() => { setAgeCategory(null); setBirthYear(''); }} style={{marginLeft:8}}>Change age</button>
+          </div>
+        </div>
+      );
+    }
 
-        // Main App
-        function App() {
-            return (
-                <div className="container">
-                    <h1>Wisdom Wayfarer - Consent Demo (Grok Branch)</h1>
-                    <p>Demo of consent flow. In full app, integrates with real verification (BankID/SMS).</p>
-                    <ConsentDemo />
-                    <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/consent-demo.html</p>
-                    <p>Open to merging: Align with Claude/ChatGPT schemas for user data.</p>
-                </div>
-            );
-        }
+    // consent approved OR adult
+    return (
+      <div className="consent">
+        <h2>Consent Approved — Tier Preview</h2>
+        <p className="muted">Age Category: {ageCategory}</p>
+        <TierPreview ageCategory={ageCategory} />
+        <div style={{marginTop:12}}>
+          <button onClick={handleRevoke} style={{background:'#fff0f0'}}>Revoke Consent (demo)</button>
+        </div>
+      </div>
+    );
+  }
 
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+  function App() {
+    // show how to use createMockUser (the real app should supply authenticated user)
+    const demoUser = createMockUser({
+      userId: "demo-consent-1",
+      ageCategory: "13-15",
+      consentStatus: { parentalConsent: false }
+    });
+
+    return (
+      <UserContext.Provider value={{ user: demoUser, updateUser: () => {} }}>
+        <div className="container">
+          <h1>Wisdom Wayfarer — Consent Demo (Refactor)</h1>
+          <p className="muted">This demo uses the shared core utilities (createMockUser + UserContext). Replace with real auth + BankID in production.</p>
+          <ConsentDemoInner />
+        </div>
+      </UserContext.Provider>
+    );
+  }
+
+  ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
 </body>
 </html>
