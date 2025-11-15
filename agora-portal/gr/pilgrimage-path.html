@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wayfarer - Pilgrimage Path Prototype</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .path { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+        button { margin-right: 10px; }
+        .age-gate-message { color: red; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useContext, createContext } = React;
+
+        // Mock UserContext for demo (aligns with Claude's schema)
+        const UserContext = createContext();
+        const mockUser = { ageCategory: 13, consentStatus: { parentalConsent: true } }; // For testing; real app from auth
+
+        // AgeGate wrapper from Claude's spec
+        function AgeGate({ minimumAge = 13, children, fallback }) {
+            const { user } = useContext(UserContext);
+            const hasAccess = user?.ageCategory >= minimumAge && user?.consentStatus?.parentalConsent;
+            if (!hasAccess) {
+                return fallback || <div className="age-gate-message">Access requires age {minimumAge}+ and consent.</div>;
+            }
+            return children;
+        }
+
+        // Pilgrimage Path component: Branching journey (Exodus motif)
+        function PilgrimagePath() {
+            const [step, setStep] = useState(0);
+            const [choices, setChoices] = useState([]);
+            const [reflection, setReflection] = useState('');
+
+            const pathSteps = [
+                { text: "You begin the Exodus journey (Exodus). Escape bondage—intro to sin. Choose your first step.", options: [{ label: "Follow Moses faithfully.", next: 1 }, { label: "Question the path.", next: 2 }] },
+                { text: "Wilderness trials: Ethical dilemma—complain or trust?", options: [{ label: "Trust in provision.", next: 3 }, { label: "Seek alternatives.", next: 4 }] },
+                { text: "Doubt in the desert: How do you respond?", options: [{ label: "Pray for guidance.", next: 3 }, { label: "Explore questions.", next: 4 }] },
+                { text: "Promised Land application: Reflect on perseverance.", end: true },
+                { text: "Alternative route: Learn from detours. Reflect on growth.", end: true }
+            ];
+
+            const handleChoice = (opt) => { setChoices([...choices, opt.label]); setStep(opt.next); };
+            const handleReflection = (e) => setReflection(e.target.value);
+
+            if (pathSteps[step].end) {
+                return (
+                    <div>
+                        <h2>Path Complete</h2>
+                        <p>Journey: {choices.join(' → ')}</p>
+                        <p>{pathSteps[step].text}</p>
+                        <textarea value={reflection} onChange={handleReflection} placeholder="Reflect..." rows="4" cols="50" />
+                        <button onClick={() => setStep(0)}>Restart Path</button>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="path">
+                    <h2>Pilgrimage Path: Exodus Journey</h2>
+                    <p>{pathSteps[step].text}</p>
+                    {pathSteps[step].options.map((opt, idx) => <button key={idx} onClick={() => handleChoice(opt)}>{opt.label}</button>)}
+                </div>
+            );
+        }
+
+        // Main App
+        function App() {
+            return (
+                <UserContext.Provider value={{ user: mockUser }}>
+                    <div className="container">
+                        <h1>Wisdom Wayfarer - Pilgrimage Path (Grok Branch)</h1>
+                        <p>Demo of branching paths. In full app, integrates with user progress.</p>
+                        <AgeGate>
+                            <PilgrimagePath />
+                        </AgeGate>
+                        <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/pilgrimage-path.html</p>
+                        <p>Open to merging: Use with Claude's schemas; add Gemini's decay if applicable.</p>
+                    </div>
+                </UserContext.Provider>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
