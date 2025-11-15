@@ -1,0 +1,51 @@
+{
+  "locale": "sv-SE",
+  "updated": "2025-02-15",
+  "categories": {
+    "immediate-danger": {
+      "instructions": "Vid omedelbar livsfara: Ring 112",
+      "phone": "112",
+      "notes": ["Polis", "Ambulans", "Akut hjälp"]
+    },
+
+    "self-harm": {
+      "name": "Självmordslinjen",
+      "phone": "90101",
+      "chat": "https://mind.se/hitta-hjalp/sjalvmordslinjen/",
+      "hours": "Öppet dygnet runt",
+      "notes": ["Samtalsstöd", "Anonymt", "Stöd vid självmordstankar"]
+    },
+
+    "mental-health": {
+      "name": "Mind Chat & Stödlinjer",
+      "website": "https://mind.se",
+      "subservices": [
+        {"name": "Självmordslinjen", "phone": "90101"},
+        {"name": "Äldrelinjen", "phone": "020-22 22 33"},
+        {"name": "Föräldralinjen", "phone": "020-85 20 00"}
+      ]
+    },
+
+    "youth": {
+      "name": "BRIS",
+      "phone": "116111",
+      "chat": "https://www.bris.se",
+      "notes": ["Stöd för barn och unga", "Chat, telefon, mejl"]
+    },
+
+    "sexual-abuse": {
+      "name": "Stödlinjen för brottsoffer",
+      "phone": "116006",
+      "website": "https://www.brottsoffermyndigheten.se",
+      "notes": ["Stöd vid våld, övergrepp eller andra brott"]
+    },
+
+    "religious-community-support": {
+      "church-of-sweden": {
+        "name": "Jourhavande präst",
+        "phone": "112 (be att få prata med Jourhavande präst)",
+        "night_chat": "https://www.svenskakyrkan.se/jourhavandeprast"
+      }
+    }
+  }
+}
