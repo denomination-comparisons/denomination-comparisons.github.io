@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wayfarer - Virtue Tree Prototype</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .tree { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+        .virtue { margin: 10px 0; }
+        progress { width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Standalone component for Virtue/Fruit Tree (Galatians 5:22-23)
+        // Users "grow" virtues through daily reflections; private, decays if neglected
+        // Aligns with proposed schema: tracks insights.categories
+        // Open to merger: Export as module, add decay timer from Gemini
+
+        function VirtueTree() {
+            const virtues = ['Love', 'Joy', 'Peace', 'Patience', 'Kindness', 'Goodness', 'Faithfulness', 'Gentleness', 'Self-Control'];
+            const initialProgress = virtues.reduce((acc, v) => ({ ...acc, [v]: 0 }), {});
+            const [progress, setProgress] = useState(initialProgress);
+            const [reflection, setReflection] = useState('');
+            const [selectedVirtue, setSelectedVirtue] = useState(virtues[0]);
+
+            useEffect(() => {
+                // Simulate decay: Reduce by 1 daily if no activity (in full app, use timestamps)
+                const timer = setInterval(() => {
+                    setProgress(prev => {
+                        const newProg = { ...prev };
+                        virtues.forEach(v => {
+                            if (newProg[v] > 0) newProg[v] = Math.max(0, newProg[v] - 1);
+                        });
+                        return newProg;
+                    });
+                }, 86400000); // 24 hours
+                return () => clearInterval(timer);
+            }, []);
+
+            const handleReflect = () => {
+                if (reflection.trim()) {
+                    setProgress(prev => ({ ...prev, [selectedVirtue]: Math.min(100, prev[selectedVirtue] + 10) }));
+                    setReflection('');
+                    alert('Reflection added! Your ' + selectedVirtue + ' virtue grows.');
+                }
+            };
+
+            return (
+                <div className="tree">
+                    <h2>Virtue Tree: Fruits of the Spirit (Galatians 5:22-23)</h2>
+                    <p>Select a virtue to reflect on and grow your tree. Reflections are private.</p>
+                    <select value={selectedVirtue} onChange={e => setSelectedVirtue(e.target.value)}>
+                        {virtues.map(v => <option key={v} value={v}>{v}</option>)}
+                    </select>
+                    <textarea 
+                        value={reflection} 
+                        onChange={e => setReflection(e.target.value)} 
+                        placeholder={`Reflect on ${selectedVirtue} today...`}
+                        rows="3" 
+                        cols="50"
+                    />
+                    <button onClick={handleReflect}>Add Reflection</button>
+                    <div>
+                        {virtues.map(v => (
+                            <div key={v} className="virtue">
+                                <label>{v}: </label>
+                                <progress value={progress[v]} max="100"></progress> {progress[v]}%
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        // Main App for this file
+        function App() {
+            return (
+                <div className="container">
+                    <h1>Wisdom Wayfarer - Virtue Tree (Grok Branch)</h1>
+                    <p>Demo of personal virtue growth. In full app, ties to insights tracking and wellbeing checks.</p>
+                    <VirtueTree />
+                    <p>Note: Intended for https://denomination-comparisons.github.io/agora-portal/gr/virtue-tree.html</p>
+                    <p>Open to merging: Add export for VirtueTree; integrate with Gemini's paths.</p>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
