@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theology Interpretation File",
+  "type": "object",
+  "required": ["id", "title", "source", "core_narrative"],
+  "properties": {
+    "id": {"type": "string"},
+    "title": {"type": "string"},
+    "source": {
+      "type": "object",
+      "properties": {
+        "biblical_reference": {"type": "string"},
+        "genre": {"type": "string"}
+      }
+    },
+    "core_narrative": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "summary": {"type": "string"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
