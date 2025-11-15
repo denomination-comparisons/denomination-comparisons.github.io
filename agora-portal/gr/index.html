@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wayfarer - Grok Prototype</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .quest { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+        button { margin-right: 10px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Self-contained React component for a sample Parable Quest mechanic
+        // This demonstrates a choose-your-own-adventure style quest based on the Prodigal Son (Luke 15)
+        // Designed to be stand-alone; can be merged later by importing as a module
+        // Ethical notes: No scoring, focuses on reflection; age-gated in full app
+
+        function ParableQuest() {
+            const [step, setStep] = useState(0);
+            const [choices, setChoices] = useState([]);
+            const [reflection, setReflection] = useState('');
+
+            const questSteps = [
+                {
+                    text: "You are the younger son in the Parable of the Prodigal Son (Luke 15:11-32). Your father has given you your inheritance early. What do you do?",
+                    options: [
+                        { label: "Travel far away and spend it all on wild living.", next: 1 },
+                        { label: "Invest it wisely in your community.", next: 2 },
+                        { label: "Share it with the needy.", next: 3 }
+                    ]
+                },
+                {
+                    text: "After squandering your wealth, you find yourself feeding pigs and starving. Do you return home?",
+                    options: [
+                        { label: "Yes, humbly ask to be a servant.", next: 4 },
+                        { label: "No, try to make it on your own.", next: 5 }
+                    ]
+                },
+                {
+                    text: "Your investment grows, but you feel distant from family. What next?",
+                    options: [
+                        { label: "Return to share success.", next: 4 },
+                        { label: "Stay independent.", next: 5 }
+                    ]
+                },
+                {
+                    text: "Your generosity helps others, but now you're in need. Seek help?",
+                    options: [
+                        { label: "Yes, from family.", next: 4 },
+                        { label: "No, from strangers.", next: 5 }
+                    ]
+                },
+                {
+                    text: "Your father welcomes you with open arms, celebrating your return. Reflect: What does this teach about forgiveness?",
+                    end: true
+                },
+                {
+                    text: "You struggle alone, learning hard lessons. Reflect: How might reconciliation change this?",
+                    end: true
+                }
+            ];
+
+            const handleChoice = (option) => {
+                setChoices([...choices, option.label]);
+                if (option.next !== undefined) {
+                    setStep(option.next);
+                }
+            };
+
+            const handleReflection = (e) => setReflection(e.target.value);
+
+            if (questSteps[step].end) {
+                return (
+                    <div>
+                        <h2>Quest Complete</h2>
+                        <p>Your journey: {choices.join(' → ')}</p>
+                        <p>{questSteps[step].text}</p>
+                        <textarea 
+                            value={reflection} 
+                            onChange={handleReflection} 
+                            placeholder="Write your personal reflection here..."
+                            rows="4" 
+                            cols="50"
+                        />
+                        <button onClick={() => setStep(0)}>Restart Quest</button>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="quest">
+                    <h2>Parable Quest: The Prodigal Son</h2>
+                    <p>{questSteps[step].text}</p>
+                    {questSteps[step].options.map((opt, idx) => (
+                        <button key={idx} onClick={() => handleChoice(opt)}>
+                            {opt.label}
+                        </button>
+                    ))}
+                </div>
+            );
+        }
+
+        // Main App Component - Stand-alone, can be extended or merged
+        function App() {
+            return (
+                <div className="container">
+                    <h1>Wisdom Wayfarer Prototype (Grok Branch)</h1>
+                    <p>This is a self-contained demo of a gamification mechanic. In the full app, this would be age-gated and integrated with backend for persistence.</p>
+                    <ParableQuest />
+                    <p>Note: This code is intended for https://denomination-comparisons.github.io/gamified-portal/grok-branch/index.html</p>
+                    <p>Open to merging: Export ParableQuest as a module for other branches.</p>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
