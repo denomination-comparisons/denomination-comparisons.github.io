@@ -3,60 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agora Portal - Registration</title>
+    <title>Agora Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <div class="logo">
+        <header class="dashboard-header">
+            <h1>The Agora</h1>
+            <div class="profile-info">
+                Welcome, <span id="user-tier-name">User</span>!
+                <button id="logout-btn">Log Out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
             
-            <h1>Welcome to The Agora</h1>
-            <p>A place to explore faith and philosophy.</p>
-        </div>
+            <h2>Your Dashboard</h2>
+            <p id="welcome-message"></p>
 
-        <div class="registration-box" id="age-gate">
-            <h2>Let's Get Started</h2>
-            <p>To provide a safe and age-appropriate experience, please enter your date of birth.</p>
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob">
-            </div>
-            <button id="check-age-btn">Continue</button>
-            <div id="age-message" class="message error"></div>
-        </div>
-
-        <div class="modal" id="consent-modal">
-            <div class="modal-content">
-                <span class="close" id="close-modal">&times;</span>
-                <h2>Guardian Consent Required</h2>
-                <p id="consent-text"></p>
-                <form id="consent-form">
-                    <div class="form-group">
-                        <label for="guardian-email">Parent/Guardian Email</label>
-                        <input type="email" id="guardian-email" placeholder="guardian@example.com" required>
-                    </div>
-                    <button type="submit" class="consent-btn">Send Consent Request</button>
-                    <p class="small-text">A link will be sent to this email. Your account will be activated once they provide consent.</p>
-                </form>
-            </div>
-        </div>
-
-        <div class="registration-box" id="adult-registration" style="display: none;">
-            <h2>Create Your "Elder" Account</h2>
-            <form id="adult-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+            <div class="feature-module">
+                <h3>Core Library</h3>
+                <p>Explore foundational texts and parables. (Available to all)</p>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit" class="consent-btn">Create Account</button>
-            </form>
-        </div>
 
+            <div class="feature-module tier-disciple" style="display: none;">
+                <h3>Disciple's Path</h3>
+                <p>Join pre-moderated forums and guided "Parable Quests."</p>
+            </div>
+
+            <div class="feature-module tier-scribe" style="display: none;">
+                <h3>Scribe's Workshop</h3>
+                <p>Create content, join post-moderated discussions, and vote on community guides.</p>
+                <a href="workshop.html" class="cta-link">Open Workshop &rarr;</a>
+            </div>
+
+            <div class="feature-module tier-elder" style="display: none;">
+                <h3>Elder's Crossroads</h3>
+                <p>Access advanced theological debates, mentorship tools, and mature ethical discussions.</p>
+            </div>
+
+        </div>
     </div>
     
     <script src="app.js"></script>
