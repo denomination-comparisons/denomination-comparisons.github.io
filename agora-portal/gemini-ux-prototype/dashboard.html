@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agora Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>The Agora</h1>
+            <div class="profile-info">
+                Welcome, <span id="user-tier-name">User</span>!
+                <button id="logout-btn">Log Out</button>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            
+            <h2>Your Dashboard</h2>
+            <p id="welcome-message"></p>
+
+            <div class="feature-module">
+                <h3>Core Library</h3>
+                <p>Explore foundational texts and parables. (Available to all)</p>
+            </div>
+
+            <div class="feature-module tier-disciple" style="display: none;">
+                <h3>Disciple's Path</h3>
+                <p>Join pre-moderated forums and guided "Parable Quests."</p>
+                </div>
+
+            <div class="feature-module tier-scribe" style="display: none;">
+                <h3>Scribe's Workshop</h3>
+                <p>Create content, join post-moderated discussions, and vote on community guides.</p>
+            </div>
+
+            <div class="feature-module tier-elder" style="display: none;">
+                <h3>Elder's Crossroads</h3>
+                <p>Access advanced theological debates, mentorship tools, and mature ethical discussions.</p>
+            </div>
+
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
