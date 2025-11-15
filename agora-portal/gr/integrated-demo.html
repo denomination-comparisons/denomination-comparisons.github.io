@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wayfarer - Integrated Demo Prototype</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Import common primitives -->
+    <script type="text/babel" src="/core/common.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+        button { margin-right: 10px; }
+        .age-gate-message { color: red; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { UserContext, AgeGate, ReflectionPrompt, detectCrisis, createMockUser } = WWCommon;
+
+        // Mock user with expanded schema
+        const mockUser = createMockUser({ ageCategory: 13, consentStatus: { parentalConsent: true } });
+
+        // Simple Parable Quest (condensed for demo)
+        function SimpleParableQuest() {
+            const [step, setStep] = useState(0);
+            const steps = [
+                { text: "Prodigal Son start: Choose path.", options: [{ label: "Spend wildly", next: 1 }, { label: "Invest wisely", next: 1 }] },
+                { text: "Reflect on choice.", end: true }
+            ];
+            if (steps[step].end) return <ReflectionPrompt prompts={["What does forgiveness mean?"]} />;
+            return (
+                <div className="section">
+                    <h2>Parable Quest</h2>
+                    <p>{steps[step].text}</p>
+                    {steps[step].options.map(opt => <button key={opt.label} onClick={() => setStep(opt.next)}>{opt.label}</button>)}
+                </div>
+            );
+        }
+
+        // Simple Virtue Tree (condensed)
+        function SimpleVirtueTree() {
+            const virtues = ['Love', 'Joy'];
+            const [progress, setProgress] = useState({ Love: 50, Joy: 30 });
+            return (
+                <div className="section">
+                    <h2>Virtue Tree</h2>
+                    {virtues.map(v => (
+                        <div key={v}>
+                            <label>{v}</label>
+                            <progress value={progress[v]} max="100" />
+                            <ReflectionPrompt prompts={[`Reflect on ${v}`]} onComplete={() => setProgress(p => ({ ...p, [v]: p[v] + 10 }))} />
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // Main App with integration
+        function App() {
+            const [user, updateUser] = useState(mockUser);
+            return (
+                <UserContext.Provider value={{ user, updateUser }}>
+                    <div className="container">
+                        <h1>Wisdom Wayfarer - Integrated Demo (Grok Branch)</h1>
+                        <p>Combines quest and virtue using common.js. Crisis flagging in reflections.</p>
+                        <AgeGate>
+                            <SimpleParableQuest />
+                            <SimpleVirtueTree />
+                        </AgeGate>
+                        <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/integrated-demo.html</p>
+                        <p>Open to merging: Expand with ChatGPT's vectors in steps; Claude's tier previews in consent.</p>
+                    </div>
+                </UserContext.Provider>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
