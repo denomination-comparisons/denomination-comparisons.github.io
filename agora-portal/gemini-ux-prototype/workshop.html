@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scribe's Workshop - Agora</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>Scribe's Workshop</h1>
+            <div class="profile-info">
+                <a href="dashboard.html" class="back-link">&larr; Back to Dashboard</a>
+            </div>
+        </header>
+
+        <div class="workshop-content">
+            <div class="fragment-inventory">
+                <h3>Collected Fragments</h3>
+                <p>You collect these by completing "Parable Quests."</p>
+                <div id="inventory-list" class="fragment-list">
+                    </div>
+            </div>
+
+            <div class="crafting-area">
+                <h3>Craft Your Credo</h3>
+                <p>Combine fragments to build a personal reflection.</p>
+                <div id="crafting-slots" class="fragment-list drop-zone">
+                    <span class="placeholder-text">Drag fragments here</span>
+                </div>
+                <textarea id="credo-text" placeholder="Explain how these concepts connect for you..."></textarea>
+                <button id="save-credo-btn">Save to Journal</button>
+                <div id="craft-message" class="message success"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="workshop.js"></script>
+</body>
+</html>
