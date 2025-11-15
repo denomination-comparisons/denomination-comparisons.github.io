@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wisdom Wayfarer - Consent Demo Prototype</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .consent { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+        button { margin-right: 10px; }
+        .tier-preview { margin-top: 20px; color: green; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        // Mock User data (aligns with schemas from Claude/ChatGPT)
+        const initialUser = { ageCategory: null, consentStatus: { parentalConsent: false } };
+
+        // Consent Demo component: Simulates registration and tier access
+        function ConsentDemo() {
+            const [user, setUser] = useState(initialUser);
+            const [age, setAge] = useState('');
+            const [guardianEmail, setGuardianEmail] = useState('');
+            const [consentSent, setConsentSent] = useState(false);
+            const [revoked, setRevoked] = useState(false);
+
+            const handleAgeSubmit = () => {
+                const category = age < 16 ? 13 : age < 18 ? 16 : 18;
+                setUser({ ...user, ageCategory: category });
+                if (category < 18) alert('Parental consent required for minors.');
+            };
+
+            const handleConsent = () => {
+                if (guardianEmail) {
+                    setConsentSent(true);
+                    // Simulate consent approval after "verification"
+                    setTimeout(() => setUser({ ...user, consentStatus: { parentalConsent: true } }), 2000);
+                }
+            };
+
+            const handleRevoke = () => {
+                setRevoked(true);
+                setUser(initialUser);
+            };
+
+            if (revoked) return <div>Consent revoked. Account suspended.</div>;
+
+            if (!user.ageCategory) {
+                return (
+                    <div className="consent">
+                        <h2>Age Verification</h2>
+                        <input type="number" value={age} onChange={e => setAge(parseInt(e.target.value))} placeholder="Enter age" />
+                        <button onClick={handleAgeSubmit}>Submit Age</button>
+                    </div>
+                );
+            }
+
+            if (user.ageCategory < 18 && !user.consentStatus.parentalConsent) {
+                return (
+                    <div className="consent">
+                        <h2>Parental Consent Required</h2>
+                        <input type="email" value={guardianEmail} onChange={e => setGuardianEmail(e.target.value)} placeholder="Guardian email/SMS" />
+                        <button onClick={handleConsent}>Send Consent Link (Mock)</button>
+                        {consentSent && <p>Consent link sent (simulated). Waiting for approval...</p>}
+                    </div>
+                );
+            }
+
+            return (
+                <div className="consent">
+                    <h2>Consent Approved - Tier Preview</h2>
+                    <p>Age Category: {user.ageCategory}+</p>
+                    <div className="tier-preview">
+                        {user.ageCategory === 13 && <p>Access: Guided quests, pre-moderated forums.</p>}
+                        {user.ageCategory === 16 && <p>Access: Voting, junior mentoring.</p>}
+                        {user.ageCategory === 18 && <p>Access: Full features, mature debates.</p>}
+                    </div>
+                    <button onClick={handleRevoke}>Revoke Consent</button>
+                </div>
+            );
+        }
+
+        // Main App
+        function App() {
+            return (
+                <div className="container">
+                    <h1>Wisdom Wayfarer - Consent Demo (Grok Branch)</h1>
+                    <p>Demo of consent flow. In full app, integrates with real verification (BankID/SMS).</p>
+                    <ConsentDemo />
+                    <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/consent-demo.html</p>
+                    <p>Open to merging: Align with Claude/ChatGPT schemas for user data.</p>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
