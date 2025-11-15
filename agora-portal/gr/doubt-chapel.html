@@ -1,111 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wisdom Wayfarer - Doubt Chapel Prototype</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .container { max-width: 800px; margin: auto; }
-        .chapel { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
-        button { margin-right: 10px; }
-        .category { margin-bottom: 10px; }
-        .age-gate-message { color: red; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wisdom Wayfarer - Doubt Chapel (Refactor)</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- shared core (WWCommon) produced earlier -->
+  <script type="text/babel" src="https://denomination-comparisons.github.io/agora-portal/core/common.js"></script>
+
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .container { max-width: 880px; margin:auto; }
+    .chapel { border:1px solid #e2e2e8; padding:18px; border-radius:8px; background:#fff; }
+    .category { margin:8px 0; display:inline-block; }
+    textarea { width:100%; border-radius:6px; padding:8px; }
+    .crisis { background:#fff1f0; padding:10px; border-radius:6px; color:#800; margin-bottom:10px; }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="text/babel">
-        const { useState, useContext, createContext } = React;
+  <div id="root"></div>
 
-        // Mock UserContext (expanded per Claude)
-        const UserContext = createContext();
-        const mockUser = { 
-            ageCategory: 13, 
-            consentStatus: { parentalConsent: true },
-            preferredLanguage: 'sv'
-        };
+  <script type="text/babel">
+  const { useState, useContext } = React;
+  const { UserContext, createMockUser, AgeGate, detectCrisis } = WWCommon;
 
-        // AgeGate from Claude
-        function AgeGate({ minimumAge = 13, children, fallback }) {
-            const { user } = useContext(UserContext);
-            const hasAccess = user?.ageCategory >= minimumAge && user?.consentStatus?.parentalConsent;
-            if (!hasAccess) {
-                return fallback || <div className="age-gate-message">Access requires age {minimumAge}+ and consent.</div>;
-            }
-            return children;
-        }
+  // Simple categories (extendable)
+  const CATEGORIES = [
+    { id: 'faith', title: "Faith Doubts", description: "Questions about belief and God", resources: ["John 20: Thomas' doubt", "Psalms of lament"] },
+    { id: 'ethics', title: "Ethical Doubts", description: "Questions about morality and action", resources: ["Job: questions on suffering", "Case studies"] },
+    { id: 'existential', title: "Existential Doubts", description: "Questions about meaning and purpose", resources: ["Ecclesiastes excerpts", "Contemplative resources"] }
+  ];
 
-        // Simple crisis flag (aligns with schemas)
-        function detectCrisis(text) {
-            const lower = text.toLowerCase();
-            return lower.includes('harm') || lower.includes('crisis') ? { level: 'sensitive', type: 'doubt' } : null;
-        }
+  function DoubtChapelInner() {
+    const { user } = useContext(UserContext);
+    const [category, setCategory] = useState(null);
+    const [text, setText] = useState("");
+    const [anonymous, setAnonymous] = useState(true);
+    const [crisis, setCrisis] = useState(null);
 
-        // Doubt Chapel component: Categorized questions with resources
-        function DoubtChapel() {
-            const [category, setCategory] = useState(null);
-            const [reflection, setReflection] = useState('');
-            const [anonymous, setAnonymous] = useState(true);
-            const [crisis, setCrisis] = useState(null);
+    function handleShare() {
+      const check = detectCrisis(text);
+      if (check && check.level === 'critical') {
+        setCrisis(check);
+        return;
+      }
+      // demo behaviour: in production we'd POST to backend & moderation queue
+      alert(anonymous ? "Your doubt has been shared anonymously (demo)." : "Your doubt has been shared with your username (demo).");
+      setText("");
+    }
 
-            const categories = [
-                { id: 'faith', title: 'Faith Doubts', description: 'Questions about belief', resources: ['John 20: Thomas\' doubt'] },
-                { id: 'ethics', title: 'Ethical Doubts', description: 'Moral concerns', resources: ['Job: Suffering questions'] }
-            ];
+    if (crisis) {
+      return (
+        <div className="chapel">
+          <div className="crisis">
+            <strong>Support suggested</strong>
+            <p>We detected language that may indicate a critical situation. If you're in immediate danger call emergency services (112 in Sweden). You can also request to speak with a vetted mentor.</p>
+          </div>
+          <button onClick={() => setCrisis(null)}>Back</button>
+        </div>
+      );
+    }
 
-            const handleReflect = () => {
-                const check = detectCrisis(reflection);
-                if (check) setCrisis(check);
-                else alert('Reflection shared anonymously.');
-            };
+    if (!category) {
+      return (
+        <div className="chapel" role="region" aria-label="Doubt chapel categories">
+          <h2>Doubt Chapel</h2>
+          <p>Share questions safely — anonymous by default. This space normalizes inquiry.</p>
+          <label style={{display:'block', marginBottom:8}}>
+            <input type="checkbox" checked={anonymous} onChange={e => setAnonymous(e.target.checked)} /> Share anonymously
+          </label>
+          <div>
+            {CATEGORIES.map(cat => (
+              <button key={cat.id} className="category" onClick={() => setCategory(cat)}>{cat.title}</button>
+            ))}
+          </div>
+        </div>
+      );
+    }
 
-            if (crisis) return <div>Crisis flagged: Seek support. <button onClick={() => setCrisis(null)}>Close</button></div>;
+    return (
+      <div className="chapel" role="region" aria-label="Doubt submission">
+        <h3>{category.title}</h3>
+        <p style={{color:'#444'}}>{category.description}</p>
+        <textarea rows="5" placeholder="Write your doubt..." value={text} onChange={e => setText(e.target.value)} />
+        <div style={{marginTop:8}}>
+          <button onClick={handleShare}>Share Reflection</button>
+          <button onClick={() => { setCategory(null); setText(""); }} style={{marginLeft:8}}>Back</button>
+        </div>
+        <div style={{marginTop:12}}>
+          <strong>Resources:</strong>
+          <ul>
+            {category.resources.map(r => <li key={r}>{r}</li>)}
+          </ul>
+        </div>
+      </div>
+    );
+  }
 
-            if (!category) {
-                return (
-                    <div className="chapel">
-                        <h2>Doubt Chapel</h2>
-                        <p>Explore questions safely.</p>
-                        <label><input type="checkbox" checked={anonymous} onChange={e => setAnonymous(e.target.checked)} /> Anonymous</label>
-                        {categories.map(cat => <button key={cat.id} className="category" onClick={() => setCategory(cat)}>{cat.title}</button>)}
-                    </div>
-                );
-            }
+  function App() {
+    // create mock user aligned with shared schema (replace with real auth in production)
+    const demoUser = createMockUser({
+      userId: "demo-doubt-1",
+      ageCategory: "13-15",
+      consentStatus: { parentalConsent: true, consentDate: new Date().toISOString() }
+    });
 
-            return (
-                <div className="chapel">
-                    <h2>{category.title}</h2>
-                    <p>{category.description}</p>
-                    <textarea value={reflection} onChange={e => setReflection(e.target.value)} placeholder="Share your doubt..." rows="4" cols="50" />
-                    <button onClick={handleReflect}>Share Reflection</button>
-                    <button onClick={() => setCategory(null)}>Back</button>
-                    <ul>{category.resources.map(res => <li key={res}>{res}</li>)}</ul>
-                </div>
-            );
-        }
+    return (
+      <UserContext.Provider value={{ user: demoUser, updateUser: () => {} }}>
+        <div className="container">
+          <h1>Wisdom Wayfarer — Doubt Chapel (Refactor)</h1>
+          <p style={{color:'#666'}}>A safe space for questions and wrestling. Re-uses core primitives (AgeGate, detectCrisis).</p>
 
-        // Main App
-        function App() {
-            return (
-                <UserContext.Provider value={{ user: mockUser }}>
-                    <div className="container">
-                        <h1>Wisdom Wayfarer - Doubt Chapel (Grok Branch)</h1>
-                        <p>Demo of safe questioning space. In full app, integrates with crisis protocols.</p>
-                        <AgeGate>
-                            <DoubtChapel />
-                        </AgeGate>
-                        <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/doubt-chapel.html</p>
-                        <p>Open to merging: Add ChatGPT's vectors to categories; Claude's prompts to reflections.</p>
-                    </div>
-                </UserContext.Provider>
-            );
-        }
+          <AgeGate minimumAge={13}>
+            <DoubtChapelInner />
+          </AgeGate>
 
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+          <p style={{marginTop:12, fontSize:13, color:'#666'}}>Note: In production reflections are queued for moderation; anonymous option & crisis detection are preserved.</p>
+        </div>
+      </UserContext.Provider>
+    );
+  }
+
+  ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
 </body>
 </html>
