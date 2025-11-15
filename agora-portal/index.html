@@ -1,0 +1,191 @@
+```html
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Vad denna tjänst är — Kort förklaring</title>
+  <style>
+    :root{
+      --bg:#fbfcfd; --card:#ffffff; --muted:#666; --accent:#2b6cb0;
+      --radius:10px; --maxw:880px;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body{
+      margin:0; padding:24px; background:linear-gradient(180deg,#f6f9fb, #fbfcff);
+      color:#222; display:flex; justify-content:center; font-size:16px;
+    }
+    .wrap{ width:100%; max-width:var(--maxw); }
+    header{ text-align:center; margin-bottom:18px; }
+    h1{ margin:0; font-size:1.6rem; color:var(--accent); }
+    p.lead{ margin:8px 0 0; color:var(--muted); }
+
+    main{ background:var(--card); border-radius:var(--radius); padding:20px; box-shadow:0 6px 20px rgba(40,50,70,0.06); }
+    section{ margin-bottom:18px; }
+    h2{ font-size:1.1rem; margin:0 0 8px; color:#1f2937; }
+    p{ margin:8px 0; line-height:1.45; color:#222; }
+    ul{ margin:8px 0 8px 20px; color:#222; }
+    li{ margin:6px 0; }
+
+    .note{ background:#f1f6ff; border-left:4px solid var(--accent); padding:10px 12px; border-radius:6px; color:#16325c; }
+    .muted{ color:var(--muted); font-size:0.95rem; }
+    .qa{ background:#fcfcfd; border-radius:8px; padding:10px; border:1px solid #eef3fb; }
+    footer{ text-align:center; color:var(--muted); font-size:0.9rem; margin-top:12px; }
+
+    @media (max-width:520px){
+      body{ padding:14px; font-size:15px; }
+      .wrap{ padding:0 4px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header>
+      <h1>Vad den här tjänsten handlar om</h1>
+      <p class="lead">En kort, lättförståelig beskrivning för dig utan teknisk eller teologisk bakgrund.</p>
+    </header>
+
+    <main aria-labelledby="overview">
+      <section id="overview" aria-label="Översikt">
+        <h2>Översikt</h2>
+        <p>
+          Den här webbplatsen är en plats för att utforska frågor om tro, etik och livsfrågor på ett tryggt, pedagogiskt sätt.
+          Materialet presenteras som korta texter, reflektioner och enkla uppgifter — tänk samtalsunderlag och övningar, inte teologiska avhandlingar.
+        </p>
+        <p class="muted">
+          Syftet är att erbjuda en neutral introduktion till teman som medkänsla, förlåtelse, mening och personlig reflektion — utan att kräva förkunskaper eller förpliktelser.
+        </p>
+      </section>
+
+      <section id="for-whom">
+        <h2>Vem det är för</h2>
+        <ul>
+          <li>Personer med grundläggande IT-kunskap (du vet hur man använder en webbläsare).</li>
+          <li>De som är nyfikna på kristna idéer men inte nödvändigtvis troende.</li>
+          <li>Lärare, samtalsledare eller föräldrar som vill ha strukturerade, säkra samtalsämnen.</li>
+        </ul>
+      </section>
+
+      <section id="how-it-works">
+        <h2>Hur det fungerar — i enkla ord</h2>
+        <p>
+          Innehållet är uppdelat i korta enheter. Varje enhet innehåller:
+        </p>
+        <ul>
+          <li>En berättande sammanfattning eller tanke att läsa.</li>
+          <li>Frågor för reflektion — enkla uppmaningar att fundera eller skriva några rader.</li>
+          <li>Eventuella små övningar som kan göras ensam eller i grupp.</li>
+        </ul>
+        <p class="muted">Allt är avsett att stimulera reflektion — inte att predika eller pracka på någon tro.</p>
+      </section>
+
+      <section id="safety">
+        <h2>Säkerhet och stöd</h2>
+        <p>
+          Trygghet är centralt. Om någon skriver om allvarliga svårigheter (till exempel tankar på att skada sig)
+          finns rutiner för att snabbt leda personen till professionell hjälp eller akutstöd.
+        </p>
+        <div class="note" role="note">
+          Om du eller någon annan mår mycket dåligt bör du i första hand vända dig till lokala hjälplinjer eller
+          nödnummer i ditt land. Plattformen ger information och uppmuntrar kontakt med professionella resurser.
+        </div>
+      </section>
+
+      <section id="age-consent">
+        <h2>Ålder och samtycke</h2>
+        <p>
+          Materialet är anpassat efter ålder. För yngre användare kan det krävas tillstånd från en vårdnadshavare.
+          Det här görs för att skydda mindreåriga och ge rätt stödnivå.
+        </p>
+      </section>
+
+      <section id="privacy">
+        <h2>Integritet och personuppgifter</h2>
+        <p>
+          Plattformen använder enkla uppgifter för att spara framsteg (till exempel att du gjort en reflektion).
+          Det finns inga krav på att dela känslig information publikt — det mesta sparas privat för dig.
+        </p>
+        <p class="muted">Om du är osäker på vad som sparas: fråga den som ansvarar för tjänsten eller läs deras sekretessinformation.</p>
+      </section>
+
+      <section id="learning">
+        <h2>Vad du faktiskt gör här</h2>
+        <ul>
+          <li>Läser korta texter med vardagliga teman (t.ex. förlåtelse, ansvar, gemenskap).</li>
+          <li>Svarar på enkla reflektionsfrågor — det räcker med att skriva några meningar.</li>
+          <li>Deltar i små uppgifter eller "reflektionsövningar" som kan göras ensam eller i grupp.</li>
+        </ul>
+        <p class="muted">Inga särskilda förberedelser behövs — vanligt sunt förnuft räcker.</p>
+      </section>
+
+      <section id="structure-explained">
+        <h2>Hur innehållet är organiserat (enkel förklaring)</h2>
+        <p>
+          Tänk dig en bok med korta kapitel. Varje "kapitel" innehåller:
+        </p>
+        <ul>
+          <li>En kort berättelse eller idé.</li>
+          <li>Vägledande frågor som hjälper dig tänka efter.</li>
+          <li>Förslag på en aktivitet eller uppgift (frivillig).</li>
+        </ul>
+        <p class="muted">Målet är reflektion — inte att mäta eller betygsätta dig.</p>
+      </section>
+
+      <section id="gamification">
+        <h2>Belöningar och spelmoment (enkelt)</h2>
+        <p>
+          För att göra lärandet roligare finns lätta belöningsidéer — t.ex. att samla små "symboler" när du gjort en reflektion.
+          Dessa är endast för motivation och påverkar inte din integritet eller rättigheter.
+        </p>
+      </section>
+
+      <section id="getting-started">
+        <h2>Kom igång — praktiskt</h2>
+        <ol>
+          <li>Skapa ett konto eller logga in (om tjänsten kräver det).</li>
+          <li>Välj ett ämne som låter intressant.</li>
+          <li>Läs igenom texten i lugn takt och svara på någon frågeställning om du vill.</li>
+        </ol>
+        <p class="muted">Det är okej att hoppa över övningar eller bara läsa — inget tvång.</p>
+      </section>
+
+      <section id="faq">
+        <h2>Vanliga frågor — korta svar</h2>
+
+        <div class="qa">
+          <strong>Är detta religiös propaganda?</strong>
+          <p class="muted">Nej. Materialet är informativt och reflekterande, avsett att ge perspektiv snarare än tvinga tro.</p>
+        </div>
+
+        <div class="qa" style="margin-top:8px;">
+          <strong>Måste jag vara troende för att delta?</strong>
+          <p class="muted">Nej. Du kan vara nyfiken eller skeptisk — ändå få värde av frågorna och samtalen.</p>
+        </div>
+
+        <div class="qa" style="margin-top:8px;">
+          <strong>Vad händer om någon mår dåligt?</strong>
+          <p class="muted">Tjänsten har rutiner för att uppmärksamma allvarliga problem och hänvisa till professionell hjälp.</p>
+        </div>
+
+        <div class="qa" style="margin-top:8px;">
+          <strong>Behöver jag kunna teknik för att använda det?</strong>
+          <p class="muted">Endast grundläggande: öppna webbsida, skriva text och klicka på knappar.</p>
+        </div>
+      </section>
+
+      <section id="closing">
+        <h2>Avslutande ord</h2>
+        <p>
+          Plattformen är avsedd som en trygg plats för eftertanke — lättillgänglig även för dig utan förkunskaper.
+          Om du är nyfiken på frågor om mening, etik eller relationer kan det vara ett bra ställe att börja.
+        </p>
+      </section>
+
+      <footer>
+        <p class="muted">Den här texten beskriver tjänstens innehåll i stort — inte tekniska detaljer eller interna filer.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
+```
