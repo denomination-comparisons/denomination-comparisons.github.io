@@ -171,3 +171,107 @@ button:hover {
 .tier-disciple { border-color: #9b59b6; }
 .tier-scribe { border-color: #2ecc71; }
 .tier-elder { border-color: #e67e22; }
+
+
+/* --- Workshop Styles --- */
+
+.back-link {
+    font-size: 0.9rem;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+
+.workshop-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .workshop-content {
+        flex-direction: row;
+    }
+    .fragment-inventory {
+        flex-basis: 30%;
+    }
+    .crafting-area {
+        flex-basis: 70%;
+    }
+}
+
+.fragment-inventory h3, .crafting-area h3 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-top: 0;
+}
+
+.fragment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+    min-height: 50px;
+}
+
+.fragment-item {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: #3498db;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: grab;
+    user-select: none;
+}
+
+.drop-zone {
+    border: 2px dashed #bdc3c7;
+    background-color: #f9f9f9;
+    min-height: 100px;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.drop-zone.hovered {
+    background-color: #e8f6fd;
+}
+
+.placeholder-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999;
+    pointer-events: none;
+}
+
+.drop-zone .fragment-item {
+    cursor: default;
+}
+
+#credo-text {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.75rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#save-credo-btn {
+    margin-top: 1rem;
+    background-color: #2ecc71;
+}
+
+#save-credo-btn:hover {
+    background-color: #27ae60;
+}
