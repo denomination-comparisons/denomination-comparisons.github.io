@@ -1,0 +1,105 @@
+{
+  "id": "parable-prodigal-son",
+  "title": "The Parable of the Prodigal Son",
+  "source": {
+    "biblical_reference": "Luke 15:11–32",
+    "genre": "Parable",
+    "themes": ["repentance", "forgiveness", "reconciliation", "restoration"]
+  },
+
+  "core_narrative": {
+    "sequence": [
+      {"id": "departure", "summary": "The younger son asks for his inheritance and leaves."},
+      {"id": "fall", "summary": "He squanders his inheritance in a distant country."},
+      {"id": "awakening", "summary": "He recognizes his situation and decides to return home."},
+      {"id": "return", "summary": "The father sees him and runs to embrace him."},
+      {"id": "restoration", "summary": "The father restores him and celebrates his return."},
+      {"id": "older-brother", "summary": "The elder brother reacts with resentment."}
+    ]
+  },
+
+  "tradition_vectors": {
+    "catholic": {
+      "emphases": [
+        "Sacramental reconciliation",
+        "The father as image of divine mercy",
+        "Grace restoring filial status"
+      ],
+      "virtues": ["humility", "contrition", "mercy"],
+      "doctrinal_links": ["CCC 1422–1498 (Penance)", "CCC 1846–1848 (Mercy)"]
+    },
+
+    "orthodox": {
+      "emphases": [
+        "Healing and restoration (therapeia)",
+        "The homily of St. John Chrysostom on repentance",
+        "The spiritual meaning of returning from exile"
+      ],
+      "virtues": ["metanoia", "restoration", "compassion"],
+      "doctrinal_links": ["Triodion themes", "Great Canon of St. Andrew of Crete"]
+    },
+
+    "protestant": {
+      "emphases": [
+        "Justification by grace",
+        "The initiative of the Father’s love",
+        "Repentance as inner turning"
+      ],
+      "virtues": ["faith", "gratitude", "renewal"],
+      "doctrinal_links": ["Lutheran Confessions on grace"]
+    },
+
+    "jewish-parallels": {
+      "emphases": [
+        "Teshuvah (returning)",
+        "The father as model of divine compassion",
+        "Older brother motif paralleling Jonah and the Ninevites"
+      ],
+      "virtues": ["repentance", "reconciliation"],
+      "sources": ["Mishneh Torah, Hilkhot Teshuvah", "Talmudic themes of return"]
+    }
+  },
+
+  "pedagogy": {
+    "discussion_prompts": [
+      "What does 'coming to oneself' mean spiritually or psychologically?",
+      "How does the father model unconditional love?",
+      "Why is the older brother important?",
+      "Where do you personally locate yourself in this story today?"
+    ],
+    "cognitive_tasks": [
+      {"type": "compare", "description": "Compare forgiveness in this parable with Joseph forgiving his brothers."},
+      {"type": "reflect", "description": "Write about a time you returned to something meaningful."}
+    ]
+  },
+
+  "gamification": {
+    "assets": {
+      "quests": [
+        {"id": "returning-home", "type": "reflection", "minSeconds": 40},
+        {"id": "reconciliation", "type": "dialogue-branch", "branches": 3}
+      ],
+      "virtue_rewards": ["compassion", "humility", "patience"]
+    },
+    "progress_mapping": {
+      "departure": "identity-question",
+      "fall": "consequence-awareness",
+      "awakening": "self-insight",
+      "return": "grace-reception",
+      "restoration": "renewal",
+      "older-brother": "resentment-processing"
+    }
+  },
+
+  "ai_guidance": {
+    "safety_notes": [
+      "Avoid moralizing language.",
+      "Respect denominational nuance.",
+      "Encourage reflection over prescription."
+    ],
+    "style": {
+      "tone": "gentle, non-judgmental, pastoral",
+      "avoid": ["diagnostic labels", "coercive language"]
+    }
+  }
+}
