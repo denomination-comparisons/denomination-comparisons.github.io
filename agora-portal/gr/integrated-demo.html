@@ -25,14 +25,14 @@
         // Mock user with expanded schema
         const mockUser = createMockUser({ ageCategory: 13, consentStatus: { parentalConsent: true } });
 
-        // Simple Parable Quest (condensed for demo)
+        // Simple Parable Quest (condensed)
         function SimpleParableQuest() {
             const [step, setStep] = useState(0);
             const steps = [
                 { text: "Prodigal Son start: Choose path.", options: [{ label: "Spend wildly", next: 1 }, { label: "Invest wisely", next: 1 }] },
                 { text: "Reflect on choice.", end: true }
             ];
-            if (steps[step].end) return <ReflectionPrompt prompts={["What does forgiveness mean?"]} />;
+            if (steps[step].end) return <ReflectionPrompt prompts={["What does forgiveness mean?"]} onComplete={() => alert('Reflection saved.')} />;
             return (
                 <div className="section">
                     <h2>Parable Quest</h2>
@@ -53,9 +53,36 @@
                         <div key={v}>
                             <label>{v}</label>
                             <progress value={progress[v]} max="100" />
-                            <ReflectionPrompt prompts={[`Reflect on ${v}`]} onComplete={() => setProgress(p => ({ ...p, [v]: p[v] + 10 }))} />
+                            <ReflectionPrompt prompts={[`Reflect on ${v}`]} onComplete={(res) => {
+                                const check = detectCrisis(Object.values(res).join(' '));
+                                if (check) alert('Crisis flagged: Seek support.');
+                                else setProgress(p => ({ ...p, [v]: p[v] + 10 }));
+                            }} />
                         </div>
                     ))}
+                </div>
+            );
+        }
+
+        // Simple Doubt Chapel (condensed)
+        function SimpleDoubtChapel() {
+            const [category, setCategory] = useState(null);
+            const categories = [{ id: 'faith', title: 'Faith Doubts' }];
+            if (!category) return (
+                <div className="section">
+                    <h2>Doubt Chapel</h2>
+                    {categories.map(cat => <button key={cat.id} onClick={() => setCategory(cat)}>{cat.title}</button>)}
+                </div>
+            );
+            return (
+                <div className="section">
+                    <h2>{category.title}</h2>
+                    <ReflectionPrompt prompts={["Share your doubt"]} onComplete={(res) => {
+                        const text = Object.values(res).join(' ');
+                        const check = detectCrisis(text);
+                        if (check) alert('Crisis flagged.');
+                        else alert('Doubt shared.');
+                    }} />
                 </div>
             );
         }
@@ -67,13 +94,14 @@
                 <UserContext.Provider value={{ user, updateUser }}>
                     <div className="container">
                         <h1>Wisdom Wayfarer - Integrated Demo (Grok Branch)</h1>
-                        <p>Combines quest and virtue using common.js. Crisis flagging in reflections.</p>
+                        <p>Combines quest, virtue, and chapel using common.js. Consistent safety.</p>
                         <AgeGate>
                             <SimpleParableQuest />
                             <SimpleVirtueTree />
+                            <SimpleDoubtChapel />
                         </AgeGate>
                         <p>Note: For https://denomination-comparisons.github.io/agora-portal/gr/integrated-demo.html</p>
-                        <p>Open to merging: Expand with ChatGPT's vectors in steps; Claude's tier previews in consent.</p>
+                        <p>Open to merging: Ready for ChatGPT's backend; Claude's expansions.</p>
                     </div>
                 </UserContext.Provider>
             );
